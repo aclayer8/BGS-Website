@@ -679,6 +679,65 @@ p { color: var(--text-medium); line-height: 1.75; }
   .process-steps { grid-template-columns: 1fr; }
 }
 
+/* ============================================
+   PARTNER MARQUEE SLIDER
+   ============================================ */
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.partner-track-wrap {
+  overflow: hidden;
+  width: 100%;
+  padding: 12px 0;
+  /* fade edges */
+  mask-image: linear-gradient(to right, transparent 0%, #000 8%, #000 92%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 8%, #000 92%, transparent 100%);
+}
+
+.partner-track {
+  display: flex;
+  gap: 24px;
+  width: max-content;
+  animation: marquee 22s linear infinite;
+}
+
+.partner-track-wrap:hover .partner-track {
+  animation-play-state: paused;
+}
+
+.partner-slide {
+  flex: 0 0 160px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+
+.partner-slide:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--secondary);
+  transform: translateY(-2px);
+}
+
+.partner-slide img {
+  height: 44px;
+  width: auto;
+  max-width: 120px;
+  object-fit: contain;
+  filter: grayscale(40%);
+  transition: var(--transition);
+}
+
+.partner-slide:hover img {
+  filter: grayscale(0%);
+}
+
 /* ---- Utility ---- */
 .text-center { text-align: center; }
 .mt-4 { margin-top: 16px; }
