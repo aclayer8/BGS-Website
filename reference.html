@@ -7,53 +7,76 @@
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <style>
-    .ref-section { padding: 60px 0; }
-    .ref-section:nth-child(even) { background: #f8fafc; }
-    .ref-cat-title {
-      text-align: center; font-size: 1.5rem; font-weight: 700;
-      color: var(--primary); margin-bottom: 10px; letter-spacing: 0.5px;
+    .customers-section {
+      padding: 70px 0 80px;
+      background: #fff;
     }
-    .ref-cat-line {
-      width: 60px; height: 3px; background: var(--accent);
-      margin: 0 auto 36px auto; border-radius: 2px;
+    .customers-header {
+      text-align: center;
+      margin-bottom: 50px;
     }
-    .ref-grid {
+    .customers-header h2 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+    .customers-header h2 span {
+      color: var(--accent);
+    }
+    .customers-header p {
+      color: #6b7a99;
+      font-size: 1rem;
+    }
+    .customers-header .ref-cat-line {
+      width: 60px;
+      height: 3px;
+      background: var(--accent);
+      margin: 14px auto 0;
+      border-radius: 2px;
+    }
+    .logo-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 20px;
     }
-    @media (max-width: 900px) { .ref-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 560px) { .ref-grid { grid-template-columns: 1fr; } }
-    .ref-card {
-      background: #fff; border-radius: 12px;
-      box-shadow: 0 2px 14px rgba(0,48,135,0.09);
+    @media (max-width: 1100px) { .logo-grid { grid-template-columns: repeat(4, 1fr); } }
+    @media (max-width: 768px)  { .logo-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 480px)  { .logo-grid { grid-template-columns: repeat(2, 1fr); } }
+
+    .logo-box {
+      background: transparent;
+      border: none;
+      aspect-ratio: 3/2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+      transition: transform 0.2s ease, opacity 0.2s ease;
       overflow: hidden;
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
     }
-    .ref-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 28px rgba(0,48,135,0.15);
+    .logo-box:hover {
+      transform: translateY(-3px);
+      opacity: 0.85;
     }
-    .ref-card-img {
-      width: 100%; aspect-ratio: 16/9; object-fit: cover;
-      display: block; background: #e8edf5;
+    .logo-box img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      display: block;
     }
-    .ref-card-placeholder {
-      width: 100%; aspect-ratio: 16/9;
-      background: linear-gradient(135deg, #e8edf5 0%, #d0dae9 100%);
-      display: flex; align-items: center; justify-content: center;
-      flex-direction: column; gap: 8px; color: #8fa3c0;
+    /* Empty / no-image state */
+    .logo-box.empty {
+      background: #f4f7fc;
+      border-style: dashed;
     }
-    .ref-card-placeholder i { font-size: 2rem; opacity: 0.45; }
-    .ref-card-placeholder span { font-size: 0.78rem; opacity: 0.55; letter-spacing: 0.3px; }
-    .ref-card-body { padding: 14px 18px 18px; }
-    .ref-card-title { font-size: 0.95rem; font-weight: 700; color: var(--primary); margin-bottom: 3px; }
-    .ref-card-sub { font-size: 0.8rem; color: #6b7a99; line-height: 1.5; }
-    .ref-card-tags { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 5px; }
-    .ref-tag {
-      display: inline-block; padding: 3px 10px; background: #eef2fb;
-      color: var(--primary); border-radius: 20px;
-      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.2px;
+    .logo-box.empty img { display: none; }
+    .logo-box.empty::after {
+      content: '\f03e';
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      font-size: 1.5rem;
+      color: #c8d3e8;
     }
   </style>
 </head>
@@ -102,239 +125,71 @@
       <i class="fas fa-chevron-right"></i>
       <span data-th="Site Reference" data-en="Site Reference">Site Reference</span>
     </div>
-    <h1 data-th="ผลงานและโครงการอ้างอิง" data-en="Our Site References">ผลงานและโครงการอ้างอิง</h1>
-    <p data-th="โครงการที่เราภาคภูมิใจ จากลูกค้าหลากหลายอุตสาหกรรมทั่วประเทศ" data-en="Projects we are proud of, from clients across diverse industries nationwide.">โครงการที่เราภาคภูมิใจ จากลูกค้าหลากหลายอุตสาหกรรมทั่วประเทศ</p>
+    <h1 data-th="ลูกค้าของเรา" data-en="Our Value Customers">ลูกค้าของเรา</h1>
+    <p data-th="องค์กรชั้นนำที่ไว้วางใจให้เราดูแลระบบ IT" data-en="Leading organizations that trust us to manage their IT systems.">องค์กรชั้นนำที่ไว้วางใจให้เราดูแลระบบ IT</p>
   </div>
 </section>
 
-<!-- ===== MNCs / Manufacturing ===== -->
-<section class="ref-section">
+<!-- CUSTOMER LOGO GRID -->
+<section class="customers-section">
   <div class="container">
-    <h2 class="ref-cat-title" data-th="MNCs / ภาคการผลิต" data-en="MNCs / Manufacturing">MNCs / ภาคการผลิต</h2>
-    <div class="ref-cat-line"></div>
-    <div class="ref-grid">
-      <div class="ref-card">
-        <div class="ref-card-placeholder"><i class="fas fa-image"></i><span>Site Screenshot</span></div>
-        <div class="ref-card-body">
-          <div class="ref-card-title">ลูกค้า MNC 1</div>
-          <div class="ref-card-sub">รายละเอียดโครงการ</div>
-          <div class="ref-card-tags"><span class="ref-tag">Network</span></div>
-        </div>
-      </div>
-      <div class="ref-card">
-        <div class="ref-card-placeholder"><i class="fas fa-image"></i><span>Site Screenshot</span></div>
-        <div class="ref-card-body">
-          <div class="ref-card-title">ลูกค้า MNC 2</div>
-          <div class="ref-card-sub">รายละเอียดโครงการ</div>
-          <div class="ref-card-tags"><span class="ref-tag">Security</span></div>
-        </div>
-      </div>
-      <div class="ref-card">
-        <div class="ref-card-placeholder"><i class="fas fa-image"></i><span>Site Screenshot</span></div>
-        <div class="ref-card-body">
-          <div class="ref-card-title">ลูกค้า MNC 3</div>
-          <div class="ref-card-sub">รายละเอียดโครงการ</div>
-          <div class="ref-card-tags"><span class="ref-tag">Cloud</span></div>
-        </div>
-      </div>
-      <div class="ref-card">
-        <div class="ref-card-placeholder"><i class="fas fa-image"></i><span>Site Screenshot</span></div>
-        <div class="ref-card-body">
-          <div class="ref-card-title">ลูกค้า MNC 4</div>
-          <div class="ref-card-sub">รายละเอียดโครงการ</div>
-          <div class="ref-card-tags"><span class="ref-tag">Server</span></div>
-        </div>
-      </div>
-      <div class="ref-card">
-        <div class="ref-card-placeholder"><i class="fas fa-image"></i><span>Site Screenshot</span></div>
-        <div class="ref-card-body">
-          <div class="ref-card-title">ลูกค้า MNC 5</div>
-          <div class="ref-card-sub">รายละเอียดโครงการ</div>
-          <div class="ref-card-tags"><span class="ref-tag">Wireless</span></div>
-        </div>
-      </div>
-      <div class="ref-card">
-        <div class="ref-card-placeholder"><i class="fas fa-image"></i><span>Site Screenshot</span></div>
-        <div class="ref-card-body">
-          <div class="ref-card-title">ลูกค้า MNC 6</div>
-          <div class="ref-card-sub">รายละเอียดโครงการ</div>
-          <div class="ref-card-tags"><span class="ref-tag">Firewall</span></div>
-        </div>
-      </div>
+    <div class="customers-header">
+      <h2>Our Value <span>Customers</span></h2>
+      <p data-th="ลูกค้าองค์กรที่เราให้บริการ IT Solution ครบวงจร" data-en="Organizations we serve with complete IT Solutions">ลูกค้าองค์กรที่เราให้บริการ IT Solution ครบวงจร</p>
+      <div class="ref-cat-line"></div>
     </div>
-  </div>
-</section>
 
-<!-- ===== Government ===== -->
-<section class="ref-section">
-  <div class="container">
-    <h2 class="ref-cat-title" data-th="หน่วยงานภาครัฐ" data-en="Government">หน่วยงานภาครัฐ</h2>
-    <div class="ref-cat-line"></div>
-    <div class="ref-grid">
-      <div class="ref-card">
-        <div class="ref-card-placeholder"><i class="fas fa-image"></i><span>Site Screenshot</span></div>
-        <div class="ref-card-body">
-          <div class="ref-card-title">หน่วยงานรัฐ 1</div>
-          <div class="ref-card-sub">รายละเอียดโครงการ</div>
-          <div class="ref-card-tags"><span class="ref-tag">Network</span></div>
-        </div>
-      </div>
-      <div class="ref-card">
-        <div class="ref-card-placeholder"><i class="fas fa-image"></i><span>Site Screenshot</span></div>
-        <div class="ref-card-body">
-          <div class="ref-card-title">หน่วยงานรัฐ 2</div>
-          <div class="ref-card-sub">รายละเอียดโครงการ</div>
-          <div class="ref-card-tags"><span class="ref-tag">Server</span></div>
-        </div>
-      </div>
-      <div class="ref-card">
-        <div class="ref-card-placeholder"><i class="fas fa-image"></i><span>Site Screenshot</span></div>
-        <div class="ref-card-body">
-          <div class="ref-card-title">หน่วยงานรัฐ 3</div>
-          <div class="ref-card-sub">รายละเอียดโครงการ</div>
-          <div class="ref-card-tags"><span class="ref-tag">Security</span></div>
-        </div>
-      </div>
-      <div class="ref-card">
-        <div class="ref-card-placeholder"><i class="fas fa-image"></i><span>Site Screenshot</span></div>
-        <div class="ref-card-body">
-          <div class="ref-card-title">หน่วยงานรัฐ 4</div>
-          <div class="ref-card-sub">รายละเอียดโครงการ</div>
-          <div class="ref-card-tags"><span class="ref-tag">Cloud</span></div>
-        </div>
-      </div>
-      <div class="ref-card">
-        <div class="ref-card-placeholder"><i class="fas fa-image"></i><span>Site Screenshot</span></div>
-        <div class="ref-card-body">
-          <div class="ref-card-title">หน่วยงานรัฐ 5</div>
-          <div class="ref-card-sub">รายละเอียดโครงการ</div>
-          <div class="ref-card-tags"><span class="ref-tag">Wireless</span></div>
-        </div>
-      </div>
-      <div class="ref-card">
-        <div class="ref-card-placeholder"><i class="fas fa-image"></i><span>Site Screenshot</span></div>
-        <div class="ref-card-body">
-          <div class="ref-card-title">หน่วยงานรัฐ 6</div>
-          <div class="ref-card-sub">รายละเอียดโครงการ</div>
-          <div class="ref-card-tags"><span class="ref-tag">Firewall</span></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== Financial ===== -->
-<section class="ref-section">
-  <div class="container">
-    <h2 class="ref-cat-title" data-th="สถาบันการเงิน" data-en="Financial">สถาบันการเงิน</h2>
-    <div class="ref-cat-line"></div>
-    <div class="ref-grid">
-      <div class="ref-card">
-        <div class="ref-card-placeholder"><i class="fas fa-image"></i><span>Site Screenshot</span></div>
-        <div class="ref-card-body">
-          <div class="ref-card-title">สถาบันการเงิน 1</div>
-          <div class="ref-card-sub">รายละเอียดโครงการ</div>
-          <div class="ref-card-tags"><span class="ref-tag">Cloud</span></div>
-        </div>
-      </div>
-      <div class="ref-card">
-        <div class="ref-card-placeholder"><i class="fas fa-image"></i><span>Site Screenshot</span></div>
-        <div class="ref-card-body">
-          <div class="ref-card-title">สถาบันการเงิน 2</div>
-          <div class="ref-card-sub">รายละเอียดโครงการ</div>
-          <div class="ref-card-tags"><span class="ref-tag">Security</span></div>
-        </div>
-      </div>
-      <div class="ref-card">
-        <div class="ref-card-placeholder"><i class="fas fa-image"></i><span>Site Screenshot</span></div>
-        <div class="ref-card-body">
-          <div class="ref-card-title">สถาบันการเงิน 3</div>
-          <div class="ref-card-sub">รายละเอียดโครงการ</div>
-          <div class="ref-card-tags"><span class="ref-tag">Network</span></div>
-        </div>
-      </div>
-      <div class="ref-card">
-        <div class="ref-card-placeholder"><i class="fas fa-image"></i><span>Site Screenshot</span></div>
-        <div class="ref-card-body">
-          <div class="ref-card-title">สถาบันการเงิน 4</div>
-          <div class="ref-card-sub">รายละเอียดโครงการ</div>
-          <div class="ref-card-tags"><span class="ref-tag">Server</span></div>
-        </div>
-      </div>
-      <div class="ref-card">
-        <div class="ref-card-placeholder"><i class="fas fa-image"></i><span>Site Screenshot</span></div>
-        <div class="ref-card-body">
-          <div class="ref-card-title">สถาบันการเงิน 5</div>
-          <div class="ref-card-sub">รายละเอียดโครงการ</div>
-          <div class="ref-card-tags"><span class="ref-tag">Firewall</span></div>
-        </div>
-      </div>
-      <div class="ref-card">
-        <div class="ref-card-placeholder"><i class="fas fa-image"></i><span>Site Screenshot</span></div>
-        <div class="ref-card-body">
-          <div class="ref-card-title">สถาบันการเงิน 6</div>
-          <div class="ref-card-sub">รายละเอียดโครงการ</div>
-          <div class="ref-card-tags"><span class="ref-tag">Wireless</span></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== Education / Healthcare ===== -->
-<section class="ref-section">
-  <div class="container">
-    <h2 class="ref-cat-title" data-th="การศึกษา / สาธารณสุข" data-en="Education / Healthcare">การศึกษา / สาธารณสุข</h2>
-    <div class="ref-cat-line"></div>
-    <div class="ref-grid">
-      <div class="ref-card">
-        <div class="ref-card-placeholder"><i class="fas fa-image"></i><span>Site Screenshot</span></div>
-        <div class="ref-card-body">
-          <div class="ref-card-title">มหาวิทยาลัย / โรงพยาบาล 1</div>
-          <div class="ref-card-sub">รายละเอียดโครงการ</div>
-          <div class="ref-card-tags"><span class="ref-tag">Network</span></div>
-        </div>
-      </div>
-      <div class="ref-card">
-        <div class="ref-card-placeholder"><i class="fas fa-image"></i><span>Site Screenshot</span></div>
-        <div class="ref-card-body">
-          <div class="ref-card-title">มหาวิทยาลัย / โรงพยาบาล 2</div>
-          <div class="ref-card-sub">รายละเอียดโครงการ</div>
-          <div class="ref-card-tags"><span class="ref-tag">Server</span></div>
-        </div>
-      </div>
-      <div class="ref-card">
-        <div class="ref-card-placeholder"><i class="fas fa-image"></i><span>Site Screenshot</span></div>
-        <div class="ref-card-body">
-          <div class="ref-card-title">มหาวิทยาลัย / โรงพยาบาล 3</div>
-          <div class="ref-card-sub">รายละเอียดโครงการ</div>
-          <div class="ref-card-tags"><span class="ref-tag">Wireless</span></div>
-        </div>
-      </div>
-      <div class="ref-card">
-        <div class="ref-card-placeholder"><i class="fas fa-image"></i><span>Site Screenshot</span></div>
-        <div class="ref-card-body">
-          <div class="ref-card-title">มหาวิทยาลัย / โรงพยาบาล 4</div>
-          <div class="ref-card-sub">รายละเอียดโครงการ</div>
-          <div class="ref-card-tags"><span class="ref-tag">Security</span></div>
-        </div>
-      </div>
-      <div class="ref-card">
-        <div class="ref-card-placeholder"><i class="fas fa-image"></i><span>Site Screenshot</span></div>
-        <div class="ref-card-body">
-          <div class="ref-card-title">มหาวิทยาลัย / โรงพยาบาล 5</div>
-          <div class="ref-card-sub">รายละเอียดโครงการ</div>
-          <div class="ref-card-tags"><span class="ref-tag">Cloud</span></div>
-        </div>
-      </div>
-      <div class="ref-card">
-        <div class="ref-card-placeholder"><i class="fas fa-image"></i><span>Site Screenshot</span></div>
-        <div class="ref-card-body">
-          <div class="ref-card-title">มหาวิทยาลัย / โรงพยาบาล 6</div>
-          <div class="ref-card-sub">รายละเอียดโครงการ</div>
-          <div class="ref-card-tags"><span class="ref-tag">Firewall</span></div>
-        </div>
-      </div>
+    <div class="logo-grid">
+      <div class="logo-box"><img src="images/customers/1.reignwoordpark.png" alt="Reignwoordpark" /></div>
+      <div class="logo-box"><img src="images/customers/2.mofa.png" alt="Mofa" /></div>
+      <div class="logo-box"><img src="images/customers/3.bsm.png" alt="Bsm" /></div>
+      <div class="logo-box"><img src="images/customers/4.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/5.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/6.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/7.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/8.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/9.jpg" alt="Jpg" /></div>
+      <div class="logo-box"><img src="images/customers/10.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/11.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/12.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/13.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/14.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/15.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/16.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/17.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/18.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/19.jpg" alt="Jpg" /></div>
+      <div class="logo-box"><img src="images/customers/20.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/21.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/22.jpg" alt="Jpg" /></div>
+      <div class="logo-box"><img src="images/customers/23.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/24.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/25.jpg" alt="Jpg" /></div>
+      <div class="logo-box"><img src="images/customers/26.jpg" alt="Jpg" /></div>
+      <div class="logo-box"><img src="images/customers/27.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/28.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/29.jpg" alt="Jpg" /></div>
+      <div class="logo-box"><img src="images/customers/30.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/31.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/32.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/33.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/34.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/35.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/36.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/37.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/38.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/39.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/40.jpg" alt="Jpg" /></div>
+      <div class="logo-box"><img src="images/customers/41.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/42.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/43.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/44.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/45.jpg" alt="Jpg" /></div>
+      <div class="logo-box"><img src="images/customers/46.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/47.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/48.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/49.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/50.png" alt="Png" /></div>
     </div>
   </div>
 </section>
@@ -412,5 +267,13 @@
   </div>
 </a>
 
+<script>
+  // Auto mark empty boxes (no image loaded)
+  document.querySelectorAll('.logo-box img').forEach(img => {
+    img.addEventListener('error', () => img.parentElement.classList.add('empty'));
+  });
+</script>
+
 </body>
 </html>
+                                                                                                                        
