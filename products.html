@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ผลิตภัณฑ์ | BE GROVE SOLUTIONS CO., LTD</title>
-  <meta name="description" content="ผลิตภัณฑ์ IT คุณภาพสูงจากแบรนด์ชั้นนำ Cisco, HPE, Fortinet, Microsoft, Palo Alto" />
+  <meta name="description" content="ผลิตภัณฑ์ IT คุณภาพสูงจากแบรนด์ชั้นนำ Cisco, HPE, Fortinet, Aruba, Ruijie, Reyee" />
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
@@ -21,6 +21,7 @@
       <li><a href="about.html" class="nav-link" data-th="เกี่ยวกับเรา" data-en="About Us">เกี่ยวกับเรา</a></li>
       <li><a href="services.html" class="nav-link" data-th="บริการ" data-en="Services">บริการ</a></li>
       <li><a href="products.html" class="nav-link active" data-th="ผลิตภัณฑ์" data-en="Products">ผลิตภัณฑ์</a></li>
+      <li><a href="reference.html" class="nav-link" data-th="Site Reference" data-en="Site Reference">Site Reference</a></li>
       <li><a href="contact.html" class="nav-link" data-th="ติดต่อเรา" data-en="Contact">ติดต่อเรา</a></li>
     </ul>
     <div class="nav-right">
@@ -38,202 +39,369 @@
   <a href="about.html" class="nav-link" data-th="เกี่ยวกับเรา" data-en="About Us">เกี่ยวกับเรา</a>
   <a href="services.html" class="nav-link" data-th="บริการ" data-en="Services">บริการ</a>
   <a href="products.html" class="nav-link" data-th="ผลิตภัณฑ์" data-en="Products">ผลิตภัณฑ์</a>
+  <a href="reference.html" class="nav-link" data-th="Site Reference" data-en="Site Reference">Site Reference</a>
   <a href="contact.html" class="nav-link" data-th="ติดต่อเรา" data-en="Contact">ติดต่อเรา</a>
   <div class="lang-switch"><button class="lang-btn active" data-lang="th">TH</button><button class="lang-btn" data-lang="en">EN</button></div>
   <a href="contact.html" class="nav-contact-btn">ติดต่อเรา</a>
 </div>
 
-<!-- PAGE HERO -->
-<section class="page-hero">
+<!-- CATEGORY SUB-NAV -->
+<div class="cat-subnav">
   <div class="container">
-    <div class="breadcrumb">
-      <a href="index.html" data-th="หน้าหลัก" data-en="Home">หน้าหลัก</a>
-      <i class="fas fa-chevron-right"></i>
-      <span data-th="ผลิตภัณฑ์" data-en="Products">ผลิตภัณฑ์</span>
-    </div>
-    <h1 data-th="ผลิตภัณฑ์ของเรา" data-en="Our Products">ผลิตภัณฑ์ของเรา</h1>
-    <p data-th="ผลิตภัณฑ์ IT คุณภาพสูงจากแบรนด์ชั้นนำระดับโลก พร้อมบริการติดตั้งและรับประกัน" data-en="High-quality IT products from world-leading brands with full installation and warranty services.">ผลิตภัณฑ์ IT คุณภาพสูงจากแบรนด์ชั้นนำระดับโลก พร้อมบริการติดตั้งและรับประกัน</p>
+    <ul class="cat-subnav-list">
+      <li><a href="#" class="cat-subnav-link active" data-cat-filter="all" data-th="ทั้งหมด" data-en="All Products">ทั้งหมด</a></li>
+      <li><a href="#" class="cat-subnav-link" data-cat-filter="network" data-th="Network" data-en="Network"><i class="fas fa-network-wired"></i> Network</a></li>
+      <li><a href="#" class="cat-subnav-link" data-cat-filter="security" data-th="Security" data-en="Security"><i class="fas fa-shield-alt"></i> Security</a></li>
+      <li><a href="#" class="cat-subnav-link" data-cat-filter="server" data-th="Server &amp; Storage" data-en="Server &amp; Storage"><i class="fas fa-server"></i> Server &amp; Storage</a></li>
+      <li><a href="#" class="cat-subnav-link" data-cat-filter="wireless" data-th="Wireless" data-en="Wireless"><i class="fas fa-wifi"></i> Wireless</a></li>
+      <li><a href="#" class="cat-subnav-link" data-cat-filter="cloud" data-th="Cloud" data-en="Cloud"><i class="fas fa-cloud"></i> Cloud</a></li>
+    </ul>
   </div>
-</section>
+</div>
 
-<!-- PRODUCTS GRID -->
-<section class="section-padding" style="background:#fff;">
+<!-- SHOP LAYOUT -->
+<div class="shop-wrapper">
   <div class="container">
-    <div class="section-header">
-      <div class="section-tag" data-th="ผลิตภัณฑ์ทั้งหมด" data-en="All Products">ผลิตภัณฑ์ทั้งหมด</div>
-      <h2 data-th="เลือกผลิตภัณฑ์ที่เหมาะสมสำหรับคุณ" data-en="Find the Right Product for You">เลือกผลิตภัณฑ์ที่เหมาะสมสำหรับคุณ</h2>
-      <div class="divider"></div>
-    </div>
+    <div class="shop-layout">
 
-    <!-- Filter Tabs -->
-    <div class="filter-tabs">
-      <button class="filter-tab active" data-filter="all" data-th="ทั้งหมด" data-en="All">ทั้งหมด</button>
-      <button class="filter-tab" data-filter="network" data-th="เครือข่าย" data-en="Networking">เครือข่าย</button>
-      <button class="filter-tab" data-filter="security" data-th="ความปลอดภัย" data-en="Security">ความปลอดภัย</button>
-      <button class="filter-tab" data-filter="server" data-th="เซิร์ฟเวอร์" data-en="Server &amp; Storage">เซิร์ฟเวอร์</button>
-      <button class="filter-tab" data-filter="cloud" data-th="คลาวด์" data-en="Cloud">คลาวด์</button>
-      <button class="filter-tab" data-filter="wireless" data-th="ไร้สาย" data-en="Wireless">ไร้สาย</button>
-    </div>
+      <!-- ========== SIDEBAR ========== -->
+      <aside class="shop-sidebar">
 
-    <div class="products-full-grid">
-
-      <!-- Networking -->
-      <div class="product-full-card" data-cat="network">
-        <div class="product-full-img" style="background:linear-gradient(135deg,#e8f0fe,#c7d7f9);">🌐</div>
-        <div class="product-full-info">
-          <div class="pcat" data-th="เครือข่าย" data-en="Networking">เครือข่าย</div>
-          <h3>Cisco Catalyst Switches</h3>
-          <p data-th="สวิตช์เครือข่ายระดับ Enterprise รองรับ PoE+, 10G/25G/100G Uplink พร้อม Cisco DNA Center" data-en="Enterprise switches supporting PoE+, 10G/25G/100G Uplinks, and Cisco DNA Center.">สวิตช์เครือข่ายระดับ Enterprise รองรับ PoE+, 10G/25G/100G Uplink พร้อม Cisco DNA Center</p>
-          <ul class="product-features">
-            <li><i class="fas fa-circle"></i><span>Layer 2/3 Managed</span></li>
-            <li><i class="fas fa-circle"></i><span data-th="รองรับ PoE+ สูงสุด 90W" data-en="PoE+ up to 90W">รองรับ PoE+ สูงสุด 90W</span></li>
-            <li><i class="fas fa-circle"></i><span data-th="รับประกัน Lifetime" data-en="Lifetime Warranty">รับประกัน Lifetime</span></li>
+        <div class="sidebar-section">
+          <h4 class="sidebar-title"><i class="fas fa-th-large"></i> <span data-th="หมวดสินค้า" data-en="Categories">หมวดสินค้า</span></h4>
+          <ul class="sidebar-menu">
+            <li class="sidebar-group">
+              <a href="#" class="sidebar-group-link" data-cat-filter="network"><i class="fas fa-network-wired"></i> Network</a>
+              <ul class="sidebar-sub">
+                <li><a href="#" data-cat-filter="network">Cisco Switches</a></li>
+                <li><a href="#" data-cat-filter="network">Cisco Routers</a></li>
+                <li><a href="#" data-cat-filter="network">Ruijie Switches</a></li>
+              </ul>
+            </li>
+            <li class="sidebar-group">
+              <a href="#" class="sidebar-group-link" data-cat-filter="security"><i class="fas fa-shield-alt"></i> Security</a>
+              <ul class="sidebar-sub">
+                <li><a href="#" data-cat-filter="security">Fortinet Firewall</a></li>
+                <li><a href="#" data-cat-filter="security">Fortinet SD-WAN</a></li>
+              </ul>
+            </li>
+            <li class="sidebar-group">
+              <a href="#" class="sidebar-group-link" data-cat-filter="server"><i class="fas fa-server"></i> Server &amp; Storage</a>
+              <ul class="sidebar-sub">
+                <li><a href="#" data-cat-filter="server">HPE ProLiant</a></li>
+                <li><a href="#" data-cat-filter="server">Dell PowerEdge</a></li>
+              </ul>
+            </li>
+            <li class="sidebar-group">
+              <a href="#" class="sidebar-group-link" data-cat-filter="wireless"><i class="fas fa-wifi"></i> Wireless</a>
+              <ul class="sidebar-sub">
+                <li><a href="#" data-cat-filter="wireless">Cisco Wireless</a></li>
+                <li><a href="#" data-cat-filter="wireless">Aruba Access Point</a></li>
+                <li><a href="#" data-cat-filter="wireless">Reyee Wi-Fi</a></li>
+              </ul>
+            </li>
+            <li class="sidebar-group">
+              <a href="#" class="sidebar-group-link" data-cat-filter="cloud"><i class="fas fa-cloud"></i> Cloud</a>
+              <ul class="sidebar-sub">
+                <li><a href="#" data-cat-filter="cloud">Microsoft Azure</a></li>
+                <li><a href="#" data-cat-filter="cloud">Microsoft 365</a></li>
+              </ul>
+            </li>
           </ul>
-          <a href="contact.html" class="btn btn-secondary" style="font-size:0.85rem;padding:10px 22px;" data-th="สอบถามราคา" data-en="Request Quote">สอบถามราคา</a>
         </div>
-      </div>
 
-      <div class="product-full-card" data-cat="network">
-        <div class="product-full-img" style="background:linear-gradient(135deg,#e0f7fa,#b2ebf2);">🔗</div>
-        <div class="product-full-info">
-          <div class="pcat" data-th="เครือข่าย" data-en="Networking">เครือข่าย</div>
-          <h3>HPE Aruba Networking</h3>
-          <p data-th="โซลูชันเครือข่ายจาก HPE Aruba รองรับ SD-WAN, CX Switching และ AI-Powered Network Analytics" data-en="HPE Aruba networking with SD-WAN, CX Switching, and AI-Powered Network Analytics.">โซลูชันเครือข่ายจาก HPE Aruba รองรับ SD-WAN, CX Switching และ AI-Powered Network Analytics</p>
-          <ul class="product-features">
-            <li><i class="fas fa-circle"></i><span>SD-WAN Built-in</span></li>
-            <li><i class="fas fa-circle"></i><span>AI-Powered Insights</span></li>
-            <li><i class="fas fa-circle"></i><span>Zero Trust Security</span></li>
-          </ul>
-          <a href="contact.html" class="btn btn-secondary" style="font-size:0.85rem;padding:10px 22px;" data-th="สอบถามราคา" data-en="Request Quote">สอบถามราคา</a>
+        <!-- Contact Box -->
+        <div class="sidebar-contact-box">
+          <div class="sidebar-contact-icon"><i class="fas fa-headset"></i></div>
+          <p data-th="ต้องการคำแนะนำ?" data-en="Need advice?">ต้องการคำแนะนำ?</p>
+          <a href="tel:+66914959996" class="sidebar-call-btn"><i class="fas fa-phone"></i> +66 9 1495 9996</a>
+          <a href="contact.html" class="sidebar-quote-btn" data-th="ขอใบเสนอราคา" data-en="Get a Quote">ขอใบเสนอราคา</a>
         </div>
-      </div>
 
-      <!-- Security -->
-      <div class="product-full-card" data-cat="security">
-        <div class="product-full-img" style="background:linear-gradient(135deg,#fff3e0,#ffe0b2);">🔒</div>
-        <div class="product-full-info">
-          <div class="pcat" data-th="ความปลอดภัย" data-en="Security">ความปลอดภัย</div>
-          <h3>Fortinet FortiGate NGFW</h3>
-          <p data-th="Next-Generation Firewall พร้อม SD-WAN, IPS, Zero Trust และ FortiGuard AI Threat Intelligence" data-en="NGFW with built-in SD-WAN, IPS, Zero Trust and FortiGuard AI Threat Intelligence.">Next-Generation Firewall พร้อม SD-WAN, IPS, Zero Trust และ FortiGuard AI Threat Intelligence</p>
-          <ul class="product-features">
-            <li><i class="fas fa-circle"></i><span>NGFW + IPS + AV</span></li>
-            <li><i class="fas fa-circle"></i><span>SD-WAN Integrated</span></li>
-            <li><i class="fas fa-circle"></i><span>FortiGuard Services</span></li>
-          </ul>
-          <a href="contact.html" class="btn btn-secondary" style="font-size:0.85rem;padding:10px 22px;" data-th="สอบถามราคา" data-en="Request Quote">สอบถามราคา</a>
+      </aside>
+
+      <!-- ========== MAIN CONTENT ========== -->
+      <main class="shop-main">
+
+        <!-- Breadcrumb -->
+        <div class="shop-breadcrumb">
+          <a href="index.html" data-th="หน้าหลัก" data-en="Home">หน้าหลัก</a>
+          <i class="fas fa-chevron-right"></i>
+          <span data-th="ผลิตภัณฑ์" data-en="Products">ผลิตภัณฑ์</span>
         </div>
-      </div>
 
-      <div class="product-full-card" data-cat="security">
-        <div class="product-full-img" style="background:linear-gradient(135deg,#fce4ec,#f8bbd0);">🛡️</div>
-        <div class="product-full-info">
-          <div class="pcat" data-th="ความปลอดภัย" data-en="Security">ความปลอดภัย</div>
-          <h3>Palo Alto Networks NGFW</h3>
-          <p data-th="แพลตฟอร์มความปลอดภัยระดับ Enterprise รองรับ Cortex XDR, SASE และ Prisma Cloud" data-en="Enterprise security platform with Cortex XDR, SASE, and Prisma Cloud.">แพลตฟอร์มความปลอดภัยระดับ Enterprise รองรับ Cortex XDR, SASE และ Prisma Cloud</p>
-          <ul class="product-features">
-            <li><i class="fas fa-circle"></i><span>Cortex XDR</span></li>
-            <li><i class="fas fa-circle"></i><span>ML-Powered Prevention</span></li>
-            <li><i class="fas fa-circle"></i><span>Zero-Day Protection</span></li>
-          </ul>
-          <a href="contact.html" class="btn btn-secondary" style="font-size:0.85rem;padding:10px 22px;" data-th="สอบถามราคา" data-en="Request Quote">สอบถามราคา</a>
+        <!-- Promo Banner -->
+        <div class="promo-banner">
+          <div class="promo-banner-inner">
+            <div class="promo-tag" data-th="สินค้าแนะนำ" data-en="Featured">สินค้าแนะนำ</div>
+            <h3 data-th="ผลิตภัณฑ์ IT คุณภาพสูง จากแบรนด์ชั้นนำระดับโลก" data-en="Premium IT Products from World-Leading Brands">ผลิตภัณฑ์ IT คุณภาพสูง<br>จากแบรนด์ชั้นนำระดับโลก</h3>
+            <p data-th="พร้อมบริการติดตั้ง ทดสอบ และรับประกัน โดยทีมวิศวกรผู้เชี่ยวชาญ" data-en="With full installation, testing and warranty by expert engineers.">พร้อมบริการติดตั้ง ทดสอบ และรับประกัน โดยทีมวิศวกรผู้เชี่ยวชาญ</p>
+            <a href="contact.html" class="btn btn-primary" data-th="สอบถามราคาพิเศษ" data-en="Get Special Price">สอบถามราคาพิเศษ</a>
+          </div>
+          <div class="promo-banner-icons">
+            <i class="fas fa-server"></i>
+            <i class="fas fa-shield-alt"></i>
+            <i class="fas fa-network-wired"></i>
+          </div>
         </div>
-      </div>
 
-      <!-- Server & Storage -->
-      <div class="product-full-card" data-cat="server">
-        <div class="product-full-img" style="background:linear-gradient(135deg,#e8f5e9,#c8e6c9);">🖥️</div>
-        <div class="product-full-info">
-          <div class="pcat" data-th="เซิร์ฟเวอร์" data-en="Server">เซิร์ฟเวอร์</div>
-          <h3>HPE ProLiant DL Gen11</h3>
-          <p data-th="เซิร์ฟเวอร์ Rack รุ่น Gen11 พร้อม Intel Xeon Scalable Gen4 และ HPE iLO 6 Management อัจฉริยะ" data-en="Gen11 Rack Server with Intel Xeon Scalable Gen4 and intelligent HPE iLO 6 Management.">เซิร์ฟเวอร์ Rack รุ่น Gen11 พร้อม Intel Xeon Scalable Gen4 และ HPE iLO 6 Management อัจฉริยะ</p>
-          <ul class="product-features">
-            <li><i class="fas fa-circle"></i><span>Intel Xeon Scalable Gen4</span></li>
-            <li><i class="fas fa-circle"></i><span>HPE iLO 6 Management</span></li>
-            <li><i class="fas fa-circle"></i><span data-th="รองรับ NVMe" data-en="NVMe Support">รองรับ NVMe</span></li>
-          </ul>
-          <a href="contact.html" class="btn btn-secondary" style="font-size:0.85rem;padding:10px 22px;" data-th="สอบถามราคา" data-en="Request Quote">สอบถามราคา</a>
+        <!-- Result bar -->
+        <div class="shop-result-bar">
+          <span class="result-count"><span id="product-count">9</span> <span data-th="รายการ" data-en="Products">รายการ</span></span>
+          <span class="result-sort" data-th="เรียงตาม: ยอดนิยม" data-en="Sort: Popular">เรียงตาม: ยอดนิยม</span>
         </div>
-      </div>
 
-      <div class="product-full-card" data-cat="server">
-        <div class="product-full-img" style="background:linear-gradient(135deg,#f3e5f5,#e1bee7);">💾</div>
-        <div class="product-full-info">
-          <div class="pcat" data-th="สตอเรจ" data-en="Storage">สตอเรจ</div>
-          <h3>HPE Nimble All-Flash</h3>
-          <p data-th="All-Flash NVMe Storage พร้อม InfoSight AI-powered Analytics และ 99.9999% Availability" data-en="All-Flash NVMe Storage with InfoSight AI Analytics and 99.9999% Availability.">All-Flash NVMe Storage พร้อม InfoSight AI-powered Analytics และ 99.9999% Availability</p>
-          <ul class="product-features">
-            <li><i class="fas fa-circle"></i><span>All-Flash NVMe</span></li>
-            <li><i class="fas fa-circle"></i><span>InfoSight AI Analytics</span></li>
-            <li><i class="fas fa-circle"></i><span>99.9999% Availability</span></li>
-          </ul>
-          <a href="contact.html" class="btn btn-secondary" style="font-size:0.85rem;padding:10px 22px;" data-th="สอบถามราคา" data-en="Request Quote">สอบถามราคา</a>
-        </div>
-      </div>
+        <!-- ===== PRODUCT LIST ===== -->
+        <div class="product-list" id="product-list">
 
-      <!-- Cloud -->
-      <div class="product-full-card" data-cat="cloud">
-        <div class="product-full-img" style="background:linear-gradient(135deg,#e3f2fd,#bbdefb);">☁️</div>
-        <div class="product-full-info">
-          <div class="pcat" data-th="คลาวด์" data-en="Cloud">คลาวด์</div>
-          <h3>Microsoft Azure</h3>
-          <p data-th="โซลูชัน Microsoft Azure ครบวงจร IaaS, PaaS, SaaS พร้อมบริการ Migration และ Managed Cloud" data-en="Complete Microsoft Azure IaaS, PaaS, SaaS with Migration and Managed Cloud services.">โซลูชัน Microsoft Azure ครบวงจร IaaS, PaaS, SaaS พร้อมบริการ Migration และ Managed Cloud</p>
-          <ul class="product-features">
-            <li><i class="fas fa-circle"></i><span>Azure Virtual Machines</span></li>
-            <li><i class="fas fa-circle"></i><span>Microsoft 365</span></li>
-            <li><i class="fas fa-circle"></i><span>Azure Security Center</span></li>
-          </ul>
-          <a href="contact.html" class="btn btn-secondary" style="font-size:0.85rem;padding:10px 22px;" data-th="สอบถามราคา" data-en="Request Quote">สอบถามราคา</a>
-        </div>
-      </div>
+          <!-- 1. Cisco Catalyst Switches -->
+          <div class="plcard" data-cat="network">
+            <div class="plcard-img" style="background:linear-gradient(135deg,#e8f0fe,#c7d7f9);">
+              <img src="images/product-partner/ciscopng-300x158.png" alt="Cisco" style="height:70px;object-fit:contain;" />
+            </div>
+            <div class="plcard-body">
+              <div class="plcard-badges">
+                <span class="badge-cat" data-th="เครือข่าย" data-en="Network">Network</span>
+                <span class="badge-brand">Cisco</span>
+              </div>
+              <h3 class="plcard-title">Cisco Catalyst Switches</h3>
+              <p class="plcard-desc" data-th="สวิตช์เครือข่ายระดับ Enterprise รองรับ PoE+, 10G/25G/100G Uplink พร้อม Cisco DNA Center สำหรับบริหารจัดการเครือข่ายแบบ Centralized" data-en="Enterprise-grade switches supporting PoE+, 10G/25G/100G Uplinks with Cisco DNA Center for centralized management.">สวิตช์เครือข่ายระดับ Enterprise รองรับ PoE+, 10G/25G/100G Uplink พร้อม Cisco DNA Center สำหรับบริหารจัดการเครือข่ายแบบ Centralized</p>
+              <ul class="plcard-specs">
+                <li><i class="fas fa-check-circle"></i> <span>Layer 2/3 Managed Switching</span></li>
+                <li><i class="fas fa-check-circle"></i> <span data-th="รองรับ PoE+ สูงสุด 90W" data-en="PoE+ up to 90W per port">รองรับ PoE+ สูงสุด 90W ต่อพอร์ต</span></li>
+                <li><i class="fas fa-check-circle"></i> <span data-th="รับประกัน Lifetime" data-en="Lifetime Warranty">รับประกัน Lifetime</span></li>
+                <li><i class="fas fa-check-circle"></i> <span>Cisco DNA Center Ready</span></li>
+              </ul>
+            </div>
+            <div class="plcard-action">
+              <div class="plcard-price" data-th="ราคาพิเศษ" data-en="Special Price">ราคาพิเศษ</div>
+              <div class="plcard-price-sub" data-th="ติดต่อสอบถาม" data-en="Contact for price">ติดต่อสอบถาม</div>
+              <a href="contact.html" class="plcard-btn-quote" data-th="ขอใบเสนอราคา" data-en="Request Quote">ขอใบเสนอราคา</a>
+              <a href="tel:+66914959996" class="plcard-btn-call"><i class="fas fa-phone"></i> โทรเลย</a>
+            </div>
+          </div>
 
-      <!-- Wireless -->
-      <div class="product-full-card" data-cat="wireless">
-        <div class="product-full-img" style="background:linear-gradient(135deg,#e8f5e9,#a5d6a7);">📶</div>
-        <div class="product-full-info">
-          <div class="pcat" data-th="ไร้สาย" data-en="Wireless">ไร้สาย</div>
-          <h3>Cisco Meraki Wi-Fi 6E</h3>
-          <p data-th="Access Point Wi-Fi 6E Cloud-Managed รองรับ 6 GHz เหมาะสำหรับองค์กรที่ต้องการ Coverage สูง" data-en="Wi-Fi 6E Cloud-Managed Access Point with 6 GHz support, ideal for high-density deployments.">Access Point Wi-Fi 6E Cloud-Managed รองรับ 6 GHz เหมาะสำหรับองค์กรที่ต้องการ Coverage สูง</p>
-          <ul class="product-features">
-            <li><i class="fas fa-circle"></i><span>Wi-Fi 6E (6 GHz Band)</span></li>
-            <li><i class="fas fa-circle"></i><span data-th="บริหารผ่าน Cloud" data-en="Cloud-Managed">บริหารผ่าน Cloud</span></li>
-            <li><i class="fas fa-circle"></i><span>Auto RF Optimization</span></li>
-          </ul>
-          <a href="contact.html" class="btn btn-secondary" style="font-size:0.85rem;padding:10px 22px;" data-th="สอบถามราคา" data-en="Request Quote">สอบถามราคา</a>
-        </div>
-      </div>
+          <!-- 2. Ruijie Switches -->
+          <div class="plcard" data-cat="network">
+            <div class="plcard-img" style="background:linear-gradient(135deg,#e3f2fd,#bbdefb);">
+              <img src="images/product-partner/ruijie-logo.png" alt="Ruijie" style="height:70px;object-fit:contain;" />
+            </div>
+            <div class="plcard-body">
+              <div class="plcard-badges">
+                <span class="badge-cat" data-th="เครือข่าย" data-en="Network">Network</span>
+                <span class="badge-brand">Ruijie</span>
+              </div>
+              <h3 class="plcard-title">Ruijie Managed Switches</h3>
+              <p class="plcard-desc" data-th="สวิตช์เครือข่ายคุณภาพสูง ราคาประหยัด รองรับ L2/L3 บริหารจัดการผ่าน Cloud Controller ง่ายดาย" data-en="High-quality, cost-effective switches with L2/L3 support and easy Cloud Controller management.">สวิตช์เครือข่ายคุณภาพสูง ราคาประหยัด รองรับ L2/L3 บริหารจัดการผ่าน Cloud Controller ง่ายดาย</p>
+              <ul class="plcard-specs">
+                <li><i class="fas fa-check-circle"></i> <span>L2/L3 Managed Switch</span></li>
+                <li><i class="fas fa-check-circle"></i> <span data-th="รองรับ PoE/PoE+" data-en="PoE/PoE+ Supported">รองรับ PoE/PoE+</span></li>
+                <li><i class="fas fa-check-circle"></i> <span>Ruijie Cloud Management</span></li>
+                <li><i class="fas fa-check-circle"></i> <span data-th="ราคาคุ้มค่า ดีไซน์ทนทาน" data-en="Cost-effective & Durable">ราคาคุ้มค่า ดีไซน์ทนทาน</span></li>
+              </ul>
+            </div>
+            <div class="plcard-action">
+              <div class="plcard-price" data-th="ราคาพิเศษ" data-en="Special Price">ราคาพิเศษ</div>
+              <div class="plcard-price-sub" data-th="ติดต่อสอบถาม" data-en="Contact for price">ติดต่อสอบถาม</div>
+              <a href="contact.html" class="plcard-btn-quote" data-th="ขอใบเสนอราคา" data-en="Request Quote">ขอใบเสนอราคา</a>
+              <a href="tel:+66914959996" class="plcard-btn-call"><i class="fas fa-phone"></i> โทรเลย</a>
+            </div>
+          </div>
 
-      <div class="product-full-card" data-cat="wireless">
-        <div class="product-full-img" style="background:linear-gradient(135deg,#fff8e1,#ffecb3);">📡</div>
-        <div class="product-full-info">
-          <div class="pcat" data-th="ไร้สาย" data-en="Wireless">ไร้สาย</div>
-          <h3>Ubiquiti UniFi</h3>
-          <p data-th="โซลูชัน Wireless ครบวงจรราคาคุ้มค่า เหมาะสำหรับ SME และองค์กรขนาดกลาง" data-en="Cost-effective complete wireless solution ideal for SMEs and mid-size organizations.">โซลูชัน Wireless ครบวงจรราคาคุ้มค่า เหมาะสำหรับ SME และองค์กรขนาดกลาง</p>
-          <ul class="product-features">
-            <li><i class="fas fa-circle"></i><span data-th="ราคาคุ้มค่า" data-en="Cost-effective">ราคาคุ้มค่า</span></li>
-            <li><i class="fas fa-circle"></i><span>UniFi Network App</span></li>
-            <li><i class="fas fa-circle"></i><span>Wi-Fi 6 Support</span></li>
-          </ul>
-          <a href="contact.html" class="btn btn-secondary" style="font-size:0.85rem;padding:10px 22px;" data-th="สอบถามราคา" data-en="Request Quote">สอบถามราคา</a>
-        </div>
-      </div>
+          <!-- 3. Fortinet Firewall -->
+          <div class="plcard" data-cat="security">
+            <div class="plcard-img" style="background:linear-gradient(135deg,#fff3e0,#ffe0b2);">
+              <img src="images/product-partner/Fortinet-removebg-preview-300x133.png" alt="Fortinet" style="height:70px;object-fit:contain;" />
+            </div>
+            <div class="plcard-body">
+              <div class="plcard-badges">
+                <span class="badge-cat" data-th="ความปลอดภัย" data-en="Security">Security</span>
+                <span class="badge-brand">Fortinet</span>
+              </div>
+              <h3 class="plcard-title">FortiGate Next-Gen Firewall</h3>
+              <p class="plcard-desc" data-th="ไฟร์วอลล์รุ่นใหม่ระดับ Enterprise พร้อม AI-powered Threat Intelligence, IPS, SSL Inspection และ Application Control แบบครบวงจร" data-en="Next-generation enterprise firewall with AI-powered threat intelligence, IPS, SSL inspection, and full application control.">ไฟร์วอลล์รุ่นใหม่ระดับ Enterprise พร้อม AI-powered Threat Intelligence, IPS, SSL Inspection และ Application Control แบบครบวงจร</p>
+              <ul class="plcard-specs">
+                <li><i class="fas fa-check-circle"></i> <span>Next-Gen Firewall (NGFW)</span></li>
+                <li><i class="fas fa-check-circle"></i> <span>IPS / Application Control</span></li>
+                <li><i class="fas fa-check-circle"></i> <span>SSL Deep Inspection</span></li>
+                <li><i class="fas fa-check-circle"></i> <span>FortiGuard AI Threat Feed</span></li>
+              </ul>
+            </div>
+            <div class="plcard-action">
+              <div class="plcard-price" data-th="ราคาพิเศษ" data-en="Special Price">ราคาพิเศษ</div>
+              <div class="plcard-price-sub" data-th="ติดต่อสอบถาม" data-en="Contact for price">ติดต่อสอบถาม</div>
+              <a href="contact.html" class="plcard-btn-quote" data-th="ขอใบเสนอราคา" data-en="Request Quote">ขอใบเสนอราคา</a>
+              <a href="tel:+66914959996" class="plcard-btn-call"><i class="fas fa-phone"></i> โทรเลย</a>
+            </div>
+          </div>
 
-    </div>
-  </div>
-</section>
+          <!-- 4. Fortinet SD-WAN -->
+          <div class="plcard" data-cat="security">
+            <div class="plcard-img" style="background:linear-gradient(135deg,#fff3e0,#ffe0b2);">
+              <img src="images/product-partner/Fortinet-removebg-preview-300x133.png" alt="Fortinet" style="height:70px;object-fit:contain;" />
+            </div>
+            <div class="plcard-body">
+              <div class="plcard-badges">
+                <span class="badge-cat" data-th="ความปลอดภัย" data-en="Security">Security</span>
+                <span class="badge-brand">Fortinet</span>
+              </div>
+              <h3 class="plcard-title">FortiGate SD-WAN Solution</h3>
+              <p class="plcard-desc" data-th="โซลูชัน SD-WAN ที่รวม Security และ Networking เป็นหนึ่งเดียว ลดต้นทุน MPLS เพิ่มประสิทธิภาพการเชื่อมต่อสาขา" data-en="Unified SD-WAN solution combining Security and Networking in one, reducing MPLS costs and boosting branch connectivity.">โซลูชัน SD-WAN ที่รวม Security และ Networking เป็นหนึ่งเดียว ลดต้นทุน MPLS เพิ่มประสิทธิภาพการเชื่อมต่อสาขา</p>
+              <ul class="plcard-specs">
+                <li><i class="fas fa-check-circle"></i> <span>Unified Security + SD-WAN</span></li>
+                <li><i class="fas fa-check-circle"></i> <span data-th="ลด MPLS Cost ได้สูงสุด 50%" data-en="Reduce MPLS cost up to 50%">ลด MPLS Cost ได้สูงสุด 50%</span></li>
+                <li><i class="fas fa-check-circle"></i> <span>Zero-Touch Provisioning</span></li>
+                <li><i class="fas fa-check-circle"></i> <span>FortiManager Centralized Mgmt.</span></li>
+              </ul>
+            </div>
+            <div class="plcard-action">
+              <div class="plcard-price" data-th="ราคาพิเศษ" data-en="Special Price">ราคาพิเศษ</div>
+              <div class="plcard-price-sub" data-th="ติดต่อสอบถาม" data-en="Contact for price">ติดต่อสอบถาม</div>
+              <a href="contact.html" class="plcard-btn-quote" data-th="ขอใบเสนอราคา" data-en="Request Quote">ขอใบเสนอราคา</a>
+              <a href="tel:+66914959996" class="plcard-btn-call"><i class="fas fa-phone"></i> โทรเลย</a>
+            </div>
+          </div>
 
-<!-- CTA -->
-<section class="cta-section">
-  <div class="container">
-    <div class="cta-inner">
-      <h2 data-th="ต้องการใบเสนอราคาหรือคำปรึกษา?" data-en="Need a Quote or Consultation?">ต้องการใบเสนอราคาหรือคำปรึกษา?</h2>
-      <p data-th="ทีมผู้เชี่ยวชาญพร้อมช่วยเลือกผลิตภัณฑ์ที่เหมาะกับงบประมาณและความต้องการของคุณ" data-en="Our specialist team is ready to help you choose the right product within your budget.">ทีมผู้เชี่ยวชาญพร้อมช่วยเลือกผลิตภัณฑ์ที่เหมาะกับงบประมาณและความต้องการของคุณ</p>
-      <div class="cta-buttons">
-        <a href="contact.html" class="btn btn-primary"><i class="fas fa-paper-plane"></i> <span data-th="ขอใบเสนอราคา" data-en="Request a Quote">ขอใบเสนอราคา</span></a>
-        <a href="services.html" class="btn btn-outline"><i class="fas fa-tools"></i> <span data-th="ดูบริการ" data-en="View Services">ดูบริการ</span></a>
-      </div>
-    </div>
-  </div>
-</section>
+          <!-- 5. HPE ProLiant Server -->
+          <div class="plcard" data-cat="server">
+            <div class="plcard-img" style="background:linear-gradient(135deg,#e8f5e9,#c8e6c9);">
+              <img src="images/product-partner/hpe-removebg-preview-300x300.png" alt="HPE" style="height:70px;object-fit:contain;" />
+            </div>
+            <div class="plcard-body">
+              <div class="plcard-badges">
+                <span class="badge-cat" data-th="เซิร์ฟเวอร์" data-en="Server">Server</span>
+                <span class="badge-brand">HPE</span>
+              </div>
+              <h3 class="plcard-title">HPE ProLiant Rack Server</h3>
+              <p class="plcard-desc" data-th="เซิร์ฟเวอร์ระดับ Enterprise รองรับ Xeon Scalable หน่วยความจำสูงสุด 6TB พร้อม HPE iLO สำหรับ Remote Management ตลอด 24 ชั่วโมง" data-en="Enterprise-grade server supporting Xeon Scalable CPUs, up to 6TB RAM, with HPE iLO for 24/7 remote management.">เซิร์ฟเวอร์ระดับ Enterprise รองรับ Xeon Scalable หน่วยความจำสูงสุด 6TB พร้อม HPE iLO สำหรับ Remote Management ตลอด 24 ชั่วโมง</p>
+              <ul class="plcard-specs">
+                <li><i class="fas fa-check-circle"></i> <span>Intel Xeon Scalable / AMD EPYC</span></li>
+                <li><i class="fas fa-check-circle"></i> <span data-th="RAM สูงสุด 6TB DDR5" data-en="Up to 6TB DDR5 RAM">RAM สูงสุด 6TB DDR5</span></li>
+                <li><i class="fas fa-check-circle"></i> <span>HPE iLO Remote Management</span></li>
+                <li><i class="fas fa-check-circle"></i> <span data-th="รับประกัน 3 ปี Onsite" data-en="3-Year Onsite Warranty">รับประกัน 3 ปี Onsite</span></li>
+              </ul>
+            </div>
+            <div class="plcard-action">
+              <div class="plcard-price" data-th="ราคาพิเศษ" data-en="Special Price">ราคาพิเศษ</div>
+              <div class="plcard-price-sub" data-th="ติดต่อสอบถาม" data-en="Contact for price">ติดต่อสอบถาม</div>
+              <a href="contact.html" class="plcard-btn-quote" data-th="ขอใบเสนอราคา" data-en="Request Quote">ขอใบเสนอราคา</a>
+              <a href="tel:+66914959996" class="plcard-btn-call"><i class="fas fa-phone"></i> โทรเลย</a>
+            </div>
+          </div>
+
+          <!-- 6. Aruba Access Point -->
+          <div class="plcard" data-cat="wireless">
+            <div class="plcard-img" style="background:linear-gradient(135deg,#f3e5f5,#e1bee7);">
+              <img src="images/product-partner/aruba-logo.png" alt="Aruba" style="height:70px;object-fit:contain;" />
+            </div>
+            <div class="plcard-body">
+              <div class="plcard-badges">
+                <span class="badge-cat" data-th="ไร้สาย" data-en="Wireless">Wireless</span>
+                <span class="badge-brand">Aruba</span>
+              </div>
+              <h3 class="plcard-title">Aruba Wi-Fi 6E Access Points</h3>
+              <p class="plcard-desc" data-th="แอคเซสพอยต์ Wi-Fi 6E รองรับ 6GHz Band ความเร็วสูงสุด 3.9Gbps เหมาะสำหรับสภาพแวดล้อมที่มีผู้ใช้งานหนาแน่น" data-en="Wi-Fi 6E Access Point with 6GHz band support, up to 3.9Gbps speed, ideal for high-density environments.">แอคเซสพอยต์ Wi-Fi 6E รองรับ 6GHz Band ความเร็วสูงสุด 3.9Gbps เหมาะสำหรับสภาพแวดล้อมที่มีผู้ใช้งานหนาแน่น</p>
+              <ul class="plcard-specs">
+                <li><i class="fas fa-check-circle"></i> <span>Wi-Fi 6E (802.11ax) Tri-Band</span></li>
+                <li><i class="fas fa-check-circle"></i> <span data-th="ความเร็วสูงสุด 3.9Gbps" data-en="Up to 3.9Gbps speed">ความเร็วสูงสุด 3.9Gbps</span></li>
+                <li><i class="fas fa-check-circle"></i> <span>Aruba Central Cloud Management</span></li>
+                <li><i class="fas fa-check-circle"></i> <span>AI-powered RF Optimization</span></li>
+              </ul>
+            </div>
+            <div class="plcard-action">
+              <div class="plcard-price" data-th="ราคาพิเศษ" data-en="Special Price">ราคาพิเศษ</div>
+              <div class="plcard-price-sub" data-th="ติดต่อสอบถาม" data-en="Contact for price">ติดต่อสอบถาม</div>
+              <a href="contact.html" class="plcard-btn-quote" data-th="ขอใบเสนอราคา" data-en="Request Quote">ขอใบเสนอราคา</a>
+              <a href="tel:+66914959996" class="plcard-btn-call"><i class="fas fa-phone"></i> โทรเลย</a>
+            </div>
+          </div>
+
+          <!-- 7. Reyee Wi-Fi -->
+          <div class="plcard" data-cat="wireless">
+            <div class="plcard-img" style="background:linear-gradient(135deg,#e8f5e9,#dcedc8);">
+              <img src="images/product-partner/reyee-logo.png" alt="Reyee" style="height:70px;object-fit:contain;" />
+            </div>
+            <div class="plcard-body">
+              <div class="plcard-badges">
+                <span class="badge-cat" data-th="ไร้สาย" data-en="Wireless">Wireless</span>
+                <span class="badge-brand">Reyee</span>
+              </div>
+              <h3 class="plcard-title">Reyee Wi-Fi 6 Access Points</h3>
+              <p class="plcard-desc" data-th="แอคเซสพอยต์ Wi-Fi 6 ราคาประหยัด บริหารจัดการผ่าน Ruijie Cloud เหมาะสำหรับธุรกิจ SME โรงแรม และอาคารพาณิชย์" data-en="Affordable Wi-Fi 6 Access Points managed via Ruijie Cloud, ideal for SME, hotels, and commercial buildings.">แอคเซสพอยต์ Wi-Fi 6 ราคาประหยัด บริหารจัดการผ่าน Ruijie Cloud เหมาะสำหรับธุรกิจ SME โรงแรม และอาคารพาณิชย์</p>
+              <ul class="plcard-specs">
+                <li><i class="fas fa-check-circle"></i> <span>Wi-Fi 6 (802.11ax) Dual-Band</span></li>
+                <li><i class="fas fa-check-circle"></i> <span data-th="ราคาประหยัด คุ้มค่า" data-en="Cost-effective Solution">ราคาประหยัด คุ้มค่า</span></li>
+                <li><i class="fas fa-check-circle"></i> <span>Ruijie Cloud Zero-Config</span></li>
+                <li><i class="fas fa-check-circle"></i> <span data-th="รองรับผู้ใช้หลายร้อยคนพร้อมกัน" data-en="Supports hundreds of concurrent users">รองรับผู้ใช้หลายร้อยคนพร้อมกัน</span></li>
+              </ul>
+            </div>
+            <div class="plcard-action">
+              <div class="plcard-price" data-th="ราคาพิเศษ" data-en="Special Price">ราคาพิเศษ</div>
+              <div class="plcard-price-sub" data-th="ติดต่อสอบถาม" data-en="Contact for price">ติดต่อสอบถาม</div>
+              <a href="contact.html" class="plcard-btn-quote" data-th="ขอใบเสนอราคา" data-en="Request Quote">ขอใบเสนอราคา</a>
+              <a href="tel:+66914959996" class="plcard-btn-call"><i class="fas fa-phone"></i> โทรเลย</a>
+            </div>
+          </div>
+
+          <!-- 8. Microsoft 365 -->
+          <div class="plcard" data-cat="cloud">
+            <div class="plcard-img" style="background:linear-gradient(135deg,#e3f2fd,#bbdefb);">
+              <img src="images/product-partner/microsoft-logo-hd-26-300x85.png" alt="Microsoft" style="height:70px;object-fit:contain;" />
+            </div>
+            <div class="plcard-body">
+              <div class="plcard-badges">
+                <span class="badge-cat" data-th="คลาวด์" data-en="Cloud">Cloud</span>
+                <span class="badge-brand">Microsoft</span>
+              </div>
+              <h3 class="plcard-title">Microsoft 365 Business</h3>
+              <p class="plcard-desc" data-th="ชุดซอฟต์แวร์ Office ครบครันบนคลาวด์ รวม Email, Teams, SharePoint และ OneDrive พร้อมระบบรักษาความปลอดภัยระดับ Enterprise" data-en="Complete cloud-based Office suite including Email, Teams, SharePoint, and OneDrive with enterprise-grade security.">ชุดซอฟต์แวร์ Office ครบครันบนคลาวด์ รวม Email, Teams, SharePoint และ OneDrive พร้อมระบบรักษาความปลอดภัยระดับ Enterprise</p>
+              <ul class="plcard-specs">
+                <li><i class="fas fa-check-circle"></i> <span>Microsoft 365 Apps (Word, Excel, PPT)</span></li>
+                <li><i class="fas fa-check-circle"></i> <span>Exchange Online + Teams</span></li>
+                <li><i class="fas fa-check-circle"></i> <span>1TB OneDrive per user</span></li>
+                <li><i class="fas fa-check-circle"></i> <span>Advanced Security &amp; Compliance</span></li>
+              </ul>
+            </div>
+            <div class="plcard-action">
+              <div class="plcard-price" data-th="ราคาพิเศษ" data-en="Special Price">ราคาพิเศษ</div>
+              <div class="plcard-price-sub" data-th="ติดต่อสอบถาม" data-en="Contact for price">ติดต่อสอบถาม</div>
+              <a href="contact.html" class="plcard-btn-quote" data-th="ขอใบเสนอราคา" data-en="Request Quote">ขอใบเสนอราคา</a>
+              <a href="tel:+66914959996" class="plcard-btn-call"><i class="fas fa-phone"></i> โทรเลย</a>
+            </div>
+          </div>
+
+          <!-- 9. HPE Aruba Networking -->
+          <div class="plcard" data-cat="network">
+            <div class="plcard-img" style="background:linear-gradient(135deg,#f3e5f5,#e1bee7);">
+              <img src="images/product-partner/aruba-logo.png" alt="Aruba" style="height:70px;object-fit:contain;" />
+            </div>
+            <div class="plcard-body">
+              <div class="plcard-badges">
+                <span class="badge-cat" data-th="เครือข่าย" data-en="Network">Network</span>
+                <span class="badge-brand">Aruba</span>
+              </div>
+              <h3 class="plcard-title">Aruba CX Switches</h3>
+              <p class="plcard-desc" data-th="สวิตช์รุ่นใหม่จาก Aruba รองรับ AOS-CX Operating System อัจฉริยะ พร้อม REST API และ NAE สำหรับ Network Analytics" data-en="Next-gen Aruba switches with AOS-CX OS, REST API support, and NAE for network analytics.">สวิตช์รุ่นใหม่จาก Aruba รองรับ AOS-CX Operating System อัจฉริยะ พร้อม REST API และ NAE สำหรับ Network Analytics</p>
+              <ul class="plcard-specs">
+                <li><i class="fas fa-check-circle"></i> <span>AOS-CX Smart OS</span></li>
+                <li><i class="fas fa-check-circle"></i> <span>VSX Active-Active Redundancy</span></li>
+                <li><i class="fas fa-check-circle"></i> <span>Network Analytics Engine (NAE)</span></li>
+                <li><i class="fas fa-check-circle"></i> <span>Aruba Central Integration</span></li>
+              </ul>
+            </div>
+            <div class="plcard-action">
+              <div class="plcard-price" data-th="ราคาพิเศษ" data-en="Special Price">ราคาพิเศษ</div>
+              <div class="plcard-price-sub" data-th="ติดต่อสอบถาม" data-en="Contact for price">ติดต่อสอบถาม</div>
+              <a href="contact.html" class="plcard-btn-quote" data-th="ขอใบเสนอราคา" data-en="Request Quote">ขอใบเสนอราคา</a>
+              <a href="tel:+66914959996" class="plcard-btn-call"><i class="fas fa-phone"></i> โทรเลย</a>
+            </div>
+          </div>
+
+        </div><!-- /product-list -->
+      </main>
+    </div><!-- /shop-layout -->
+  </div><!-- /container -->
+</div><!-- /shop-wrapper -->
 
 <!-- FOOTER -->
 <footer class="footer">
@@ -243,49 +411,91 @@
         <div class="logo-wrap">
           <img src="bgs-logo1.png" alt="BE GROVE SOLUTIONS CO., LTD" class="footer-logo-img" />
         </div>
-        </div>
-        <p data-th="ผู้ให้บริการด้าน IT System Integration ครบวงจร" data-en="A complete IT System Integration service provider.">ผู้ให้บริการด้าน IT System Integration ครบวงจร</p>
+        <p data-th="ผู้ให้บริการด้าน IT System Integration ครบวงจร ด้วยประสบการณ์กว่า 10 ปี เราพร้อมดูแลโครงสร้างพื้นฐาน IT ขององค์กรคุณ" data-en="A complete IT System Integration service provider. With over 10 years of experience, we are ready to support your organization's IT infrastructure.">ผู้ให้บริการด้าน IT System Integration ครบวงจร ด้วยประสบการณ์กว่า 10 ปี เราพร้อมดูแลโครงสร้างพื้นฐาน IT ขององค์กรคุณ</p>
         <div class="footer-social">
           <a href="#"><i class="fab fa-facebook-f"></i></a>
           <a href="#"><i class="fab fa-linkedin-in"></i></a>
           <a href="#"><i class="fab fa-line"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
         </div>
       </div>
-
       <div class="footer-links">
-      <div class="footer-col">
-        <h4 data-th="บริการ" data-en="Services">บริการ</h4>
-        <ul>
-          <li><a href="services.html">Network Infrastructure</a></li>
-          <li><a href="services.html">Cybersecurity</a></li>
-          <li><a href="services.html">Cloud Solutions</a></li>
-          <li><a href="services.html">Managed Services</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4 data-th="เกี่ยวกับเรา" data-en="Company">เกี่ยวกับเรา</h4>
-        <ul>
-          <li><a href="about.html" data-th="ประวัติบริษัท" data-en="Our Story">ประวัติบริษัท</a></li>
-          <li><a href="products.html" data-th="ผลิตภัณฑ์" data-en="Products">ผลิตภัณฑ์</a></li>
-          <li><a href="contact.html" data-th="ติดต่อเรา" data-en="Contact">ติดต่อเรา</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4 data-th="ติดต่อ" data-en="Contact">ติดต่อ</h4>
-        <ul>
-          <li class="contact-li"><i class="fas fa-map-marker-alt"></i><span data-th="111/38 หมู่ 4 ต.บึงยี่โถ อ.ธัญบุรี จ.ปทุมธานี 12130" data-en="111/38 Moo 4, Buengyitho, Thanyaburi, Pathumtani 12130">111/38 หมู่ 4 ต.บึงยี่โถ อ.ธัญบุรี จ.ปทุมธานี 12130</span></li>
-          <li class="contact-li"><i class="fas fa-phone"></i><span>+66 9 1495 9996</span></li>
-          <li class="contact-li"><i class="fas fa-phone"></i><span>+66 9 1495 9997</span></li>
-          <li class="contact-li"><i class="fab fa-line"></i><span>@begrove</span></li>
-          <li class="contact-li"><i class="fas fa-envelope"></i><span>info@begrovesolutions.com</span></li>
-        </ul>
+        <div class="footer-col">
+          <h4 data-th="บริการ" data-en="Services">บริการ</h4>
+          <ul>
+            <li><a href="services.html" data-th="Network Infrastructure" data-en="Network Infrastructure">Network Infrastructure</a></li>
+            <li><a href="services.html" data-th="Cybersecurity" data-en="Cybersecurity">Cybersecurity</a></li>
+            <li><a href="services.html" data-th="Cloud Solutions" data-en="Cloud Solutions">Cloud Solutions</a></li>
+            <li><a href="services.html" data-th="Server &amp; Storage" data-en="Server &amp; Storage">Server &amp; Storage</a></li>
+            <li><a href="services.html" data-th="Managed Services" data-en="Managed Services">Managed Services</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4 data-th="เกี่ยวกับเรา" data-en="Company">เกี่ยวกับเรา</h4>
+          <ul>
+            <li><a href="about.html" data-th="ประวัติบริษัท" data-en="Our Story">ประวัติบริษัท</a></li>
+            <li><a href="about.html" data-th="ทีมงาน" data-en="Team">ทีมงาน</a></li>
+            <li><a href="products.html" data-th="ผลิตภัณฑ์" data-en="Products">ผลิตภัณฑ์</a></li>
+            <li><a href="contact.html" data-th="ติดต่อเรา" data-en="Contact">ติดต่อเรา</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4 data-th="ติดต่อ" data-en="Contact">ติดต่อ</h4>
+          <ul>
+            <li class="contact-li"><i class="fas fa-map-marker-alt"></i><span data-th="111/38 หมู่ 4 ต.บึงยี่โถ อ.ธัญบุรี จ.ปทุมธานี 12130" data-en="111/38 Moo 4, Buengyitho, Thanyaburi, Pathumtani 12130">111/38 หมู่ 4 ต.บึงยี่โถ อ.ธัญบุรี จ.ปทุมธานี 12130</span></li>
+            <li class="contact-li"><i class="fas fa-phone"></i><span>+66 9 1495 9996</span></li>
+            <li class="contact-li"><i class="fas fa-phone"></i><span>+66 9 1495 9997</span></li>
+            <li class="contact-li"><i class="fab fa-line"></i><span>@begrove</span></li>
+            <li class="contact-li"><i class="fas fa-envelope"></i><span>info@begrovesolutions.com</span></li>
+            <li class="contact-li"><i class="fas fa-clock"></i><span data-th="จ.-ศ. 08:30–17:30 น." data-en="Mon–Fri 08:30–17:30">จ.-ศ. 08:30–17:30 น.</span></li>
+          </ul>
+        </div>
       </div>
     </div>
     <div class="footer-bottom">
       <p data-th="© 2024 BE GROVE SOLUTIONS CO., LTD. สงวนลิขสิทธิ์" data-en="© 2024 BE GROVE SOLUTIONS CO., LTD. All Rights Reserved.">© 2024 BE GROVE SOLUTIONS CO., LTD. สงวนลิขสิทธิ์</p>
+      <div class="footer-bottom-links">
+        <a href="#" data-th="นโยบายความเป็นส่วนตัว" data-en="Privacy Policy">นโยบายความเป็นส่วนตัว</a>
+        <a href="#" data-th="เงื่อนไขการใช้บริการ" data-en="Terms of Service">เงื่อนไขการใช้บริการ</a>
+      </div>
     </div>
   </div>
 </footer>
+
 <script src="js/main.js"></script>
+<script>
+// Category filter for shop page
+document.querySelectorAll('[data-cat-filter]').forEach(link => {
+  link.addEventListener('click', function(e) {
+    e.preventDefault();
+    const filter = this.dataset.catFilter;
+
+    // Update active states on subnav
+    document.querySelectorAll('.cat-subnav-link').forEach(l => l.classList.remove('active'));
+    document.querySelectorAll(\`[data-cat-filter="\${filter}"]\`).forEach(l => {
+      if (l.classList.contains('cat-subnav-link')) l.classList.add('active');
+    });
+
+    // Filter products
+    const cards = document.querySelectorAll('.plcard');
+    let count = 0;
+    cards.forEach(card => {
+      const show = filter === 'all' || card.dataset.cat === filter;
+      card.style.display = show ? 'flex' : 'none';
+      if (show) count++;
+    });
+    document.getElementById('product-count').textContent = count;
+  });
+});
+</script>
+
+<!-- STICKY LINE TAB -->
+<a href="https://line.me/ti/p/@begrove" target="_blank" class="sticky-line-tab" title="Chat with us on LINE">
+  <div class="slt-inner">
+    <i class="fab fa-line slt-icon"></i>
+    <span class="slt-label">Line: @begrove</span>
+  </div>
+</a>
+
 </body>
 </html>

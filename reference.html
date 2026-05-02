@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Site Reference | BE GROVE SOLUTIONS CO., LTD</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    .ref-section { padding: 60px 0; }
+    .ref-section:nth-child(even) { background: #f8fafc; }
+    .ref-cat-title {
+      text-align: center; font-size: 1.5rem; font-weight: 700;
+      color: var(--primary); margin-bottom: 10px; letter-spacing: 0.5px;
+    }
+    .ref-cat-line {
+      width: 60px; height: 3px; background: var(--accent);
+      margin: 0 auto 36px auto; border-radius: 2px;
+    }
+    .ref-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    @media (max-width: 900px) { .ref-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 560px) { .ref-grid { grid-template-columns: 1fr; } }
+    .ref-card {
+      background: #fff; border-radius: 12px;
+      box-shadow: 0 2px 14px rgba(0,48,135,0.09);
+      overflow: hidden;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .ref-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 28px rgba(0,48,135,0.15);
+    }
+    .ref-card-img {
+      width: 100%; aspect-ratio: 16/9; object-fit: cover;
+      display: block; background: #e8edf5;
+    }
+    .ref-card-placeholder {
+      width: 100%; aspect-ratio: 16/9;
+      background: linear-gradient(135deg, #e8edf5 0%, #d0dae9 100%);
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 8px; color: #8fa3c0;
+    }
+    .ref-card-placeholder i { font-size: 2rem; opacity: 0.45; }
+    .ref-card-placeholder span { font-size: 0.78rem; opacity: 0.55; letter-spacing: 0.3px; }
+    .ref-card-body { padding: 14px 18px 18px; }
+    .ref-card-title { font-size: 0.95rem; font-weight: 700; color: var(--primary); margin-bottom: 3px; }
+    .ref-card-sub { font-size: 0.8rem; color: #6b7a99; line-height: 1.5; }
+    .ref-card-tags { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 5px; }
+    .ref-tag {
+      display: inline-block; padding: 3px 10px; background: #eef2fb;
+      color: var(--primary); border-radius: 20px;
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.2px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar solid" id="navbar">
+  <div class="nav-container">
+    <a href="index.html" class="nav-logo">
+      <img src="bgs-logo1.png" alt="BE GROVE SOLUTIONS CO., LTD" class="nav-logo-img" />
+    </a>
+    <ul class="nav-menu">
+      <li><a href="index.html" class="nav-link" data-th="หน้าหลัก" data-en="Home">หน้าหลัก</a></li>
+      <li><a href="about.html" class="nav-link" data-th="เกี่ยวกับเรา" data-en="About Us">เกี่ยวกับเรา</a></li>
+      <li><a href="services.html" class="nav-link" data-th="บริการ" data-en="Services">บริการ</a></li>
+      <li><a href="products.html" class="nav-link" data-th="ผลิตภัณฑ์" data-en="Products">ผลิตภัณฑ์</a></li>
+      <li><a href="reference.html" class="nav-link active" data-th="Site Reference" data-en="Site Reference">Site Reference</a></li>
+      <li><a href="contact.html" class="nav-link" data-th="ติดต่อเรา" data-en="Contact">ติดต่อเรา</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="lang-switch">
+        <button class="lang-btn active" data-lang="th">TH</button>
+        <button class="lang-btn" data-lang="en">EN</button>
+      </div>
+      <a href="contact.html" class="nav-contact-btn" data-th="ติดต่อเรา" data-en="Contact Us">ติดต่อเรา</a>
+    </div>
+    <button class="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-menu">
+  <a href="index.html" class="nav-link" data-th="หน้าหลัก" data-en="Home">หน้าหลัก</a>
+  <a href="about.html" class="nav-link" data-th="เกี่ยวกับเรา" data-en="About Us">เกี่ยวกับเรา</a>
+  <a href="services.html" class="nav-link" data-th="บริการ" data-en="Services">บริการ</a>
+  <a href="products.html" class="nav-link" data-th="ผลิตภัณฑ์" data-en="Products">ผลิตภัณฑ์</a>
+  <a href="reference.html" class="nav-link" data-th="Site Reference" data-en="Site Reference">Site Reference</a>
+  <a href="contact.html" class="nav-link" data-th="ติดต่อเรา" data-en="Contact">ติดต่อเรา</a>
+  <div class="lang-switch"><button class="lang-btn active" data-lang="th">TH</button><button class="lang-btn" data-lang="en">EN</button></div>
+  <a href="contact.html" class="nav-contact-btn" data-th="ติดต่อเรา" data-en="Contact Us">ติดต่อเรา</a>
+</div>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="index.html" data-th="หน้าหลัก" data-en="Home">หน้าหลัก</a>
+      <i class="fas fa-chevron-right"></i>
+      <span data-th="Site Reference" data-en="Site Reference">Site Reference</span>
+    </div>
+    <h1 data-th="ผลงานและโครงการอ้างอิง" data-en="Our Site References">ผลงานและโครงการอ้างอิง</h1>
+    <p data-th="โครงการที่เราภาคภูมิใจ จากลูกค้าหลากหลายอุตสาหกรรมทั่วประเทศ" data-en="Projects we are proud of, from clients across diverse industries nationwide.">โครงการที่เราภาคภูมิใจ จากลูกค้าหลากหลายอุตสาหกรรมทั่วประเทศ</p>
+  </div>
+</section>
+
+<!-- ===== MNCs / Manufacturing ===== -->
+<section class="ref-section">
+  <div class="container">
+    <h2 class="ref-cat-title" data-th="MNCs / ภาคการผลิต" data-en="MNCs / Manufacturing">MNCs / ภาคการผลิต</h2>
+    <div class="ref-cat-line"></div>
+    <div class="ref-grid">
+      <div class="ref-card">
+        <div class="ref-card-placeholder"><i class="fas fa-image"></i><span>Site Screenshot</span></div>
+        <div class="ref-card-body">
+          <div class="ref-card-title">ลูกค้า MNC 1</div>
+          <div class="ref-card-sub">รายละเอียดโครงการ</div>
+          <div class="ref-card-tags"><span class="ref-tag">Network</span></div>
+        </div>
+      </div>
+      <div class="ref-card">
+        <div class="ref-card-placeholder"><i class="fas fa-image"></i><span>Site Screenshot</span></div>
+        <div class="ref-card-body">
+          <div class="ref-card-title">ลูกค้า MNC 2</div>
+          <div class="ref-card-sub">รายละเอียดโครงการ</div>
+          <div class="ref-card-tags"><span class="ref-tag">Security</span></div>
+        </div>
+      </div>
+      <div class="ref-card">
+        <div class="ref-card-placeholder"><i class="fas fa-image"></i><span>Site Screenshot</span></div>
+        <div class="ref-card-body">
+          <div class="ref-card-title">ลูกค้า MNC 3</div>
+          <div class="ref-card-sub">รายละเอียดโครงการ</div>
+          <div class="ref-card-tags"><span class="ref-tag">Cloud</span></div>
+        </div>
+      </div>
+      <div class="ref-card">
+        <div class="ref-card-placeholder"><i class="fas fa-image"></i><span>Site Screenshot</span></div>
+        <div class="ref-card-body">
+          <div class="ref-card-title">ลูกค้า MNC 4</div>
+          <div class="ref-card-sub">รายละเอียดโครงการ</div>
+          <div class="ref-card-tags"><span class="ref-tag">Server</span></div>
+        </div>
+      </div>
+      <div class="ref-card">
+        <div class="ref-card-placeholder"><i class="fas fa-image"></i><span>Site Screenshot</span></div>
+        <div class="ref-card-body">
+          <div class="ref-card-title">ลูกค้า MNC 5</div>
+          <div class="ref-card-sub">รายละเอียดโครงการ</div>
+          <div class="ref-card-tags"><span class="ref-tag">Wireless</span></div>
+        </div>
+      </div>
+      <div class="ref-card">
+        <div class="ref-card-placeholder"><i class="fas fa-image"></i><span>Site Screenshot</span></div>
+        <div class="ref-card-body">
+          <div class="ref-card-title">ลูกค้า MNC 6</div>
+          <div class="ref-card-sub">รายละเอียดโครงการ</div>
+          <div class="ref-card-tags"><span class="ref-tag">Firewall</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Government ===== -->
+<section class="ref-section">
+  <div class="container">
+    <h2 class="ref-cat-title" data-th="หน่วยงานภาครัฐ" data-en="Government">หน่วยงานภาครัฐ</h2>
+    <div class="ref-cat-line"></div>
+    <div class="ref-grid">
+      <div class="ref-card">
+        <div class="ref-card-placeholder"><i class="fas fa-image"></i><span>Site Screenshot</span></div>
+        <div class="ref-card-body">
+          <div class="ref-card-title">หน่วยงานรัฐ 1</div>
+          <div class="ref-card-sub">รายละเอียดโครงการ</div>
+          <div class="ref-card-tags"><span class="ref-tag">Network</span></div>
+        </div>
+      </div>
+      <div class="ref-card">
+        <div class="ref-card-placeholder"><i class="fas fa-image"></i><span>Site Screenshot</span></div>
+        <div class="ref-card-body">
+          <div class="ref-card-title">หน่วยงานรัฐ 2</div>
+          <div class="ref-card-sub">รายละเอียดโครงการ</div>
+          <div class="ref-card-tags"><span class="ref-tag">Server</span></div>
+        </div>
+      </div>
+      <div class="ref-card">
+        <div class="ref-card-placeholder"><i class="fas fa-image"></i><span>Site Screenshot</span></div>
+        <div class="ref-card-body">
+          <div class="ref-card-title">หน่วยงานรัฐ 3</div>
+          <div class="ref-card-sub">รายละเอียดโครงการ</div>
+          <div class="ref-card-tags"><span class="ref-tag">Security</span></div>
+        </div>
+      </div>
+      <div class="ref-card">
+        <div class="ref-card-placeholder"><i class="fas fa-image"></i><span>Site Screenshot</span></div>
+        <div class="ref-card-body">
+          <div class="ref-card-title">หน่วยงานรัฐ 4</div>
+          <div class="ref-card-sub">รายละเอียดโครงการ</div>
+          <div class="ref-card-tags"><span class="ref-tag">Cloud</span></div>
+        </div>
+      </div>
+      <div class="ref-card">
+        <div class="ref-card-placeholder"><i class="fas fa-image"></i><span>Site Screenshot</span></div>
+        <div class="ref-card-body">
+          <div class="ref-card-title">หน่วยงานรัฐ 5</div>
+          <div class="ref-card-sub">รายละเอียดโครงการ</div>
+          <div class="ref-card-tags"><span class="ref-tag">Wireless</span></div>
+        </div>
+      </div>
+      <div class="ref-card">
+        <div class="ref-card-placeholder"><i class="fas fa-image"></i><span>Site Screenshot</span></div>
+        <div class="ref-card-body">
+          <div class="ref-card-title">หน่วยงานรัฐ 6</div>
+          <div class="ref-card-sub">รายละเอียดโครงการ</div>
+          <div class="ref-card-tags"><span class="ref-tag">Firewall</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Financial ===== -->
+<section class="ref-section">
+  <div class="container">
+    <h2 class="ref-cat-title" data-th="สถาบันการเงิน" data-en="Financial">สถาบันการเงิน</h2>
+    <div class="ref-cat-line"></div>
+    <div class="ref-grid">
+      <div class="ref-card">
+        <div class="ref-card-placeholder"><i class="fas fa-image"></i><span>Site Screenshot</span></div>
+        <div class="ref-card-body">
+          <div class="ref-card-title">สถาบันการเงิน 1</div>
+          <div class="ref-card-sub">รายละเอียดโครงการ</div>
+          <div class="ref-card-tags"><span class="ref-tag">Cloud</span></div>
+        </div>
+      </div>
+      <div class="ref-card">
+        <div class="ref-card-placeholder"><i class="fas fa-image"></i><span>Site Screenshot</span></div>
+        <div class="ref-card-body">
+          <div class="ref-card-title">สถาบันการเงิน 2</div>
+          <div class="ref-card-sub">รายละเอียดโครงการ</div>
+          <div class="ref-card-tags"><span class="ref-tag">Security</span></div>
+        </div>
+      </div>
+      <div class="ref-card">
+        <div class="ref-card-placeholder"><i class="fas fa-image"></i><span>Site Screenshot</span></div>
+        <div class="ref-card-body">
+          <div class="ref-card-title">สถาบันการเงิน 3</div>
+          <div class="ref-card-sub">รายละเอียดโครงการ</div>
+          <div class="ref-card-tags"><span class="ref-tag">Network</span></div>
+        </div>
+      </div>
+      <div class="ref-card">
+        <div class="ref-card-placeholder"><i class="fas fa-image"></i><span>Site Screenshot</span></div>
+        <div class="ref-card-body">
+          <div class="ref-card-title">สถาบันการเงิน 4</div>
+          <div class="ref-card-sub">รายละเอียดโครงการ</div>
+          <div class="ref-card-tags"><span class="ref-tag">Server</span></div>
+        </div>
+      </div>
+      <div class="ref-card">
+        <div class="ref-card-placeholder"><i class="fas fa-image"></i><span>Site Screenshot</span></div>
+        <div class="ref-card-body">
+          <div class="ref-card-title">สถาบันการเงิน 5</div>
+          <div class="ref-card-sub">รายละเอียดโครงการ</div>
+          <div class="ref-card-tags"><span class="ref-tag">Firewall</span></div>
+        </div>
+      </div>
+      <div class="ref-card">
+        <div class="ref-card-placeholder"><i class="fas fa-image"></i><span>Site Screenshot</span></div>
+        <div class="ref-card-body">
+          <div class="ref-card-title">สถาบันการเงิน 6</div>
+          <div class="ref-card-sub">รายละเอียดโครงการ</div>
+          <div class="ref-card-tags"><span class="ref-tag">Wireless</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Education / Healthcare ===== -->
+<section class="ref-section">
+  <div class="container">
+    <h2 class="ref-cat-title" data-th="การศึกษา / สาธารณสุข" data-en="Education / Healthcare">การศึกษา / สาธารณสุข</h2>
+    <div class="ref-cat-line"></div>
+    <div class="ref-grid">
+      <div class="ref-card">
+        <div class="ref-card-placeholder"><i class="fas fa-image"></i><span>Site Screenshot</span></div>
+        <div class="ref-card-body">
+          <div class="ref-card-title">มหาวิทยาลัย / โรงพยาบาล 1</div>
+          <div class="ref-card-sub">รายละเอียดโครงการ</div>
+          <div class="ref-card-tags"><span class="ref-tag">Network</span></div>
+        </div>
+      </div>
+      <div class="ref-card">
+        <div class="ref-card-placeholder"><i class="fas fa-image"></i><span>Site Screenshot</span></div>
+        <div class="ref-card-body">
+          <div class="ref-card-title">มหาวิทยาลัย / โรงพยาบาล 2</div>
+          <div class="ref-card-sub">รายละเอียดโครงการ</div>
+          <div class="ref-card-tags"><span class="ref-tag">Server</span></div>
+        </div>
+      </div>
+      <div class="ref-card">
+        <div class="ref-card-placeholder"><i class="fas fa-image"></i><span>Site Screenshot</span></div>
+        <div class="ref-card-body">
+          <div class="ref-card-title">มหาวิทยาลัย / โรงพยาบาล 3</div>
+          <div class="ref-card-sub">รายละเอียดโครงการ</div>
+          <div class="ref-card-tags"><span class="ref-tag">Wireless</span></div>
+        </div>
+      </div>
+      <div class="ref-card">
+        <div class="ref-card-placeholder"><i class="fas fa-image"></i><span>Site Screenshot</span></div>
+        <div class="ref-card-body">
+          <div class="ref-card-title">มหาวิทยาลัย / โรงพยาบาล 4</div>
+          <div class="ref-card-sub">รายละเอียดโครงการ</div>
+          <div class="ref-card-tags"><span class="ref-tag">Security</span></div>
+        </div>
+      </div>
+      <div class="ref-card">
+        <div class="ref-card-placeholder"><i class="fas fa-image"></i><span>Site Screenshot</span></div>
+        <div class="ref-card-body">
+          <div class="ref-card-title">มหาวิทยาลัย / โรงพยาบาล 5</div>
+          <div class="ref-card-sub">รายละเอียดโครงการ</div>
+          <div class="ref-card-tags"><span class="ref-tag">Cloud</span></div>
+        </div>
+      </div>
+      <div class="ref-card">
+        <div class="ref-card-placeholder"><i class="fas fa-image"></i><span>Site Screenshot</span></div>
+        <div class="ref-card-body">
+          <div class="ref-card-title">มหาวิทยาลัย / โรงพยาบาล 6</div>
+          <div class="ref-card-sub">รายละเอียดโครงการ</div>
+          <div class="ref-card-tags"><span class="ref-tag">Firewall</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-inner">
+      <h2 data-th="สนใจใช้บริการกับเรา?" data-en="Interested in Working With Us?">สนใจใช้บริการกับเรา?</h2>
+      <p data-th="ติดต่อทีมผู้เชี่ยวชาญเพื่อปรึกษาโซลูชัน IT ที่เหมาะสมสำหรับองค์กรของคุณ" data-en="Contact our expert team to discuss the right IT solution for your organization.">ติดต่อทีมผู้เชี่ยวชาญเพื่อปรึกษาโซลูชัน IT ที่เหมาะสมสำหรับองค์กรของคุณ</p>
+      <div class="cta-buttons">
+        <a href="contact.html" class="btn btn-primary"><i class="fas fa-paper-plane"></i> <span data-th="ติดต่อเรา" data-en="Contact Us">ติดต่อเรา</span></a>
+        <a href="services.html" class="btn btn-outline"><i class="fas fa-th-large"></i> <span data-th="ดูบริการ" data-en="Our Services">ดูบริการ</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="logo-wrap">
+          <img src="bgs-logo1.png" alt="BE GROVE SOLUTIONS CO., LTD" class="footer-logo-img" />
+        </div></div>
+        <p data-th="ผู้ให้บริการด้าน IT System Integration ครบวงจร" data-en="A complete IT System Integration service provider.">ผู้ให้บริการด้าน IT System Integration ครบวงจร</p>
+        <div class="footer-social">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#"><i class="fab fa-line"></i></a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4 data-th="บริการ" data-en="Services">บริการ</h4>
+          <ul>
+            <li><a href="services.html">Network Infrastructure</a></li>
+            <li><a href="services.html">Cybersecurity</a></li>
+            <li><a href="services.html">Cloud Solutions</a></li>
+            <li><a href="services.html">Managed Services</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4 data-th="เกี่ยวกับเรา" data-en="Company">เกี่ยวกับเรา</h4>
+          <ul>
+            <li><a href="about.html" data-th="ประวัติบริษัท" data-en="Our Story">ประวัติบริษัท</a></li>
+            <li><a href="reference.html" data-th="Site Reference" data-en="Site Reference">Site Reference</a></li>
+            <li><a href="contact.html" data-th="ติดต่อเรา" data-en="Contact">ติดต่อเรา</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4 data-th="ติดต่อ" data-en="Contact">ติดต่อ</h4>
+          <ul>
+            <li class="contact-li"><i class="fas fa-map-marker-alt"></i><span data-th="111/38 หมู่ 4 ต.บึงยี่โถ อ.ธัญบุรี จ.ปทุมธานี 12130" data-en="111/38 Moo 4, Buengyitho, Thanyaburi, Pathumtani 12130">111/38 หมู่ 4 ต.บึงยี่โถ อ.ธัญบุรี จ.ปทุมธานี 12130</span></li>
+            <li class="contact-li"><i class="fas fa-phone"></i><span>+66 9 1495 9996</span></li>
+            <li class="contact-li"><i class="fas fa-phone"></i><span>+66 9 1495 9997</span></li>
+            <li class="contact-li"><i class="fab fa-line"></i><span>@begrove</span></li>
+            <li class="contact-li"><i class="fas fa-envelope"></i><span>info@begrovesolutions.com</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p data-th="© 2024 BE GROVE SOLUTIONS CO., LTD. สงวนลิขสิทธิ์" data-en="© 2024 BE GROVE SOLUTIONS CO., LTD. All Rights Reserved.">© 2024 BE GROVE SOLUTIONS CO., LTD. สงวนลิขสิทธิ์</p>
+    </div>
+  </div>
+</footer>
+<script src="js/main.js"></script>
+
+<!-- STICKY LINE TAB -->
+<a href="https://line.me/ti/p/@begrove" target="_blank" class="sticky-line-tab" title="Chat with us on LINE">
+  <div class="slt-inner">
+    <i class="fab fa-line slt-icon"></i>
+    <span class="slt-label">Line: @begrove</span>
+  </div>
+</a>
+
+</body>
+</html>
