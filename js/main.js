@@ -18,6 +18,13 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('[data-th]').forEach(el => {
       el.textContent = lang === 'th' ? el.dataset.th : el.dataset.en;
     });
+    // Support HTML-rich text blocks (th-text / en-text spans)
+    document.querySelectorAll('.th-text').forEach(el => {
+      el.style.display = lang === 'th' ? '' : 'none';
+    });
+    document.querySelectorAll('.en-text').forEach(el => {
+      el.style.display = lang === 'en' ? '' : 'none';
+    });
     document.querySelectorAll('[data-lang]').forEach(el => {
       const elLang = el.dataset.lang;
       el.style.display = elLang === lang ? '' : 'none';
