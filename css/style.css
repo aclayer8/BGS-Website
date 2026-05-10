@@ -703,6 +703,8 @@ p { color: var(--text-medium); line-height: 1.75; }
 .shop-sidebar { position: sticky; top: 80px; }
 .sidebar-section { background: #fff; border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px; margin-bottom: 16px; }
 .sidebar-title { font-size: 0.9rem; font-weight: 700; color: var(--primary-dark); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+.sidebar-brand-select { width: 100%; padding: 9px 30px 9px 12px; border: 2px solid var(--border); border-radius: var(--radius); font-family: var(--font-thai); font-size: 0.9rem; color: var(--text-dark); background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3E%3Cpath fill='%23718096' d='M5 7L0 2h10z'/%3E%3C/svg%3E") no-repeat right 10px center; appearance: none; cursor: pointer; outline: none; transition: var(--transition); }
+.sidebar-brand-select:focus { border-color: var(--secondary); }
 .sidebar-menu { list-style: none; display: flex; flex-direction: column; gap: 4px; }
 .sidebar-group { }
 .sidebar-group-link { display: flex; align-items: center; gap: 8px; padding: 8px 10px; border-radius: var(--radius); font-size: 0.88rem; font-weight: 600; color: var(--primary-dark); cursor: pointer; transition: var(--transition); }

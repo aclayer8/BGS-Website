@@ -7,8 +7,477 @@
   <meta name="description" content="ผลิตภัณฑ์ IT คุณภาพสูงจากแบรนด์ชั้นนำ Cisco, HPE, Fortinet, Aruba, Ruijie, Reyee" />
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    /* ============================================================
+       DESIGN TOKENS — ใช้ project palette จาก css/style.css
+       ============================================================ */
+    :root {
+      --space-1: 0.25rem;
+      --space-2: 0.5rem;
+      --space-3: 0.75rem;
+      --space-4: 1rem;
+      --space-5: 1.25rem;
+      --space-6: 1.5rem;
+      --space-8: 2rem;
+      --space-10: 2.5rem;
+      --space-12: 3rem;
+      --radius-sm: 4px;
+      --radius-md: 8px;
+      --radius-lg: 12px;
+      --text-xs: 0.75rem;
+      --text-sm: 0.875rem;
+      --text-base: 1rem;
+      --color-surface: #f5f7fa;
+      --color-surface-raised: #fff;
+      --color-border: #e2e8f0;
+      --color-border-focus: var(--primary);
+      --color-text-muted: #64748b;
+      --color-text-secondary: #475569;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    /* ============================================================
+       LAYOUT
+       ============================================================ */
+    .products-page { background: var(--color-surface); }
+
+    .shop-outer {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: var(--space-6);
+      align-items: start;
+      padding: var(--space-6) 0 var(--space-12);
+    }
+
+    /* Mobile: stack sidebar below toggle */
+    @media (max-width: 900px) {
+      .shop-outer { grid-template-columns: 1fr; gap: var(--space-4); }
+    }
+
+    /* ============================================================
+       MOBILE FILTER TOGGLE
+       ============================================================ */
+    .mobile-filter-btn {
+      display: none;
+      width: 100%;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-3) var(--space-4);
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      font-size: var(--text-sm);
+      font-weight: 700;
+      cursor: pointer;
+      letter-spacing: 0.3px;
+    }
+    .mobile-filter-btn:focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 2px;
+    }
+    @media (max-width: 900px) { .mobile-filter-btn { display: flex; } }
+
+    /* ============================================================
+       SIDEBAR
+       ============================================================ */
+    .prod-sidebar {
+      position: sticky;
+      top: 90px;
+      background: var(--color-surface-raised);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      max-height: calc(100vh - 110px);
+      overflow-y: auto;
+    }
+
+    /* Mobile: slide-in panel */
+    @media (max-width: 900px) {
+      .prod-sidebar {
+        position: fixed;
+        top: 0; left: -280px;
+        width: 270px; height: 100vh;
+        border-radius: 0;
+        max-height: 100vh;
+        z-index: 2000;
+        transition: left 0.25s ease;
+        border: none;
+        box-shadow: var(--shadow-md);
+      }
+      .prod-sidebar[aria-hidden="false"] { left: 0; }
+    }
+
+    .sidebar-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.4);
+      z-index: 1999;
+    }
+    .sidebar-overlay.show { display: block; }
+
+    /* Sidebar header */
+    .sidebar-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--space-3) var(--space-4);
+      background: var(--primary);
+      color: #fff;
+      font-size: var(--text-sm);
+      font-weight: 700;
+    }
+    .sidebar-close {
+      display: none;
+      background: none;
+      border: none;
+      color: #fff;
+      padding: var(--space-1);
+      cursor: pointer;
+      border-radius: var(--radius-sm);
+    }
+    .sidebar-close:focus-visible { outline: 2px solid #fff; }
+    @media (max-width: 900px) { .sidebar-close { display: block; } }
+
+    /* Brand select */
+    .sb-brand-wrap { padding: var(--space-3) var(--space-4); border-bottom: 1px solid var(--color-border); }
+    .sb-brand-label {
+      display: block;
+      font-size: var(--text-xs);
+      font-weight: 700;
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      margin-bottom: var(--space-2);
+    }
+    .sb-brand-select {
+      width: 100%;
+      padding: var(--space-2) var(--space-3);
+      border: 1.5px solid var(--color-border);
+      border-radius: var(--radius-md);
+      font-size: var(--text-sm);
+      color: var(--primary);
+      background: var(--color-surface);
+      cursor: pointer;
+    }
+    .sb-brand-select:focus { outline: 2px solid var(--primary); outline-offset: 1px; }
+
+    /* Section label */
+    .sb-section-label {
+      display: block;
+      padding: var(--space-3) var(--space-4) var(--space-2);
+      font-size: var(--text-xs);
+      font-weight: 800;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      background: var(--color-surface);
+      border-top: 1px solid var(--color-border);
+    }
+
+    /* Accordion */
+    .sb-cat-btn {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--space-2) var(--space-4);
+      background: none;
+      border: none;
+      text-align: left;
+      font-size: var(--text-sm);
+      font-weight: 600;
+      color: #2d3a5e;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .sb-cat-btn:hover { background: var(--color-surface); }
+    .sb-cat-btn:focus-visible { outline: 2px solid var(--primary); outline-offset: -2px; }
+    .sb-cat-btn[aria-expanded="true"] { color: var(--primary); }
+    .sb-cat-arrow {
+      font-size: 0.65rem;
+      color: var(--color-text-muted);
+      transition: transform 0.2s;
+      flex-shrink: 0;
+    }
+    .sb-cat-btn[aria-expanded="true"] .sb-cat-arrow { transform: rotate(45deg); }
+
+    /* No-toggle category (direct link) */
+    .sb-cat-direct {
+      display: block;
+      width: 100%;
+      padding: var(--space-2) var(--space-4);
+      background: none;
+      border: none;
+      text-align: left;
+      font-size: var(--text-sm);
+      font-weight: 600;
+      color: #2d3a5e;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .sb-cat-direct:hover { background: var(--color-surface); color: var(--primary); }
+    .sb-cat-direct:focus-visible { outline: 2px solid var(--primary); outline-offset: -2px; }
+
+    /* Sub-list */
+    .sb-sub-list {
+      display: none;
+      border-left: 2px solid var(--primary);
+      margin-left: var(--space-4);
+      padding: var(--space-1) 0;
+    }
+    .sb-sub-list[aria-hidden="false"] { display: block; }
+
+    .sb-sub-list a {
+      display: block;
+      padding: 6px var(--space-3);
+      font-size: var(--text-xs);
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      transition: color 0.15s, background 0.15s;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    }
+    .sb-sub-list a:hover { color: var(--primary); background: #eef3fb; }
+    .sb-sub-list a:focus-visible { outline: 2px solid var(--primary); outline-offset: -1px; }
+    .sb-sub-list a[aria-current="true"] { color: var(--primary); font-weight: 700; background: #eef3fb; }
+
+    .sb-sub-group-label {
+      display: block;
+      padding: var(--space-2) var(--space-3) var(--space-1);
+      font-size: var(--text-xs);
+      font-weight: 800;
+      color: var(--primary);
+      background: #eef3fb;
+      border-top: 1px solid var(--color-border);
+    }
+
+    .sb-divider { height: 1px; background: var(--color-border); margin: var(--space-2) 0; }
+
+    /* ============================================================
+       MAIN CONTENT
+       ============================================================ */
+
+    /* Breadcrumb */
+    .prod-breadcrumb {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-4);
+    }
+    .prod-breadcrumb a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+    .prod-breadcrumb a:hover { text-decoration: underline; }
+    .prod-breadcrumb i { font-size: 0.6rem; }
+
+    /* Brand banner */
+    .brand-banner {
+      display: none;
+      background: var(--color-surface-raised);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-5) var(--space-6);
+      margin-bottom: var(--space-4);
+    }
+    .brand-banner[aria-hidden="false"] { display: block; }
+    .brand-banner-inner { display: flex; gap: var(--space-5); align-items: flex-start; }
+    @media (max-width: 600px) { .brand-banner-inner { flex-direction: column; } }
+    .brand-logo-wrap {
+      flex-shrink: 0;
+      width: 120px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--color-surface);
+      border-radius: var(--radius-md);
+      padding: var(--space-3);
+      border: 1px solid var(--color-border);
+    }
+    .brand-logo-wrap img { max-width: 100%; max-height: 100%; object-fit: contain; }
+    .brand-desc h2 { font-size: var(--text-base); font-weight: 800; color: var(--primary); margin-bottom: var(--space-2); }
+    .brand-desc p { font-size: var(--text-sm); color: var(--color-text-secondary); line-height: 1.7; margin: 0; }
+
+    /* Subcategory cards */
+    .subcat-section { margin-bottom: var(--space-4); }
+    .subcat-label {
+      font-size: var(--text-xs);
+      font-weight: 700;
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      margin-bottom: var(--space-3);
+    }
+    .subcat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-3);
+    }
+    @media (max-width: 640px) { .subcat-grid { grid-template-columns: repeat(2, 1fr); } }
+    .subcat-card {
+      background: var(--color-surface-raised);
+      border: 1.5px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--space-3);
+      text-align: center;
+      cursor: pointer;
+      text-decoration: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-2);
+    }
+    .subcat-card:hover { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(0,48,135,0.06); }
+    .subcat-card:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+    .subcat-card img { width: 60px; height: 36px; object-fit: contain; }
+    .subcat-card span { font-size: var(--text-xs); font-weight: 700; color: var(--primary); }
+
+    /* Toolbar */
+    .prod-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: var(--space-3);
+      background: var(--color-surface-raised);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--space-3) var(--space-4);
+      margin-bottom: var(--space-4);
+    }
+    .prod-count { font-size: var(--text-sm); color: var(--color-text-muted); }
+    .prod-count strong { color: var(--primary); font-weight: 700; }
+    .prod-sort { display: flex; align-items: center; gap: var(--space-2); }
+    .prod-sort label { font-size: var(--text-sm); color: var(--color-text-muted); font-weight: 600; }
+    .prod-sort select {
+      padding: var(--space-1) var(--space-3);
+      border: 1.5px solid var(--color-border);
+      border-radius: var(--radius-md);
+      font-size: var(--text-sm);
+      color: var(--primary);
+      background: var(--color-surface);
+      cursor: pointer;
+    }
+    .prod-sort select:focus { outline: 2px solid var(--primary); }
+
+    /* Product grid */
+    .prod-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-4);
+    }
+    @media (max-width: 700px) { .prod-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 420px) { .prod-grid { grid-template-columns: 1fr; } }
+
+    .prod-card {
+      background: var(--color-surface-raised);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .prod-card:hover {
+      border-color: #b0bdd8;
+      box-shadow: var(--shadow-md);
+    }
+    .prod-card:focus-within { outline: 2px solid var(--primary); }
+
+    .prod-card-img-wrap {
+      background: var(--color-surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-4);
+      aspect-ratio: 4/3;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .prod-card-img {
+      max-width: 80%;
+      max-height: 80%;
+      object-fit: contain;
+    }
+
+    .prod-card-body {
+      padding: var(--space-4);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+    .prod-card-brand {
+      font-size: var(--text-xs);
+      font-weight: 800;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+    }
+    .prod-card-name {
+      font-size: var(--text-sm);
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1.4;
+    }
+    .prod-card-desc {
+      font-size: var(--text-xs);
+      color: var(--color-text-secondary);
+      line-height: 1.6;
+      flex: 1;
+    }
+    .prod-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: var(--space-2);
+    }
+    .prod-card-tag {
+      font-size: var(--text-xs);
+      padding: 2px var(--space-2);
+      background: #eef2fb;
+      color: var(--primary);
+      border-radius: 99px;
+      font-weight: 600;
+    }
+    .prod-card-btn {
+      font-size: var(--text-xs);
+      padding: var(--space-1) var(--space-3);
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: 99px;
+      text-decoration: none;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .prod-card-btn:hover { background: var(--accent); }
+    .prod-card-btn:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+
+    /* Empty state */
+    .prod-empty {
+      grid-column: 1 / -1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-12) var(--space-6);
+      color: var(--color-text-muted);
+      text-align: center;
+      gap: var(--space-3);
+    }
+    .prod-empty i { font-size: 2.5rem; opacity: 0.25; }
+    .prod-empty strong { font-size: var(--text-base); color: var(--color-text-secondary); }
+    .prod-empty span { font-size: var(--text-sm); }
+  </style>
 </head>
-<body>
+<body class="products-page">
 
 <!-- NAVBAR -->
 <nav class="navbar solid" id="navbar">
@@ -16,382 +485,139 @@
     <a href="index.html" class="nav-logo">
       <img src="bgs-logo1.png" alt="BE GROVE SOLUTIONS CO., LTD" class="nav-logo-img" />
     </a>
-    <ul class="nav-menu">
-      <li><a href="index.html" class="nav-link" data-th="หน้าหลัก" data-en="Home">หน้าหลัก</a></li>
-      <li><a href="about.html" class="nav-link" data-th="เกี่ยวกับเรา" data-en="About Us">เกี่ยวกับเรา</a></li>
-      <li><a href="services.html" class="nav-link" data-th="บริการ" data-en="Services">บริการ</a></li>
-      <li><a href="products.html" class="nav-link active" data-th="ผลิตภัณฑ์" data-en="Products">ผลิตภัณฑ์</a></li>
-      <li><a href="reference.html" class="nav-link" data-th="Site Reference" data-en="Site Reference">Site Reference</a></li>
-      <li><a href="contact.html" class="nav-link" data-th="ติดต่อเรา" data-en="Contact">ติดต่อเรา</a></li>
+    <ul class="nav-menu" role="menubar">
+      <li role="none"><a href="index.html" class="nav-link" role="menuitem">หน้าหลัก</a></li>
+      <li role="none"><a href="about.html" class="nav-link" role="menuitem">เกี่ยวกับเรา</a></li>
+      <li role="none"><a href="services.html" class="nav-link" role="menuitem">บริการ</a></li>
+      <li role="none"><a href="products.html" class="nav-link active" role="menuitem" aria-current="page">ผลิตภัณฑ์</a></li>
+      <li role="none"><a href="reference.html" class="nav-link" role="menuitem">Site Reference</a></li>
+      <li role="none"><a href="contact.html" class="nav-link" role="menuitem">ติดต่อเรา</a></li>
     </ul>
     <div class="nav-right">
       <div class="lang-switch">
         <button class="lang-btn active" data-lang="th">TH</button>
         <button class="lang-btn" data-lang="en">EN</button>
       </div>
-      <a href="contact.html" class="nav-contact-btn" data-th="ติดต่อเรา" data-en="Contact Us">ติดต่อเรา</a>
+      <a href="contact.html" class="nav-contact-btn">ติดต่อเรา</a>
     </div>
-    <button class="hamburger"><span></span><span></span><span></span></button>
+    <button class="hamburger" aria-label="เปิดเมนู" aria-expanded="false"><span></span><span></span><span></span></button>
   </div>
 </nav>
-<div class="mobile-menu">
-  <a href="index.html" class="nav-link" data-th="หน้าหลัก" data-en="Home">หน้าหลัก</a>
-  <a href="about.html" class="nav-link" data-th="เกี่ยวกับเรา" data-en="About Us">เกี่ยวกับเรา</a>
-  <a href="services.html" class="nav-link" data-th="บริการ" data-en="Services">บริการ</a>
-  <a href="products.html" class="nav-link" data-th="ผลิตภัณฑ์" data-en="Products">ผลิตภัณฑ์</a>
-  <a href="reference.html" class="nav-link" data-th="Site Reference" data-en="Site Reference">Site Reference</a>
-  <a href="contact.html" class="nav-link" data-th="ติดต่อเรา" data-en="Contact">ติดต่อเรา</a>
-  <div class="lang-switch"><button class="lang-btn active" data-lang="th">TH</button><button class="lang-btn" data-lang="en">EN</button></div>
+<div class="mobile-menu" role="navigation" aria-label="เมนูมือถือ">
+  <a href="index.html" class="nav-link">หน้าหลัก</a>
+  <a href="about.html" class="nav-link">เกี่ยวกับเรา</a>
+  <a href="services.html" class="nav-link">บริการ</a>
+  <a href="products.html" class="nav-link" aria-current="page">ผลิตภัณฑ์</a>
+  <a href="reference.html" class="nav-link">Site Reference</a>
+  <a href="contact.html" class="nav-link">ติดต่อเรา</a>
+  <div class="lang-switch">
+    <button class="lang-btn active" data-lang="th">TH</button>
+    <button class="lang-btn" data-lang="en">EN</button>
+  </div>
   <a href="contact.html" class="nav-contact-btn">ติดต่อเรา</a>
 </div>
 
-<!-- CATEGORY SUB-NAV -->
-<div class="cat-subnav">
-  <div class="container">
-    <ul class="cat-subnav-list">
-      <li><a href="#" class="cat-subnav-link active" data-cat-filter="all" data-th="ทั้งหมด" data-en="All Products">ทั้งหมด</a></li>
-      <li><a href="#" class="cat-subnav-link" data-cat-filter="network" data-th="Network" data-en="Network"><i class="fas fa-network-wired"></i> Network</a></li>
-      <li><a href="#" class="cat-subnav-link" data-cat-filter="security" data-th="Security" data-en="Security"><i class="fas fa-shield-alt"></i> Security</a></li>
-      <li><a href="#" class="cat-subnav-link" data-cat-filter="server" data-th="Server &amp; Storage" data-en="Server &amp; Storage"><i class="fas fa-server"></i> Server &amp; Storage</a></li>
-      <li><a href="#" class="cat-subnav-link" data-cat-filter="wireless" data-th="Wireless" data-en="Wireless"><i class="fas fa-wifi"></i> Wireless</a></li>
-      <li><a href="#" class="cat-subnav-link" data-cat-filter="cloud" data-th="Cloud" data-en="Cloud"><i class="fas fa-cloud"></i> Cloud</a></li>
-    </ul>
+<!-- Mobile filter button -->
+<button class="mobile-filter-btn" id="mobileFilterBtn" aria-expanded="false" aria-controls="prodSidebar">
+  <i class="fas fa-sliders-h" aria-hidden="true"></i> หมวดหมู่สินค้า
+</button>
+
+<!-- Overlay -->
+<div class="sidebar-overlay" id="sidebarOverlay" aria-hidden="true"></div>
+
+<div class="container">
+  <div class="shop-outer">
+
+    <!-- ===== SIDEBAR ===== -->
+    <nav id="prodSidebar" class="prod-sidebar" aria-label="หมวดหมู่สินค้า" aria-hidden="true">
+      <div class="sidebar-head">
+        <span><i class="fas fa-th-list" aria-hidden="true"></i> หมวดหมู่สินค้า</span>
+        <button class="sidebar-close" id="sidebarClose" aria-label="ปิดเมนูหมวดหมู่">
+          <i class="fas fa-times" aria-hidden="true"></i>
+        </button>
+      </div>
+
+      <!-- Brand -->
+      <div class="sb-brand-wrap">
+        <label class="sb-brand-label" for="brandSelect">แบรนด์</label>
+        <select class="sb-brand-select" id="brandSelect">
+          <option value="all">ทุกแบรนด์</option>
+          <option value="cisco">Cisco (ซิสโก้)</option>
+          <option value="ruijie">Ruijie Networks</option>
+          <option value="reyee">Reyee Network</option>
+          <option value="fortinet">Fortinet</option>
+          <option value="hpe">HPE / Aruba</option>
+          <option value="tplink">TP-Link</option>
+          <option value="ubiquiti">Ubiquiti</option>
+          <option value="mikrotik">Mikrotik</option>
+          <option value="engenius">Engenius</option>
+          <option value="draytek">DrayTek</option>
+          <option value="huawei">Huawei eKit</option>
+          <option value="ipcom">IP-COM</option>
+          <option value="bdcom">BDCOM</option>
+          <option value="zyxel">Zyxel</option>
+          <option value="cybrey">Cybrey</option>
+        </select>
+      </div>
+
+      <!-- Categories -->
+      <span class="sb-section-label">ประเภทสินค้า</span>
+
+      <!-- Macro: accordion item helper generated via JS below -->
+      <div id="sb-categories"></div>
+
+    </nav>
+
+    <!-- ===== MAIN ===== -->
+    <main id="prodMain">
+      <!-- Breadcrumb -->
+      <nav class="prod-breadcrumb" aria-label="เส้นทาง">
+        <a href="index.html">หน้าหลัก</a>
+        <i class="fas fa-chevron-right" aria-hidden="true"></i>
+        <span id="bcCurrent" aria-current="page">ผลิตภัณฑ์ทั้งหมด</span>
+      </nav>
+
+      <!-- Brand banner -->
+      <section class="brand-banner" id="brandBanner" aria-hidden="true" aria-label="ข้อมูลแบรนด์">
+        <div class="brand-banner-inner">
+          <div class="brand-logo-wrap">
+            <img id="bannerLogo" src="" alt="" />
+          </div>
+          <div class="brand-desc">
+            <h2 id="bannerName"></h2>
+            <p id="bannerDesc"></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Subcats -->
+      <section class="subcat-section" id="subcatSection" aria-label="หมวดหมู่ย่อย" hidden>
+        <p class="subcat-label">หมวดหมู่ย่อย</p>
+        <div class="subcat-grid" id="subcatGrid"></div>
+      </section>
+
+      <!-- Toolbar -->
+      <div class="prod-toolbar">
+        <p class="prod-count" role="status" aria-live="polite">
+          แสดง <strong id="prodCountNum">0</strong> รายการ
+        </p>
+        <div class="prod-sort">
+          <label for="sortSelect">เรียงตาม:</label>
+          <select id="sortSelect">
+            <option value="default">ค่าเริ่มต้น</option>
+            <option value="name-asc">ชื่อ A–Z</option>
+            <option value="name-desc">ชื่อ Z–A</option>
+            <option value="brand">แบรนด์</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Products -->
+      <div class="prod-grid" id="prodGrid" role="list" aria-label="รายการสินค้า"></div>
+    </main>
+
   </div>
 </div>
-
-<!-- SHOP LAYOUT -->
-<div class="shop-wrapper">
-  <div class="container">
-    <div class="shop-layout">
-
-      <!-- ========== SIDEBAR ========== -->
-      <aside class="shop-sidebar">
-
-        <div class="sidebar-section">
-          <h4 class="sidebar-title"><i class="fas fa-th-large"></i> <span data-th="หมวดสินค้า" data-en="Categories">หมวดสินค้า</span></h4>
-          <ul class="sidebar-menu">
-            <li class="sidebar-group">
-              <a href="#" class="sidebar-group-link" data-cat-filter="network"><i class="fas fa-network-wired"></i> Network</a>
-              <ul class="sidebar-sub">
-                <li><a href="#" data-cat-filter="network">Cisco Switches</a></li>
-                <li><a href="#" data-cat-filter="network">Cisco Routers</a></li>
-                <li><a href="#" data-cat-filter="network">Ruijie Switches</a></li>
-              </ul>
-            </li>
-            <li class="sidebar-group">
-              <a href="#" class="sidebar-group-link" data-cat-filter="security"><i class="fas fa-shield-alt"></i> Security</a>
-              <ul class="sidebar-sub">
-                <li><a href="#" data-cat-filter="security">Fortinet Firewall</a></li>
-                <li><a href="#" data-cat-filter="security">Fortinet SD-WAN</a></li>
-              </ul>
-            </li>
-            <li class="sidebar-group">
-              <a href="#" class="sidebar-group-link" data-cat-filter="server"><i class="fas fa-server"></i> Server &amp; Storage</a>
-              <ul class="sidebar-sub">
-                <li><a href="#" data-cat-filter="server">HPE ProLiant</a></li>
-                <li><a href="#" data-cat-filter="server">Dell PowerEdge</a></li>
-              </ul>
-            </li>
-            <li class="sidebar-group">
-              <a href="#" class="sidebar-group-link" data-cat-filter="wireless"><i class="fas fa-wifi"></i> Wireless</a>
-              <ul class="sidebar-sub">
-                <li><a href="#" data-cat-filter="wireless">Cisco Wireless</a></li>
-                <li><a href="#" data-cat-filter="wireless">Aruba Access Point</a></li>
-                <li><a href="#" data-cat-filter="wireless">Reyee Wi-Fi</a></li>
-              </ul>
-            </li>
-            <li class="sidebar-group">
-              <a href="#" class="sidebar-group-link" data-cat-filter="cloud"><i class="fas fa-cloud"></i> Cloud</a>
-              <ul class="sidebar-sub">
-                <li><a href="#" data-cat-filter="cloud">Microsoft Azure</a></li>
-                <li><a href="#" data-cat-filter="cloud">Microsoft 365</a></li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-
-        <!-- Contact Box -->
-        <div class="sidebar-contact-box">
-          <div class="sidebar-contact-icon"><i class="fas fa-headset"></i></div>
-          <p data-th="ต้องการคำแนะนำ?" data-en="Need advice?">ต้องการคำแนะนำ?</p>
-          <a href="contact.html" class="sidebar-quote-btn" data-th="ขอใบเสนอราคา" data-en="Get a Quote">ขอใบเสนอราคา</a>
-        </div>
-
-      </aside>
-
-      <!-- ========== MAIN CONTENT ========== -->
-      <main class="shop-main">
-
-        <!-- Breadcrumb -->
-        <div class="shop-breadcrumb">
-          <a href="index.html" data-th="หน้าหลัก" data-en="Home">หน้าหลัก</a>
-          <i class="fas fa-chevron-right"></i>
-          <span data-th="ผลิตภัณฑ์" data-en="Products">ผลิตภัณฑ์</span>
-        </div>
-
-        <!-- Promo Banner -->
-        <div class="promo-banner">
-          <div class="promo-banner-inner">
-            <div class="promo-tag" data-th="สินค้าแนะนำ" data-en="Featured">สินค้าแนะนำ</div>
-            <h3 data-th="ผลิตภัณฑ์ IT คุณภาพสูง จากแบรนด์ชั้นนำระดับโลก" data-en="Premium IT Products from World-Leading Brands">ผลิตภัณฑ์ IT คุณภาพสูง<br>จากแบรนด์ชั้นนำระดับโลก</h3>
-            <p data-th="พร้อมบริการติดตั้ง ทดสอบ และรับประกัน โดยทีมวิศวกรผู้เชี่ยวชาญ" data-en="With full installation, testing and warranty by expert engineers.">พร้อมบริการติดตั้ง ทดสอบ และรับประกัน โดยทีมวิศวกรผู้เชี่ยวชาญ</p>
-            <a href="contact.html" class="btn btn-primary" data-th="สอบถามราคาพิเศษ" data-en="Get Special Price">สอบถามราคาพิเศษ</a>
-          </div>
-          <div class="promo-banner-icons">
-            <i class="fas fa-server"></i>
-            <i class="fas fa-shield-alt"></i>
-            <i class="fas fa-network-wired"></i>
-          </div>
-        </div>
-
-        <!-- Result bar -->
-        <div class="shop-result-bar">
-          <span class="result-count"><span id="product-count">9</span> <span data-th="รายการ" data-en="Products">รายการ</span></span>
-          <span class="result-sort" data-th="เรียงตาม: ยอดนิยม" data-en="Sort: Popular">เรียงตาม: ยอดนิยม</span>
-        </div>
-
-        <!-- ===== PRODUCT LIST ===== -->
-        <div class="product-list" id="product-list">
-
-          <!-- 1. Cisco Catalyst Switches -->
-          <div class="plcard" data-cat="network">
-            <div class="plcard-img" style="background:linear-gradient(135deg,#e8f0fe,#c7d7f9);">
-              <img src="images/product-partner/ciscopng-300x158.png" alt="Cisco" style="height:70px;object-fit:contain;" />
-            </div>
-            <div class="plcard-body">
-              <div class="plcard-badges">
-                <span class="badge-cat" data-th="เครือข่าย" data-en="Network">Network</span>
-                <span class="badge-brand">Cisco</span>
-              </div>
-              <h3 class="plcard-title">Cisco Catalyst Switches</h3>
-              <p class="plcard-desc" data-th="สวิตช์เครือข่ายระดับ Enterprise รองรับ PoE+, 10G/25G/100G Uplink พร้อม Cisco DNA Center สำหรับบริหารจัดการเครือข่ายแบบ Centralized" data-en="Enterprise-grade switches supporting PoE+, 10G/25G/100G Uplinks with Cisco DNA Center for centralized management.">สวิตช์เครือข่ายระดับ Enterprise รองรับ PoE+, 10G/25G/100G Uplink พร้อม Cisco DNA Center สำหรับบริหารจัดการเครือข่ายแบบ Centralized</p>
-              <ul class="plcard-specs">
-                <li><i class="fas fa-check-circle"></i> <span>Layer 2/3 Managed Switching</span></li>
-                <li><i class="fas fa-check-circle"></i> <span data-th="รองรับ PoE+ สูงสุด 90W" data-en="PoE+ up to 90W per port">รองรับ PoE+ สูงสุด 90W ต่อพอร์ต</span></li>
-                <li><i class="fas fa-check-circle"></i> <span data-th="รับประกัน Lifetime" data-en="Lifetime Warranty">รับประกัน Lifetime</span></li>
-                <li><i class="fas fa-check-circle"></i> <span>Cisco DNA Center Ready</span></li>
-              </ul>
-            </div>
-            <div class="plcard-action">
-              <div class="plcard-price" data-th="ราคาพิเศษ" data-en="Special Price">ราคาพิเศษ</div>
-              <div class="plcard-price-sub" data-th="ติดต่อสอบถาม" data-en="Contact for price">ติดต่อสอบถาม</div>
-              <a href="contact.html" class="plcard-btn-quote" data-th="ขอใบเสนอราคา" data-en="Request Quote">ขอใบเสนอราคา</a>
-            </div>
-          </div>
-
-          <!-- 2. Ruijie Switches -->
-          <div class="plcard" data-cat="network">
-            <div class="plcard-img" style="background:linear-gradient(135deg,#e3f2fd,#bbdefb);">
-              <img src="images/product-partner/ruijie-logo.png" alt="Ruijie" style="height:70px;object-fit:contain;" />
-            </div>
-            <div class="plcard-body">
-              <div class="plcard-badges">
-                <span class="badge-cat" data-th="เครือข่าย" data-en="Network">Network</span>
-                <span class="badge-brand">Ruijie</span>
-              </div>
-              <h3 class="plcard-title">Ruijie Managed Switches</h3>
-              <p class="plcard-desc" data-th="สวิตช์เครือข่ายคุณภาพสูง ราคาประหยัด รองรับ L2/L3 บริหารจัดการผ่าน Cloud Controller ง่ายดาย" data-en="High-quality, cost-effective switches with L2/L3 support and easy Cloud Controller management.">สวิตช์เครือข่ายคุณภาพสูง ราคาประหยัด รองรับ L2/L3 บริหารจัดการผ่าน Cloud Controller ง่ายดาย</p>
-              <ul class="plcard-specs">
-                <li><i class="fas fa-check-circle"></i> <span>L2/L3 Managed Switch</span></li>
-                <li><i class="fas fa-check-circle"></i> <span data-th="รองรับ PoE/PoE+" data-en="PoE/PoE+ Supported">รองรับ PoE/PoE+</span></li>
-                <li><i class="fas fa-check-circle"></i> <span>Ruijie Cloud Management</span></li>
-                <li><i class="fas fa-check-circle"></i> <span data-th="ราคาคุ้มค่า ดีไซน์ทนทาน" data-en="Cost-effective & Durable">ราคาคุ้มค่า ดีไซน์ทนทาน</span></li>
-              </ul>
-            </div>
-            <div class="plcard-action">
-              <div class="plcard-price" data-th="ราคาพิเศษ" data-en="Special Price">ราคาพิเศษ</div>
-              <div class="plcard-price-sub" data-th="ติดต่อสอบถาม" data-en="Contact for price">ติดต่อสอบถาม</div>
-              <a href="contact.html" class="plcard-btn-quote" data-th="ขอใบเสนอราคา" data-en="Request Quote">ขอใบเสนอราคา</a>
-            </div>
-          </div>
-
-          <!-- 3. Fortinet Firewall -->
-          <div class="plcard" data-cat="security">
-            <div class="plcard-img" style="background:linear-gradient(135deg,#fff3e0,#ffe0b2);">
-              <img src="images/product-partner/Fortinet-removebg-preview-300x133.png" alt="Fortinet" style="height:70px;object-fit:contain;" />
-            </div>
-            <div class="plcard-body">
-              <div class="plcard-badges">
-                <span class="badge-cat" data-th="ความปลอดภัย" data-en="Security">Security</span>
-                <span class="badge-brand">Fortinet</span>
-              </div>
-              <h3 class="plcard-title">FortiGate Next-Gen Firewall</h3>
-              <p class="plcard-desc" data-th="ไฟร์วอลล์รุ่นใหม่ระดับ Enterprise พร้อม AI-powered Threat Intelligence, IPS, SSL Inspection และ Application Control แบบครบวงจร" data-en="Next-generation enterprise firewall with AI-powered threat intelligence, IPS, SSL inspection, and full application control.">ไฟร์วอลล์รุ่นใหม่ระดับ Enterprise พร้อม AI-powered Threat Intelligence, IPS, SSL Inspection และ Application Control แบบครบวงจร</p>
-              <ul class="plcard-specs">
-                <li><i class="fas fa-check-circle"></i> <span>Next-Gen Firewall (NGFW)</span></li>
-                <li><i class="fas fa-check-circle"></i> <span>IPS / Application Control</span></li>
-                <li><i class="fas fa-check-circle"></i> <span>SSL Deep Inspection</span></li>
-                <li><i class="fas fa-check-circle"></i> <span>FortiGuard AI Threat Feed</span></li>
-              </ul>
-            </div>
-            <div class="plcard-action">
-              <div class="plcard-price" data-th="ราคาพิเศษ" data-en="Special Price">ราคาพิเศษ</div>
-              <div class="plcard-price-sub" data-th="ติดต่อสอบถาม" data-en="Contact for price">ติดต่อสอบถาม</div>
-              <a href="contact.html" class="plcard-btn-quote" data-th="ขอใบเสนอราคา" data-en="Request Quote">ขอใบเสนอราคา</a>
-            </div>
-          </div>
-
-          <!-- 4. Fortinet SD-WAN -->
-          <div class="plcard" data-cat="security">
-            <div class="plcard-img" style="background:linear-gradient(135deg,#fff3e0,#ffe0b2);">
-              <img src="images/product-partner/Fortinet-removebg-preview-300x133.png" alt="Fortinet" style="height:70px;object-fit:contain;" />
-            </div>
-            <div class="plcard-body">
-              <div class="plcard-badges">
-                <span class="badge-cat" data-th="ความปลอดภัย" data-en="Security">Security</span>
-                <span class="badge-brand">Fortinet</span>
-              </div>
-              <h3 class="plcard-title">FortiGate SD-WAN Solution</h3>
-              <p class="plcard-desc" data-th="โซลูชัน SD-WAN ที่รวม Security และ Networking เป็นหนึ่งเดียว ลดต้นทุน MPLS เพิ่มประสิทธิภาพการเชื่อมต่อสาขา" data-en="Unified SD-WAN solution combining Security and Networking in one, reducing MPLS costs and boosting branch connectivity.">โซลูชัน SD-WAN ที่รวม Security และ Networking เป็นหนึ่งเดียว ลดต้นทุน MPLS เพิ่มประสิทธิภาพการเชื่อมต่อสาขา</p>
-              <ul class="plcard-specs">
-                <li><i class="fas fa-check-circle"></i> <span>Unified Security + SD-WAN</span></li>
-                <li><i class="fas fa-check-circle"></i> <span data-th="ลด MPLS Cost ได้สูงสุด 50%" data-en="Reduce MPLS cost up to 50%">ลด MPLS Cost ได้สูงสุด 50%</span></li>
-                <li><i class="fas fa-check-circle"></i> <span>Zero-Touch Provisioning</span></li>
-                <li><i class="fas fa-check-circle"></i> <span>FortiManager Centralized Mgmt.</span></li>
-              </ul>
-            </div>
-            <div class="plcard-action">
-              <div class="plcard-price" data-th="ราคาพิเศษ" data-en="Special Price">ราคาพิเศษ</div>
-              <div class="plcard-price-sub" data-th="ติดต่อสอบถาม" data-en="Contact for price">ติดต่อสอบถาม</div>
-              <a href="contact.html" class="plcard-btn-quote" data-th="ขอใบเสนอราคา" data-en="Request Quote">ขอใบเสนอราคา</a>
-            </div>
-          </div>
-
-          <!-- 5. HPE ProLiant Server -->
-          <div class="plcard" data-cat="server">
-            <div class="plcard-img" style="background:linear-gradient(135deg,#e8f5e9,#c8e6c9);">
-              <img src="images/product-partner/hpe-removebg-preview-300x300.png" alt="HPE" style="height:70px;object-fit:contain;" />
-            </div>
-            <div class="plcard-body">
-              <div class="plcard-badges">
-                <span class="badge-cat" data-th="เซิร์ฟเวอร์" data-en="Server">Server</span>
-                <span class="badge-brand">HPE</span>
-              </div>
-              <h3 class="plcard-title">HPE ProLiant Rack Server</h3>
-              <p class="plcard-desc" data-th="เซิร์ฟเวอร์ระดับ Enterprise รองรับ Xeon Scalable หน่วยความจำสูงสุด 6TB พร้อม HPE iLO สำหรับ Remote Management ตลอด 24 ชั่วโมง" data-en="Enterprise-grade server supporting Xeon Scalable CPUs, up to 6TB RAM, with HPE iLO for 24/7 remote management.">เซิร์ฟเวอร์ระดับ Enterprise รองรับ Xeon Scalable หน่วยความจำสูงสุด 6TB พร้อม HPE iLO สำหรับ Remote Management ตลอด 24 ชั่วโมง</p>
-              <ul class="plcard-specs">
-                <li><i class="fas fa-check-circle"></i> <span>Intel Xeon Scalable / AMD EPYC</span></li>
-                <li><i class="fas fa-check-circle"></i> <span data-th="RAM สูงสุด 6TB DDR5" data-en="Up to 6TB DDR5 RAM">RAM สูงสุด 6TB DDR5</span></li>
-                <li><i class="fas fa-check-circle"></i> <span>HPE iLO Remote Management</span></li>
-                <li><i class="fas fa-check-circle"></i> <span data-th="รับประกัน 3 ปี Onsite" data-en="3-Year Onsite Warranty">รับประกัน 3 ปี Onsite</span></li>
-              </ul>
-            </div>
-            <div class="plcard-action">
-              <div class="plcard-price" data-th="ราคาพิเศษ" data-en="Special Price">ราคาพิเศษ</div>
-              <div class="plcard-price-sub" data-th="ติดต่อสอบถาม" data-en="Contact for price">ติดต่อสอบถาม</div>
-              <a href="contact.html" class="plcard-btn-quote" data-th="ขอใบเสนอราคา" data-en="Request Quote">ขอใบเสนอราคา</a>
-            </div>
-          </div>
-
-          <!-- 6. Aruba Access Point -->
-          <div class="plcard" data-cat="wireless">
-            <div class="plcard-img" style="background:linear-gradient(135deg,#f3e5f5,#e1bee7);">
-              <img src="images/product-partner/aruba-logo.png" alt="Aruba" style="height:70px;object-fit:contain;" />
-            </div>
-            <div class="plcard-body">
-              <div class="plcard-badges">
-                <span class="badge-cat" data-th="ไร้สาย" data-en="Wireless">Wireless</span>
-                <span class="badge-brand">Aruba</span>
-              </div>
-              <h3 class="plcard-title">Aruba Wi-Fi 6E Access Points</h3>
-              <p class="plcard-desc" data-th="แอคเซสพอยต์ Wi-Fi 6E รองรับ 6GHz Band ความเร็วสูงสุด 3.9Gbps เหมาะสำหรับสภาพแวดล้อมที่มีผู้ใช้งานหนาแน่น" data-en="Wi-Fi 6E Access Point with 6GHz band support, up to 3.9Gbps speed, ideal for high-density environments.">แอคเซสพอยต์ Wi-Fi 6E รองรับ 6GHz Band ความเร็วสูงสุด 3.9Gbps เหมาะสำหรับสภาพแวดล้อมที่มีผู้ใช้งานหนาแน่น</p>
-              <ul class="plcard-specs">
-                <li><i class="fas fa-check-circle"></i> <span>Wi-Fi 6E (802.11ax) Tri-Band</span></li>
-                <li><i class="fas fa-check-circle"></i> <span data-th="ความเร็วสูงสุด 3.9Gbps" data-en="Up to 3.9Gbps speed">ความเร็วสูงสุด 3.9Gbps</span></li>
-                <li><i class="fas fa-check-circle"></i> <span>Aruba Central Cloud Management</span></li>
-                <li><i class="fas fa-check-circle"></i> <span>AI-powered RF Optimization</span></li>
-              </ul>
-            </div>
-            <div class="plcard-action">
-              <div class="plcard-price" data-th="ราคาพิเศษ" data-en="Special Price">ราคาพิเศษ</div>
-              <div class="plcard-price-sub" data-th="ติดต่อสอบถาม" data-en="Contact for price">ติดต่อสอบถาม</div>
-              <a href="contact.html" class="plcard-btn-quote" data-th="ขอใบเสนอราคา" data-en="Request Quote">ขอใบเสนอราคา</a>
-            </div>
-          </div>
-
-          <!-- 7. Reyee Wi-Fi -->
-          <div class="plcard" data-cat="wireless">
-            <div class="plcard-img" style="background:linear-gradient(135deg,#e8f5e9,#dcedc8);">
-              <img src="images/product-partner/reyee-logo.png" alt="Reyee" style="height:70px;object-fit:contain;" />
-            </div>
-            <div class="plcard-body">
-              <div class="plcard-badges">
-                <span class="badge-cat" data-th="ไร้สาย" data-en="Wireless">Wireless</span>
-                <span class="badge-brand">Reyee</span>
-              </div>
-              <h3 class="plcard-title">Reyee Wi-Fi 6 Access Points</h3>
-              <p class="plcard-desc" data-th="แอคเซสพอยต์ Wi-Fi 6 ราคาประหยัด บริหารจัดการผ่าน Ruijie Cloud เหมาะสำหรับธุรกิจ SME โรงแรม และอาคารพาณิชย์" data-en="Affordable Wi-Fi 6 Access Points managed via Ruijie Cloud, ideal for SME, hotels, and commercial buildings.">แอคเซสพอยต์ Wi-Fi 6 ราคาประหยัด บริหารจัดการผ่าน Ruijie Cloud เหมาะสำหรับธุรกิจ SME โรงแรม และอาคารพาณิชย์</p>
-              <ul class="plcard-specs">
-                <li><i class="fas fa-check-circle"></i> <span>Wi-Fi 6 (802.11ax) Dual-Band</span></li>
-                <li><i class="fas fa-check-circle"></i> <span data-th="ราคาประหยัด คุ้มค่า" data-en="Cost-effective Solution">ราคาประหยัด คุ้มค่า</span></li>
-                <li><i class="fas fa-check-circle"></i> <span>Ruijie Cloud Zero-Config</span></li>
-                <li><i class="fas fa-check-circle"></i> <span data-th="รองรับผู้ใช้หลายร้อยคนพร้อมกัน" data-en="Supports hundreds of concurrent users">รองรับผู้ใช้หลายร้อยคนพร้อมกัน</span></li>
-              </ul>
-            </div>
-            <div class="plcard-action">
-              <div class="plcard-price" data-th="ราคาพิเศษ" data-en="Special Price">ราคาพิเศษ</div>
-              <div class="plcard-price-sub" data-th="ติดต่อสอบถาม" data-en="Contact for price">ติดต่อสอบถาม</div>
-              <a href="contact.html" class="plcard-btn-quote" data-th="ขอใบเสนอราคา" data-en="Request Quote">ขอใบเสนอราคา</a>
-            </div>
-          </div>
-
-          <!-- 8. Microsoft 365 -->
-          <div class="plcard" data-cat="cloud">
-            <div class="plcard-img" style="background:linear-gradient(135deg,#e3f2fd,#bbdefb);">
-              <img src="images/product-partner/microsoft-logo-hd-26-300x85.png" alt="Microsoft" style="height:70px;object-fit:contain;" />
-            </div>
-            <div class="plcard-body">
-              <div class="plcard-badges">
-                <span class="badge-cat" data-th="คลาวด์" data-en="Cloud">Cloud</span>
-                <span class="badge-brand">Microsoft</span>
-              </div>
-              <h3 class="plcard-title">Microsoft 365 Business</h3>
-              <p class="plcard-desc" data-th="ชุดซอฟต์แวร์ Office ครบครันบนคลาวด์ รวม Email, Teams, SharePoint และ OneDrive พร้อมระบบรักษาความปลอดภัยระดับ Enterprise" data-en="Complete cloud-based Office suite including Email, Teams, SharePoint, and OneDrive with enterprise-grade security.">ชุดซอฟต์แวร์ Office ครบครันบนคลาวด์ รวม Email, Teams, SharePoint และ OneDrive พร้อมระบบรักษาความปลอดภัยระดับ Enterprise</p>
-              <ul class="plcard-specs">
-                <li><i class="fas fa-check-circle"></i> <span>Microsoft 365 Apps (Word, Excel, PPT)</span></li>
-                <li><i class="fas fa-check-circle"></i> <span>Exchange Online + Teams</span></li>
-                <li><i class="fas fa-check-circle"></i> <span>1TB OneDrive per user</span></li>
-                <li><i class="fas fa-check-circle"></i> <span>Advanced Security &amp; Compliance</span></li>
-              </ul>
-            </div>
-            <div class="plcard-action">
-              <div class="plcard-price" data-th="ราคาพิเศษ" data-en="Special Price">ราคาพิเศษ</div>
-              <div class="plcard-price-sub" data-th="ติดต่อสอบถาม" data-en="Contact for price">ติดต่อสอบถาม</div>
-              <a href="contact.html" class="plcard-btn-quote" data-th="ขอใบเสนอราคา" data-en="Request Quote">ขอใบเสนอราคา</a>
-            </div>
-          </div>
-
-          <!-- 9. HPE Aruba Networking -->
-          <div class="plcard" data-cat="network">
-            <div class="plcard-img" style="background:linear-gradient(135deg,#f3e5f5,#e1bee7);">
-              <img src="images/product-partner/aruba-logo.png" alt="Aruba" style="height:70px;object-fit:contain;" />
-            </div>
-            <div class="plcard-body">
-              <div class="plcard-badges">
-                <span class="badge-cat" data-th="เครือข่าย" data-en="Network">Network</span>
-                <span class="badge-brand">Aruba</span>
-              </div>
-              <h3 class="plcard-title">Aruba CX Switches</h3>
-              <p class="plcard-desc" data-th="สวิตช์รุ่นใหม่จาก Aruba รองรับ AOS-CX Operating System อัจฉริยะ พร้อม REST API และ NAE สำหรับ Network Analytics" data-en="Next-gen Aruba switches with AOS-CX OS, REST API support, and NAE for network analytics.">สวิตช์รุ่นใหม่จาก Aruba รองรับ AOS-CX Operating System อัจฉริยะ พร้อม REST API และ NAE สำหรับ Network Analytics</p>
-              <ul class="plcard-specs">
-                <li><i class="fas fa-check-circle"></i> <span>AOS-CX Smart OS</span></li>
-                <li><i class="fas fa-check-circle"></i> <span>VSX Active-Active Redundancy</span></li>
-                <li><i class="fas fa-check-circle"></i> <span>Network Analytics Engine (NAE)</span></li>
-                <li><i class="fas fa-check-circle"></i> <span>Aruba Central Integration</span></li>
-              </ul>
-            </div>
-            <div class="plcard-action">
-              <div class="plcard-price" data-th="ราคาพิเศษ" data-en="Special Price">ราคาพิเศษ</div>
-              <div class="plcard-price-sub" data-th="ติดต่อสอบถาม" data-en="Contact for price">ติดต่อสอบถาม</div>
-              <a href="contact.html" class="plcard-btn-quote" data-th="ขอใบเสนอราคา" data-en="Request Quote">ขอใบเสนอราคา</a>
-            </div>
-          </div>
-
-        </div><!-- /product-list -->
-      </main>
-    </div><!-- /shop-layout -->
-  </div><!-- /container -->
-</div><!-- /shop-wrapper -->
 
 <!-- FOOTER -->
 <footer class="footer">
@@ -400,90 +626,525 @@
       <div class="footer-brand">
         <div class="logo-wrap">
           <img src="bgs-logo1.png" alt="BE GROVE SOLUTIONS CO., LTD" class="footer-logo-img" />
-        </div>
-        <p data-th="ผู้ให้บริการด้าน IT System Integration ครบวงจร ด้วยประสบการณ์กว่า 10 ปี เราพร้อมดูแลโครงสร้างพื้นฐาน IT ขององค์กรคุณ" data-en="A complete IT System Integration service provider. With over 10 years of experience, we are ready to support your organization's IT infrastructure.">ผู้ให้บริการด้าน IT System Integration ครบวงจร ด้วยประสบการณ์กว่า 10 ปี เราพร้อมดูแลโครงสร้างพื้นฐาน IT ขององค์กรคุณ</p>
+        </div></div>
+        <p>ผู้ให้บริการด้าน IT System Integration ครบวงจร</p>
         <div class="footer-social">
-          <a href="#"><i class="fab fa-facebook-f"></i></a>
-          <a href="#"><i class="fab fa-linkedin-in"></i></a>
-          <a href="#"><i class="fab fa-line"></i></a>
-          <a href="#"><i class="fab fa-youtube"></i></a>
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+          <a href="#" aria-label="LINE"><i class="fab fa-line" aria-hidden="true"></i></a>
         </div>
       </div>
       <div class="footer-links">
         <div class="footer-col">
-          <h4 data-th="บริการ" data-en="Services">บริการ</h4>
+          <h4>บริการ</h4>
           <ul>
-            <li><a href="services.html" data-th="Network Infrastructure" data-en="Network Infrastructure">Network Infrastructure</a></li>
-            <li><a href="services.html" data-th="Cybersecurity" data-en="Cybersecurity">Cybersecurity</a></li>
-            <li><a href="services.html" data-th="Cloud Solutions" data-en="Cloud Solutions">Cloud Solutions</a></li>
-            <li><a href="services.html" data-th="Server &amp; Storage" data-en="Server &amp; Storage">Server &amp; Storage</a></li>
-            <li><a href="services.html" data-th="Managed Services" data-en="Managed Services">Managed Services</a></li>
+            <li><a href="services.html">Network Infrastructure</a></li>
+            <li><a href="services.html">Cybersecurity</a></li>
+            <li><a href="services.html">Cloud Solutions</a></li>
+            <li><a href="services.html">Managed Services</a></li>
           </ul>
         </div>
         <div class="footer-col">
-          <h4 data-th="เกี่ยวกับเรา" data-en="Company">เกี่ยวกับเรา</h4>
+          <h4>เกี่ยวกับเรา</h4>
           <ul>
-            <li><a href="about.html" data-th="ประวัติบริษัท" data-en="Our Story">ประวัติบริษัท</a></li>
-            <li><a href="products.html" data-th="ผลิตภัณฑ์" data-en="Products">ผลิตภัณฑ์</a></li>
-            <li><a href="contact.html" data-th="ติดต่อเรา" data-en="Contact">ติดต่อเรา</a></li>
+            <li><a href="about.html">ประวัติบริษัท</a></li>
+            <li><a href="reference.html">Site Reference</a></li>
+            <li><a href="contact.html">ติดต่อเรา</a></li>
           </ul>
         </div>
         <div class="footer-col">
-          <h4 data-th="ติดต่อ" data-en="Contact">ติดต่อ</h4>
+          <h4>ติดต่อ</h4>
           <ul>
-            <li class="contact-li"><i class="fas fa-map-marker-alt"></i><span data-th="111/38 หมู่ 4 ต.บึงยี่โถ อ.ธัญบุรี จ.ปทุมธานี 12130" data-en="111/38 Moo 4, Buengyitho, Thanyaburi, Pathumtani 12130">111/38 หมู่ 4 ต.บึงยี่โถ อ.ธัญบุรี จ.ปทุมธานี 12130</span></li>
-            <li class="contact-li"><i class="fas fa-phone"></i><span>+66 9 1495 9997</span></li>
-            <li class="contact-li"><i class="fab fa-line"></i><span>@begrove</span></li>
-            <li class="contact-li"><i class="fas fa-envelope"></i><span>info@begrovesolutions.com</span></li>
-            <li class="contact-li"><i class="fas fa-clock"></i><span data-th="จ.-ศ. 08:30–17:30 น." data-en="Mon–Fri 08:30–17:30">จ.-ศ. 08:30–17:30 น.</span></li>
+            <li class="contact-li"><i class="fas fa-map-marker-alt" aria-hidden="true"></i><span>111/38 หมู่ 4 ต.บึงยี่โถ อ.ธัญบุรี จ.ปทุมธานี 12130</span></li>
+            <li class="contact-li"><i class="fas fa-phone" aria-hidden="true"></i><span>+66 9 1495 9997</span></li>
+            <li class="contact-li"><i class="fab fa-line" aria-hidden="true"></i><span>@begrove</span></li>
+            <li class="contact-li"><i class="fas fa-envelope" aria-hidden="true"></i><span>info@begrovesolutions.com</span></li>
           </ul>
         </div>
       </div>
     </div>
     <div class="footer-bottom">
-      <p data-th="© 2024 BE GROVE SOLUTIONS CO., LTD. สงวนลิขสิทธิ์" data-en="© 2024 BE GROVE SOLUTIONS CO., LTD. All Rights Reserved.">© 2024 BE GROVE SOLUTIONS CO., LTD. สงวนลิขสิทธิ์</p>
-      <div class="footer-bottom-links">
-        <a href="#" data-th="นโยบายความเป็นส่วนตัว" data-en="Privacy Policy">นโยบายความเป็นส่วนตัว</a>
-        <a href="#" data-th="เงื่อนไขการใช้บริการ" data-en="Terms of Service">เงื่อนไขการใช้บริการ</a>
-      </div>
+      <p>© 2024 BE GROVE SOLUTIONS CO., LTD. สงวนลิขสิทธิ์</p>
     </div>
   </div>
 </footer>
 
-<script src="js/main.js"></script>
-<script>
-// Category filter for shop page
-document.querySelectorAll('[data-cat-filter]').forEach(link => {
-  link.addEventListener('click', function(e) {
-    e.preventDefault();
-    const filter = this.dataset.catFilter;
-
-    // Update active states on subnav
-    document.querySelectorAll('.cat-subnav-link').forEach(l => l.classList.remove('active'));
-    document.querySelectorAll(\`[data-cat-filter="\${filter}"]\`).forEach(l => {
-      if (l.classList.contains('cat-subnav-link')) l.classList.add('active');
-    });
-
-    // Filter products
-    const cards = document.querySelectorAll('.plcard');
-    let count = 0;
-    cards.forEach(card => {
-      const show = filter === 'all' || card.dataset.cat === filter;
-      card.style.display = show ? 'flex' : 'none';
-      if (show) count++;
-    });
-    document.getElementById('product-count').textContent = count;
-  });
-});
-</script>
-
-<!-- STICKY LINE TAB -->
 <a href="https://line.me/ti/p/@begrove" target="_blank" class="sticky-line-tab" title="Chat with us on LINE">
   <div class="slt-inner">
-    <i class="fab fa-line slt-icon"></i>
+    <i class="fab fa-line slt-icon" aria-hidden="true"></i>
     <span class="slt-label">Line: @begrove</span>
   </div>
 </a>
 
+<script src="js/main.js"></script>
+<script>
+/* ============================================================
+   DATA
+   ============================================================ */
+const BRANDS = {
+  cisco:    { name:'Cisco', logo:'images/product-partner/ciscopng-300x158.png', desc:'Cisco Systems ผู้นำระดับโลกด้าน Networking และ Security ให้บริการโซลูชันครอบคลุมทั้ง Switch, Router, Wireless, Firewall และ Cloud ที่องค์กรชั้นนำทั่วโลกไว้วางใจ' },
+  ruijie:   { name:'Ruijie Networks', logo:'images/product-partner/ruijie-logo.png', desc:'Ruijie Networks ผู้ผลิตอุปกรณ์ Network ชั้นนำ มีสินค้าครอบคลุมทั้ง Switch, Access Point, Gateway และ Next-Gen Firewall พร้อมระบบบริหารจัดการผ่าน Cloud แบบ Centralized' },
+  reyee:    { name:'Reyee Network', logo:'images/product-partner/reyee-logo.png', desc:'Reyee เป็นแบรนด์ Cloud Networking จาก Ruijie เน้นความง่ายในการติดตั้งและบริหารจัดการ เหมาะสำหรับ SME ที่ต้องการระบบ Wi-Fi คุณภาพสูงในราคาที่คุ้มค่า' },
+  fortinet: { name:'Fortinet', logo:'images/product-partner/Fortinet-removebg-preview-300x133.png', desc:'Fortinet ผู้นำด้าน Cybersecurity ระดับโลก มีผลิตภัณฑ์ FortiGate Firewall ที่ได้รับการยอมรับสูงสุดในอุตสาหกรรม พร้อมโซลูชัน Security ครบวงจรสำหรับทุกขนาดองค์กร' },
+  hpe:      { name:'HPE / Aruba', logo:'images/product-partner/hpe-removebg-preview-300x300.png', desc:'HPE ผู้นำด้าน Server, Storage และ Networking Infrastructure ระดับ Enterprise พร้อม Aruba Networks ผู้นำ Wireless และ Network Access Control' },
+  aruba:    { name:'Aruba Networks', logo:'images/product-partner/aruba-logo.png', desc:'Aruba Networks (HPE) ผู้นำด้าน Wireless Networking มีโซลูชัน Wi-Fi 6/6E พร้อมระบบ Security แบบ Zero Trust และ Cloud Management' },
+  microsoft:{ name:'Microsoft', logo:'images/product-partner/microsoft-logo-hd-26-300x85.png', desc:'Microsoft ผู้ให้บริการ Cloud Computing และ Business Solutions ชั้นนำของโลก ครอบคลุม Microsoft 365, Azure Cloud, Teams และ Dynamics 365' },
+};
+
+const SIDEBAR_CATS = [
+  { key:'netacc', label:'อุปกรณ์ Network Accessories', subs:[
+    {label:'ตัวรับสัญญาณ WiFi USB Adapter', cat:'network', brand:'all'},
+    {label:'Print Server พิมพ์ผ่านระบบ Network', cat:'network', brand:'all'},
+    {label:'POE Injector', cat:'network', brand:'all'},
+    {label:'ปลั๊กป้องกันไฟกระชาก', cat:'network', brand:'all'},
+    {label:'ป้องกันฟ้าผ่า Surge/Lightning Protector', cat:'network', brand:'all'},
+    {label:'Ethernet Adapter/การ์ด Lan', cat:'network', brand:'all'},
+    {label:'Adapter Power Supply', cat:'network', brand:'all'},
+    {label:'PowerLine Adapter', cat:'network', brand:'all'},
+    {label:'VDSL Converter', cat:'network', brand:'all'},
+    {label:'KVM Switch', cat:'network', brand:'all'},
+    {label:'Smart Home Security', cat:'network', brand:'all'},
+  ]},
+  { key:'ap', label:'Access Point (แอคเซสพอยต์)', subs:[
+    {label:'งานติดตั้งระบบ Wifi Hotspot', cat:'wireless', brand:'all'},
+    {label:'แบบภายในอาคาร', cat:'wireless', brand:'all'},
+    {label:'แบบภายนอกอาคาร', cat:'wireless', brand:'all'},
+    {label:'MESH WIFI / Repeater เพิ่มระยะสัญญาณ', cat:'wireless', brand:'all'},
+  ]},
+  { key:'sw', label:'Switch เชื่อมเครือข่ายแบบสาย', subs:[
+    {label:'Unmanaged Switches', cat:'network', brand:'all'},
+    {label:'Managed Switches L2', cat:'network', brand:'all'},
+    {label:'Managed Switches L3', cat:'network', brand:'all'},
+    {label:'POE Switch', cat:'network', brand:'all'},
+    {label:'Industrial Switches', cat:'network', brand:'all'},
+    {label:'PON Switch', cat:'network', brand:'all'},
+  ]},
+  { key:'fw', label:'Router/ Firewall/ VPN/ Loadbalance', subs:[
+    {label:'VPN Router', cat:'security', brand:'all'},
+    {label:'Load Balance / SD-WAN', cat:'security', brand:'all'},
+    {label:'Wireless Router', cat:'security', brand:'all'},
+    {label:'3G/4G Wireless Router', cat:'security', brand:'all'},
+    {label:'5G Router', cat:'security', brand:'all'},
+  ]},
+  { key:'hotspot', label:'ระบบ WIFI Hotspot /เก็บ Log Internet', direct:{cat:'wireless', brand:'all'} },
+  { key:'cctv', label:'ระบบ CCTV/ IP Camera / NVR', subs:[
+    {label:'IP-Camera', cat:'cctv', brand:'all'},
+    {label:'Network Video Recorder', cat:'cctv', brand:'all'},
+    {label:'VIGI Network Camera', cat:'cctv', brand:'all'},
+    {label:'UNV Uniview', cat:'cctv', brand:'all'},
+    {label:'Uniarch', cat:'cctv', brand:'all'},
+    {label:'Hikvision', cat:'cctv', brand:'all'},
+    {label:'ACTi', cat:'cctv', brand:'all'},
+  ]},
+  { key:'voip', label:'VOIP / IP-PBX ระบบโทรศัพท์แบบ IP', subs:[
+    {label:'IP-Phone เครื่องโทรศัพท์แบบ IP', cat:'voip', brand:'all'},
+    {label:'IP-PBX ตู้โทรศัพท์แบบ IP', cat:'voip', brand:'all'},
+    {label:'FXS-FXO VOIP Gateway', cat:'voip', brand:'all'},
+    {label:'SIP Speaker', cat:'voip', brand:'all'},
+    {label:'อุปกรณ์เสริม', cat:'voip', brand:'all'},
+  ]},
+  { key:'rack', label:'ตู้ Rack / อุปกรณ์เสริมตู้ Rack', subs:[
+    {label:'Cabinet Rack', cat:'rack', brand:'all'},
+    {label:'Wall Rack', cat:'rack', brand:'all'},
+    {label:'Server Rack', cat:'rack', brand:'all'},
+    {label:'Open Rack', cat:'rack', brand:'all'},
+    {label:'Outdoor Cabinet', cat:'rack', brand:'all'},
+    {label:'Cable Management แผงจัดสาย', cat:'rack', brand:'all'},
+    {label:'อุปกรณ์ประกอบตู้ Rack', cat:'rack', brand:'all'},
+    {label:'Heavy Duty Fan พัดลม', cat:'rack', brand:'all'},
+    {label:'Component Shelf ถาด', cat:'rack', brand:'all'},
+    {label:'AC Power Distribution รางไฟ', cat:'rack', brand:'all'},
+  ]},
+  { key:'cable', label:'สาย Lan/ Tools/ Connector', subs:[
+    {label:'สาย LAN แบบ Cat 5E', cat:'cable', brand:'all'},
+    {label:'สาย LAN แบบ Cat 6', cat:'cable', brand:'all'},
+    {label:'สาย LAN แบบ Cat 6A', cat:'cable', brand:'all'},
+    {label:'สาย LAN UTP/FTP สำเร็จรูป Patch Cord', cat:'cable', brand:'all'},
+    {label:'Connector หัวต่อ LAN RJ45', cat:'cable', brand:'all'},
+    {label:'UTP Cabling Tools & Testers', cat:'cable', brand:'all'},
+  ]},
+  { key:'fiber', label:'สาย Fiber Optic/ Media Converter', subs:[
+    {label:'สาย Fiber Optic Cable', cat:'fiber', brand:'all'},
+    {label:'หัวต่อ Fiber Optic Connector', cat:'fiber', brand:'all'},
+    {label:'SFP Module', cat:'fiber', brand:'all'},
+    {label:'Media Converter', cat:'fiber', brand:'all'},
+    {label:'Fiber Optic Tools & Testers', cat:'fiber', brand:'all'},
+  ]},
+  { key:'nas', label:'อุปกรณ์จัดเก็บข้อมูล (NAS)', direct:{cat:'server', brand:'all'} },
+  { key:'cybrey', label:'Cybrey (ไซเบอร์รี่)', subs:[
+    {label:'Cybrey Cloud-Managed Firewalls', cat:'security', brand:'cybrey'},
+    {label:'Cybrey Cloud-Managed Routers', cat:'security', brand:'cybrey'},
+    {label:'Cybrey Cloud-Managed Switches', cat:'network', brand:'cybrey'},
+    {label:'Cybrey Cloud-Managed Wireless', cat:'wireless', brand:'cybrey'},
+  ]},
+  { key:'ups', label:'UPS เครื่องสำรองไฟ', subs:[
+    {label:'UPS APC', cat:'ups', brand:'all'},
+    {label:'Syndome', cat:'ups', brand:'all'},
+    {label:'ZIRCON UPS', cat:'ups', brand:'all'},
+  ]},
+  { divider: true },
+  { key:'ruijie-b', label:'Ruijie Networks (รุ้เจี่ย เน็ตเวิร์ค)', subs:[
+    {label:'Ruijie Accessories', cat:'all', brand:'ruijie'},
+    {label:'Ruijie Access Point', cat:'wireless', brand:'ruijie'},
+    {label:'Ruijie Gateway', cat:'network', brand:'ruijie'},
+    {label:'Ruijie Switches', cat:'network', brand:'ruijie'},
+    {label:'Ruijie Next-Gen Firewall', cat:'security', brand:'ruijie'},
+    {label:'Ruijie Wireless Controller', cat:'wireless', brand:'ruijie'},
+  ]},
+  { key:'reyee-b', label:'Reyee Network (รีอี เน็ตเวิร์ค)', subs:[
+    {label:'Reyee Access Point', cat:'wireless', brand:'reyee'},
+    {label:'Reyee Gateway Router', cat:'network', brand:'reyee'},
+    {label:'Reyee Network Switch', cat:'network', brand:'reyee'},
+    {label:'Reyee MESH WIFI', cat:'wireless', brand:'reyee'},
+    {label:'Reyee Home WIFI', cat:'wireless', brand:'reyee'},
+    {label:'Network Access Control (NAC)', cat:'security', brand:'reyee'},
+    {label:'Reyee Wireless Bridge', cat:'wireless', brand:'reyee'},
+    {label:'Reyee e-Lighten Optical', cat:'fiber', brand:'reyee'},
+  ]},
+  { key:'tplink-b', label:'TP-Link (ทีพี-ลิ้งค์)', subs:[
+    {label:'สินค้างาน Project', cat:'all', brand:'tplink'},
+    {label:'MERCUSYS by TP-Link', cat:'all', brand:'tplink'},
+    {label:'Omada Cloud Solution', cat:'all', brand:'tplink'},
+    {label:'TP-Link Wireless Router', cat:'network', brand:'tplink'},
+    {label:'TP-Link SOHO Switches', cat:'network', brand:'tplink'},
+    {label:'Whole Home Mesh Wi-Fi', cat:'wireless', brand:'tplink'},
+    {label:'SFP Module, Media-Converter', cat:'fiber', brand:'tplink'},
+    {label:'Tapo Smart Home', cat:'all', brand:'tplink'},
+    {label:'Wireless USB Adapter', cat:'network', brand:'tplink'},
+    {label:'TP-Link GPON', cat:'fiber', brand:'tplink'},
+  ]},
+  { key:'ubiquiti-b', label:'Ubiquiti (ยูบิคิวตี้)', subs:[
+    {label:'Ubiquiti Accessories', cat:'all', brand:'ubiquiti'},
+    {label:'Unifi Enterprise WiFi', cat:'wireless', brand:'ubiquiti'},
+    {label:'Ubiquiti Unifi Switch', cat:'network', brand:'ubiquiti'},
+    {label:'Ubiquiti UniFi Security Gateway', cat:'security', brand:'ubiquiti'},
+    {label:'Ubiquiti Unifi Controller', cat:'all', brand:'ubiquiti'},
+    {label:'Ubiquiti Unifi Video Camera', cat:'cctv', brand:'ubiquiti'},
+  ]},
+  { key:'engenius-b', label:'Engenius (เอ็นจีเนียส)', subs:[
+    {label:'EnGenius Cloud', cat:'all', brand:'engenius'},
+    {label:'EnGenius Fit', cat:'all', brand:'engenius'},
+    {label:'Wireless Access Point', cat:'wireless', brand:'engenius'},
+    {label:'Managed Switch POE', cat:'network', brand:'engenius'},
+    {label:'อุปกรณ์เสริม', cat:'all', brand:'engenius'},
+  ]},
+  { key:'mikrotik-b', label:'Mikrotik (ไมโครติก)', subs:[
+    {label:'Mikrotik Router', cat:'security', brand:'mikrotik'},
+    {label:'Mikrotik Access Point', cat:'wireless', brand:'mikrotik'},
+    {label:'Mikrotik Switch', cat:'network', brand:'mikrotik'},
+    {label:'Accessories/ สาย DAC/ Power Adapter', cat:'all', brand:'mikrotik'},
+  ]},
+  { key:'draytek-b', label:'DrayTek (เดรเทค)', subs:[
+    {label:'DrayTek Firewall Router', cat:'security', brand:'draytek'},
+    {label:'Draytek Network Switches', cat:'network', brand:'draytek'},
+    {label:'DrayTek Wireless AP', cat:'wireless', brand:'draytek'},
+    {label:'Draytek Web Content Filtering', cat:'security', brand:'draytek'},
+  ]},
+  { key:'huawei-b', label:'Huawei eKit', subs:[
+    {label:'Access Point', cat:'wireless', brand:'huawei'},
+    {label:'Network Switch', cat:'network', brand:'huawei'},
+    {label:'Router', cat:'network', brand:'huawei'},
+  ]},
+  { key:'ipcom-b', label:'IP-COM (ไอพีคอม)', subs:[
+    {label:'Wireless LAN', cat:'wireless', brand:'ipcom'},
+    {label:'Switches', cat:'network', brand:'ipcom'},
+    {label:'Gateway Router', cat:'network', brand:'ipcom'},
+    {label:'Access Controller', cat:'network', brand:'ipcom'},
+  ]},
+  { key:'bdcom-b', label:'BDCOM (บีดีคอม)', subs:[
+    {label:'Network Switch', cat:'network', brand:'bdcom'},
+    {label:'GPON OLT', cat:'fiber', brand:'bdcom'},
+    {label:'xPON ONU', cat:'fiber', brand:'bdcom'},
+    {label:'EPON OLT', cat:'fiber', brand:'bdcom'},
+    {label:'Optical Module', cat:'fiber', brand:'bdcom'},
+  ]},
+  { key:'hpe-b', label:'HPE / Aruba', subs:[
+    {label:'HPE ProLiant Server', cat:'server', brand:'hpe'},
+    {label:'HPE Storage', cat:'server', brand:'hpe'},
+    {groupLabel:'Aruba (อรูบ้า)'},
+    {label:'Aruba Instant On AP', cat:'wireless', brand:'hpe'},
+    {label:'Aruba Instant Wi-Fi AP', cat:'wireless', brand:'hpe'},
+    {label:'Aruba Accessories', cat:'all', brand:'hpe'},
+  ]},
+  { key:'cisco-b', label:'Cisco (ซิสโก้)', subs:[
+    {label:'Cisco CBS Switch Series', cat:'network', brand:'cisco'},
+    {label:'Cisco CBW Access Point Series', cat:'wireless', brand:'cisco'},
+    {label:'Cisco SMB Switch', cat:'network', brand:'cisco'},
+    {label:'Cisco SMB VPN Router', cat:'security', brand:'cisco'},
+    {label:'Cisco SMB Accesspoint', cat:'wireless', brand:'cisco'},
+    {label:'Cisco Enterprise Accesspoint', cat:'wireless', brand:'cisco'},
+    {label:'Cisco Catalyst Series Switches', cat:'network', brand:'cisco'},
+  ]},
+  { key:'zyxel-b', label:'Zyxel (ไซเซล)', subs:[
+    {label:'Switches', cat:'network', brand:'zyxel'},
+    {label:'Access Point & Controller', cat:'wireless', brand:'zyxel'},
+    {label:'Security Firewalls', cat:'security', brand:'zyxel'},
+  ]},
+];
+
+const PRODUCTS = [
+  { id:1, name:'Cisco Catalyst 9200 Switch', brand:'cisco', cat:'network', desc:'Enterprise L3 Switch 24/48-port PoE+ พร้อม Cisco DNA Center', tags:['Switch','PoE+','L3'] },
+  { id:2, name:'Cisco Catalyst 9120 Access Point', brand:'cisco', cat:'wireless', desc:'Wi-Fi 6 Access Point สำหรับองค์กร รองรับ 802.11ax Multi-Gigabit', tags:['Wi-Fi 6','Indoor'] },
+  { id:3, name:'Cisco Firepower 1010 NGFW', brand:'cisco', cat:'security', desc:'Next-Generation Firewall สำหรับ Branch Office', tags:['NGFW','Security'] },
+  { id:4, name:'Ruijie RG-S5760C Switch', brand:'ruijie', cat:'network', desc:'Core Switch 10G พร้อม PoE รองรับ SD-WAN ผ่าน Ruijie Cloud', tags:['Core Switch','10G'] },
+  { id:5, name:'Ruijie RG-AP820 Access Point', brand:'ruijie', cat:'wireless', desc:'Wi-Fi 6 Access Point Indoor ความเร็วสูงสุด 3Gbps', tags:['Wi-Fi 6','3Gbps'] },
+  { id:6, name:'Ruijie RG-WALL 1600-E Firewall', brand:'ruijie', cat:'security', desc:'Next-Gen Firewall พร้อม IPS, URL Filter และ Application Control', tags:['Firewall','NGFW'] },
+  { id:7, name:'Reyee RG-EW3200GX PRO Router', brand:'reyee', cat:'network', desc:'Mesh Router Wi-Fi 6 สำหรับสำนักงานขนาดกลาง ติดตั้งง่าย', tags:['Mesh','Wi-Fi 6'] },
+  { id:8, name:'Reyee RG-RAP2260(G) Access Point', brand:'reyee', cat:'wireless', desc:'Ceiling AP Wi-Fi 6 Dual Band 1775Mbps ราคาประหยัด', tags:['Ceiling AP','Wi-Fi 6'] },
+  { id:9, name:'FortiGate 60F Firewall', brand:'fortinet', cat:'security', desc:'NGFW สำหรับ SME ประสิทธิภาพสูง 10Gbps Firewall Throughput', tags:['Firewall','SME'] },
+  { id:10, name:'FortiGate 100F Firewall', brand:'fortinet', cat:'security', desc:'NGFW สำหรับองค์กรขนาดกลาง พร้อม SSL Inspection และ SD-WAN', tags:['Firewall','Enterprise'] },
+  { id:11, name:'HPE ProLiant DL380 Gen10 Plus', brand:'hpe', cat:'server', desc:'2U Rack Server Intel Xeon Scalable สำหรับ Virtualization', tags:['Server','2U','Xeon'] },
+  { id:12, name:'HPE MSA 2060 Storage', brand:'hpe', cat:'server', desc:'Hybrid SAN Storage รองรับ SAS/SSD สำหรับ SME ถึง Enterprise', tags:['Storage','SAN'] },
+  { id:13, name:'Aruba AP-515 Access Point', brand:'hpe', cat:'wireless', desc:'Wi-Fi 6 Indoor AP High-Density สำหรับ Enterprise', tags:['Wi-Fi 6','High-Density'] },
+  { id:14, name:'Aruba 2930F Switch', brand:'hpe', cat:'network', desc:'Smart-managed L3 Switch 24-port PoE+ สำหรับ Enterprise', tags:['Switch','PoE+'] },
+  { id:15, name:'Microsoft 365 Business Premium', brand:'microsoft', cat:'cloud', desc:'Cloud Productivity Suite Teams, Exchange, SharePoint + Security', tags:['Cloud','M365'] },
+  { id:16, name:'Microsoft Azure Cloud', brand:'microsoft', cat:'cloud', desc:'Enterprise Cloud Platform สำหรับ Hosting, AI, Database และ DevOps', tags:['Cloud','Azure'] },
+];
+
+/* ============================================================
+   BUILD SIDEBAR
+   ============================================================ */
+function buildSidebar() {
+  const container = document.getElementById('sb-categories');
+  let html = '';
+
+  SIDEBAR_CATS.forEach(item => {
+    if (item.divider) {
+      html += '<div class="sb-divider"></div>';
+      return;
+    }
+    if (item.direct) {
+      html += `<div class="sb-cat-item">
+        <button class="sb-cat-direct" data-cat="${item.direct.cat}" data-brand="${item.direct.brand}">${item.label}</button>
+      </div>`;
+      return;
+    }
+    const subId = 'sub-' + item.key;
+    html += `<div class="sb-cat-item">
+      <button class="sb-cat-btn" aria-expanded="false" aria-controls="${subId}">
+        ${item.label}
+        <i class="fas fa-plus sb-cat-arrow" aria-hidden="true"></i>
+      </button>
+      <ul class="sb-sub-list" id="${subId}" aria-hidden="true">
+        ${item.subs.map(s => {
+          if (s.groupLabel) return `<li><span class="sb-sub-group-label">${s.groupLabel}</span></li>`;
+          return `<li><a href="#" data-cat="${s.cat}" data-brand="${s.brand}">${s.label}</a></li>`;
+        }).join('')}
+      </ul>
+    </div>`;
+  });
+
+  container.innerHTML = html;
+  bindSidebarEvents();
+}
+
+/* ============================================================
+   STATE
+   ============================================================ */
+let state = { brand:'all', cat:'all', sort:'default' };
+
+/* ============================================================
+   RENDER
+   ============================================================ */
+function render() {
+  const filtered = PRODUCTS.filter(p => {
+    const bOk = state.brand === 'all' || p.brand === state.brand;
+    const cOk = state.cat   === 'all' || p.cat   === state.cat;
+    return bOk && cOk;
+  });
+
+  const sorted = [...filtered];
+  if (state.sort === 'name-asc')  sorted.sort((a,b) => a.name.localeCompare(b.name));
+  if (state.sort === 'name-desc') sorted.sort((a,b) => b.name.localeCompare(a.name));
+  if (state.sort === 'brand')     sorted.sort((a,b) => a.brand.localeCompare(b.brand));
+
+  /* Count */
+  document.getElementById('prodCountNum').textContent = sorted.length;
+
+  /* Product grid */
+  const grid = document.getElementById('prodGrid');
+  if (!sorted.length) {
+    grid.innerHTML = `
+      <div class="prod-empty" role="status">
+        <i class="fas fa-box-open" aria-hidden="true"></i>
+        <strong>ไม่พบสินค้าในหมวดนี้</strong>
+        <span>ลองเปลี่ยนแบรนด์หรือประเภทสินค้า</span>
+      </div>`;
+  } else {
+    grid.innerHTML = sorted.map(p => `
+      <article class="prod-card" role="listitem">
+        <div class="prod-card-img-wrap">
+          <img class="prod-card-img"
+               src="${BRANDS[p.brand]?.logo || ''}"
+               alt="${BRANDS[p.brand]?.name || p.brand} logo"
+               loading="lazy" />
+        </div>
+        <div class="prod-card-body">
+          <p class="prod-card-brand">${BRANDS[p.brand]?.name || p.brand}</p>
+          <h3 class="prod-card-name">${p.name}</h3>
+          <p class="prod-card-desc">${p.desc}</p>
+          <div class="prod-card-footer">
+            <span class="prod-card-tag">${p.tags[0]}</span>
+            <a href="contact.html" class="prod-card-btn">สอบถาม</a>
+          </div>
+        </div>
+      </article>`).join('');
+  }
+
+  /* Brand banner */
+  const banner = document.getElementById('brandBanner');
+  if (state.brand !== 'all' && BRANDS[state.brand]) {
+    const b = BRANDS[state.brand];
+    document.getElementById('bannerLogo').src = b.logo;
+    document.getElementById('bannerLogo').alt = b.name + ' logo';
+    document.getElementById('bannerName').textContent = b.name;
+    document.getElementById('bannerDesc').textContent = b.desc;
+    banner.removeAttribute('aria-hidden');
+    banner.setAttribute('aria-hidden','false');
+  } else {
+    banner.setAttribute('aria-hidden','true');
+  }
+
+  /* Subcategory cards */
+  const subcatSection = document.getElementById('subcatSection');
+  const subcatGrid = document.getElementById('subcatGrid');
+  const cat = SIDEBAR_CATS.find(c => !c.divider && !c.direct && c.key === (state.brand + '-b'));
+  const subs = cat ? cat.subs.filter(s => s.label && (state.cat === 'all' || s.cat === state.cat)) : [];
+  if (subs.length) {
+    subcatGrid.innerHTML = subs.map(s => `
+      <button class="subcat-card" data-cat="${s.cat}" data-brand="${s.brand}">
+        <img src="${BRANDS[s.brand]?.logo || ''}" alt="${s.label}" loading="lazy" onerror="this.style.display='none'" />
+        <span>${s.label}</span>
+      </button>`).join('');
+    subcatSection.removeAttribute('hidden');
+    subcatSection.querySelectorAll('.subcat-card').forEach(btn => {
+      btn.addEventListener('click', () => {
+        state.cat = btn.dataset.cat;
+        state.brand = btn.dataset.brand;
+        render();
+      });
+    });
+  } else {
+    subcatSection.setAttribute('hidden','');
+  }
+
+  /* Breadcrumb */
+  let bcText = 'ผลิตภัณฑ์ทั้งหมด';
+  if (state.brand !== 'all') bcText = BRANDS[state.brand]?.name || state.brand;
+  if (state.cat !== 'all')   bcText += ' › ' + state.cat;
+  document.getElementById('bcCurrent').textContent = bcText;
+
+  /* Sync brand select */
+  document.getElementById('brandSelect').value = state.brand;
+}
+
+/* ============================================================
+   SIDEBAR EVENTS
+   ============================================================ */
+function bindSidebarEvents() {
+  /* Accordion buttons */
+  document.querySelectorAll('.sb-cat-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const isOpen = btn.getAttribute('aria-expanded') === 'true';
+      /* Close all */
+      document.querySelectorAll('.sb-cat-btn').forEach(b => {
+        b.setAttribute('aria-expanded','false');
+        document.getElementById(b.getAttribute('aria-controls'))
+          ?.setAttribute('aria-hidden','true');
+      });
+      /* Toggle current */
+      if (!isOpen) {
+        btn.setAttribute('aria-expanded','true');
+        document.getElementById(btn.getAttribute('aria-controls'))
+          ?.setAttribute('aria-hidden','false');
+      }
+    });
+    /* Keyboard: Space/Enter already handled for buttons */
+  });
+
+  /* Sub-list links */
+  document.querySelectorAll('.sb-sub-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      state.cat   = a.dataset.cat;
+      if (a.dataset.brand !== 'all') {
+        state.brand = a.dataset.brand;
+      }
+      document.querySelectorAll('.sb-sub-list a').forEach(x => x.removeAttribute('aria-current'));
+      a.setAttribute('aria-current','true');
+      closeSidebar();
+      render();
+    });
+  });
+
+  /* Direct category buttons */
+  document.querySelectorAll('.sb-cat-direct').forEach(btn => {
+    btn.addEventListener('click', () => {
+      state.cat   = btn.dataset.cat;
+      state.brand = btn.dataset.brand;
+      closeSidebar();
+      render();
+    });
+  });
+}
+
+/* ============================================================
+   CONTROLS
+   ============================================================ */
+document.getElementById('brandSelect').addEventListener('change', e => {
+  state.brand = e.target.value;
+  state.cat   = 'all';
+  render();
+});
+
+document.getElementById('sortSelect').addEventListener('change', e => {
+  state.sort = e.target.value;
+  render();
+});
+
+/* Mobile sidebar */
+function openSidebar() {
+  const sb = document.getElementById('prodSidebar');
+  const overlay = document.getElementById('sidebarOverlay');
+  const btn = document.getElementById('mobileFilterBtn');
+  sb.setAttribute('aria-hidden','false');
+  overlay.classList.add('show');
+  btn.setAttribute('aria-expanded','true');
+  sb.querySelector('.sidebar-close')?.focus();
+}
+function closeSidebar() {
+  const sb = document.getElementById('prodSidebar');
+  const overlay = document.getElementById('sidebarOverlay');
+  const btn = document.getElementById('mobileFilterBtn');
+  sb.setAttribute('aria-hidden','true');
+  overlay.classList.remove('show');
+  btn.setAttribute('aria-expanded','false');
+}
+
+document.getElementById('mobileFilterBtn').addEventListener('click', openSidebar);
+document.getElementById('sidebarClose').addEventListener('click', closeSidebar);
+document.getElementById('sidebarOverlay').addEventListener('click', closeSidebar);
+
+/* Keyboard: Escape closes sidebar */
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeSidebar();
+});
+
+/* Init */
+buildSidebar();
+render();
+
+/* On desktop, sidebar is always visible */
+function handleResize() {
+  if (window.innerWidth > 900) {
+    document.getElementById('prodSidebar').setAttribute('aria-hidden','false');
+  } else {
+    document.getElementById('prodSidebar').setAttribute('aria-hidden','true');
+    document.getElementById('mobileFilterBtn').setAttribute('aria-expanded','false');
+  }
+}
+window.addEventListener('resize', handleResize);
+handleResize();
+</script>
 </body>
 </html>
