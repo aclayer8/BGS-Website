@@ -445,6 +445,25 @@
       border-radius: 99px;
       font-weight: 600;
     }
+    .prod-card-model {
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+      font-family: monospace;
+      letter-spacing: 0.3px;
+    }
+    .prod-card-pdf {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px; height: 28px;
+      background: #fff0f0;
+      color: #dc2626;
+      border-radius: var(--radius-sm);
+      font-size: 0.85rem;
+      text-decoration: none;
+      transition: background 0.15s;
+    }
+    .prod-card-pdf:hover { background: #fee2e2; }
     .prod-card-btn {
       font-size: var(--text-xs);
       padding: var(--space-1) var(--space-3);
@@ -459,6 +478,53 @@
     }
     .prod-card-btn:hover { background: var(--accent); }
     .prod-card-btn:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+
+    /* Loading skeleton */
+    .prod-skeleton {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: var(--space-4);
+    }
+    .skel-card {
+      background: var(--color-surface-raised);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    .skel-img  { height: 140px; background: #e2e8f0; animation: shimmer 1.4s infinite; }
+    .skel-body { padding: var(--space-4); display: flex; flex-direction: column; gap: var(--space-2); }
+    .skel-line { height: 10px; border-radius: 4px; background: #e2e8f0; animation: shimmer 1.4s infinite; }
+    .skel-line.short { width: 55%; }
+    .skel-line.long  { width: 85%; }
+    @keyframes shimmer {
+      0%,100% { opacity: 1; }
+      50%      { opacity: 0.45; }
+    }
+
+    /* Price */
+    .prod-card-price {
+      font-size: var(--text-sm);
+      font-weight: 700;
+      color: var(--primary);
+      margin-top: var(--space-1);
+    }
+    .price-contact {
+      font-size: var(--text-xs);
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    /* Error state */
+    .prod-error {
+      grid-column: 1 / -1;
+      padding: var(--space-10) var(--space-6);
+      text-align: center;
+      color: var(--color-text-muted);
+    }
+    .prod-error i { font-size: 2rem; opacity: 0.3; margin-bottom: var(--space-3); display: block; }
+    .prod-error strong { display: block; margin-bottom: var(--space-2); color: #dc2626; }
+    .prod-error code { font-size: var(--text-xs); background: #f1f5f9; padding: 2px 6px; border-radius: 4px; }
 
     /* Empty state */
     .prod-empty {
@@ -677,6 +743,7 @@
 </a>
 
 <script src="js/main.js"></script>
+<script src="js/products-data.js"></script>
 <script>
 /* ============================================================
    DATA
@@ -882,24 +949,8 @@ const SIDEBAR_CATS = [
   ]},
 ];
 
-const PRODUCTS = [
-  { id:1, name:'Cisco Catalyst 9200 Switch', brand:'cisco', cat:'network', desc:'Enterprise L3 Switch 24/48-port PoE+ พร้อม Cisco DNA Center', tags:['Switch','PoE+','L3'] },
-  { id:2, name:'Cisco Catalyst 9120 Access Point', brand:'cisco', cat:'wireless', desc:'Wi-Fi 6 Access Point สำหรับองค์กร รองรับ 802.11ax Multi-Gigabit', tags:['Wi-Fi 6','Indoor'] },
-  { id:3, name:'Cisco Firepower 1010 NGFW', brand:'cisco', cat:'security', desc:'Next-Generation Firewall สำหรับ Branch Office', tags:['NGFW','Security'] },
-  { id:4, name:'Ruijie RG-S5760C Switch', brand:'ruijie', cat:'network', desc:'Core Switch 10G พร้อม PoE รองรับ SD-WAN ผ่าน Ruijie Cloud', tags:['Core Switch','10G'] },
-  { id:5, name:'Ruijie RG-AP820 Access Point', brand:'ruijie', cat:'wireless', desc:'Wi-Fi 6 Access Point Indoor ความเร็วสูงสุด 3Gbps', tags:['Wi-Fi 6','3Gbps'] },
-  { id:6, name:'Ruijie RG-WALL 1600-E Firewall', brand:'ruijie', cat:'security', desc:'Next-Gen Firewall พร้อม IPS, URL Filter และ Application Control', tags:['Firewall','NGFW'] },
-  { id:7, name:'Reyee RG-EW3200GX PRO Router', brand:'reyee', cat:'network', desc:'Mesh Router Wi-Fi 6 สำหรับสำนักงานขนาดกลาง ติดตั้งง่าย', tags:['Mesh','Wi-Fi 6'] },
-  { id:8, name:'Reyee RG-RAP2260(G) Access Point', brand:'reyee', cat:'wireless', desc:'Ceiling AP Wi-Fi 6 Dual Band 1775Mbps ราคาประหยัด', tags:['Ceiling AP','Wi-Fi 6'] },
-  { id:9, name:'FortiGate 60F Firewall', brand:'fortinet', cat:'security', desc:'NGFW สำหรับ SME ประสิทธิภาพสูง 10Gbps Firewall Throughput', tags:['Firewall','SME'] },
-  { id:10, name:'FortiGate 100F Firewall', brand:'fortinet', cat:'security', desc:'NGFW สำหรับองค์กรขนาดกลาง พร้อม SSL Inspection และ SD-WAN', tags:['Firewall','Enterprise'] },
-  { id:11, name:'HPE ProLiant DL380 Gen10 Plus', brand:'hpe', cat:'server', desc:'2U Rack Server Intel Xeon Scalable สำหรับ Virtualization', tags:['Server','2U','Xeon'] },
-  { id:12, name:'HPE MSA 2060 Storage', brand:'hpe', cat:'server', desc:'Hybrid SAN Storage รองรับ SAS/SSD สำหรับ SME ถึง Enterprise', tags:['Storage','SAN'] },
-  { id:13, name:'Aruba AP-515 Access Point', brand:'hpe', cat:'wireless', desc:'Wi-Fi 6 Indoor AP High-Density สำหรับ Enterprise', tags:['Wi-Fi 6','High-Density'] },
-  { id:14, name:'Aruba 2930F Switch', brand:'hpe', cat:'network', desc:'Smart-managed L3 Switch 24-port PoE+ สำหรับ Enterprise', tags:['Switch','PoE+'] },
-  { id:15, name:'Microsoft 365 Business Premium', brand:'microsoft', cat:'cloud', desc:'Cloud Productivity Suite Teams, Exchange, SharePoint + Security', tags:['Cloud','M365'] },
-  { id:16, name:'Microsoft Azure Cloud', brand:'microsoft', cat:'cloud', desc:'Enterprise Cloud Platform สำหรับ Hosting, AI, Database และ DevOps', tags:['Cloud','Azure'] },
-];
+// Products are loaded dynamically from Google Sheets via products-data.js
+let PRODUCTS = [];
 
 /* ============================================================
    BUILD SIDEBAR
@@ -971,24 +1022,40 @@ function render() {
         <span>ลองเปลี่ยนแบรนด์หรือประเภทสินค้า</span>
       </div>`;
   } else {
-    grid.innerHTML = sorted.map(p => `
+    grid.innerHTML = sorted.map(p => {
+      const imgSrc = p.images[0] || BRANDS[p.brand]?.logo || '';
+      const priceHtml = (!p.price || p.price === '0')
+        ? '<span class="price-contact"><i class="fas fa-tag" aria-hidden="true"></i> ติดต่อสอบถาม</span>'
+        : '฿' + Number(p.price).toLocaleString();
+      const modelHtml = p.model ? `<p class="prod-card-model">${p.model}</p>` : '';
+      const pdfHtml = p.pdf
+        ? `<a href="${p.pdf}" target="_blank" class="prod-card-pdf" aria-label="ดาวน์โหลด Datasheet ${p.name}"><i class="fas fa-file-pdf" aria-hidden="true"></i></a>`
+        : '';
+      return `
       <article class="prod-card" role="listitem">
         <div class="prod-card-img-wrap">
           <img class="prod-card-img"
-               src="${BRANDS[p.brand]?.logo || ''}"
-               alt="${BRANDS[p.brand]?.name || p.brand} logo"
-               loading="lazy" />
+               src="${imgSrc}"
+               alt="${p.name}"
+               loading="lazy"
+               onerror="this.src='${BRANDS[p.brand]?.logo || ''}'" />
         </div>
         <div class="prod-card-body">
           <p class="prod-card-brand">${BRANDS[p.brand]?.name || p.brand}</p>
+          ${modelHtml}
           <h3 class="prod-card-name">${p.name}</h3>
           <p class="prod-card-desc">${p.desc}</p>
+          <p class="prod-card-price">${priceHtml}</p>
           <div class="prod-card-footer">
-            <span class="prod-card-tag">${p.tags[0]}</span>
-            <a href="contact.html" class="prod-card-btn">สอบถาม</a>
+            ${p.tags[0] ? `<span class="prod-card-tag">${p.tags[0]}</span>` : '<span></span>'}
+            <div style="display:flex;gap:6px;align-items:center;">
+              ${pdfHtml}
+              <a href="contact.html" class="prod-card-btn">สอบถาม</a>
+            </div>
           </div>
         </div>
-      </article>`).join('');
+      </article>`;
+    }).join('');
   }
 
   /* Brand banner */
@@ -1130,9 +1197,53 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Escape') closeSidebar();
 });
 
-/* Init */
+/* ── LOADING / ERROR HELPERS ─────────────────────────── */
+function showLoading() {
+  document.getElementById('prodCountNum').textContent = '…';
+  document.getElementById('prodGrid').innerHTML = `
+    <div class="prod-skeleton" aria-label="กำลังโหลดสินค้า">
+      ${Array.from({length:8}).map(() => `
+        <div class="skel-card" aria-hidden="true">
+          <div class="skel-img"></div>
+          <div class="skel-body">
+            <div class="skel-line short"></div>
+            <div class="skel-line long"></div>
+            <div class="skel-line long"></div>
+            <div class="skel-line short"></div>
+          </div>
+        </div>`).join('')}
+    </div>`;
+}
+
+function showError(err) {
+  document.getElementById('prodCountNum').textContent = '!';
+  document.getElementById('prodGrid').innerHTML = `
+    <div class="prod-error" role="alert">
+      <i class="fas fa-exclamation-circle" aria-hidden="true"></i>
+      <strong>โหลดสินค้าไม่สำเร็จ</strong>
+      <p>กรุณาตรวจสอบ SHEET_ID ใน js/products-data.js และ Publish Sheet</p>
+      <code>${err.message}</code>
+      <button onclick="initProducts()" style="margin-top:12px;padding:6px 16px;background:var(--primary);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:13px;">
+        ลองอีกครั้ง
+      </button>
+    </div>`;
+}
+
+/* ── INIT (async) ────────────────────────────────────── */
 buildSidebar();
-render();
+showLoading();
+
+async function initProducts() {
+  showLoading();
+  try {
+    PRODUCTS = await loadProducts();
+    render();
+  } catch (err) {
+    console.error('[BGS] loadProducts failed:', err);
+    showError(err);
+  }
+}
+initProducts();
 
 /* On desktop, sidebar is always visible */
 function handleResize() {
