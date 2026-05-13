@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>รายละเอียดสินค้า | BE GROVE SOLUTIONS CO., LTD</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    :root {
+      --space-1:.25rem;--space-2:.5rem;--space-3:.75rem;--space-4:1rem;
+      --space-5:1.25rem;--space-6:1.5rem;--space-8:2rem;--space-10:2.5rem;--space-12:3rem;
+      --radius-sm:4px;--radius-md:8px;--radius-lg:12px;
+      --text-xs:.75rem;--text-sm:.875rem;--text-base:1rem;--text-lg:1.125rem;--text-xl:1.25rem;
+      --color-surface:#f5f7fa;--color-surface-raised:#fff;
+      --color-border:#e2e8f0;--color-text-muted:#64748b;--color-text-secondary:#475569;
+      --shadow-sm:0 1px 3px rgba(0,0,0,.08);--shadow-md:0 4px 12px rgba(0,0,0,.08);
+    }
+
+    .product-page { background: var(--color-surface); }
+
+    /* Breadcrumb */
+    .prod-breadcrumb {
+      display: flex; align-items: center; gap: var(--space-2);
+      padding: var(--space-4) 0 var(--space-2);
+      font-size: var(--text-sm); color: var(--color-text-muted);
+    }
+    .prod-breadcrumb a { color: var(--color-text-muted); text-decoration: none; }
+    .prod-breadcrumb a:hover { color: var(--primary); }
+    .prod-breadcrumb i { font-size: .6rem; }
+
+    /* Main layout */
+    .product-outer {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-8);
+      padding: var(--space-4) 0 var(--space-12);
+      align-items: start;
+    }
+    @media (max-width: 860px) {
+      .product-outer { grid-template-columns: 1fr; gap: var(--space-6); }
+    }
+
+    /* ── GALLERY ── */
+    .gallery-wrap {}
+    .gallery-main {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: var(--color-surface-raised);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden; position: relative;
+    }
+    .gallery-main img {
+      max-width: 85%; max-height: 85%;
+      object-fit: contain;
+      transition: opacity .2s;
+    }
+    .gallery-main .gallery-placeholder {
+      color: var(--color-text-muted); font-size: 3rem; opacity: .2;
+    }
+    .gallery-thumbs {
+      display: flex; gap: var(--space-2); margin-top: var(--space-3);
+      flex-wrap: wrap;
+    }
+    .gallery-thumb {
+      width: 72px; height: 72px;
+      border: 2px solid var(--color-border);
+      border-radius: var(--radius-md);
+      overflow: hidden; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--color-surface-raised);
+      transition: border-color .15s;
+    }
+    .gallery-thumb:hover { border-color: var(--primary); }
+    .gallery-thumb.active { border-color: var(--primary); }
+    .gallery-thumb img { max-width: 90%; max-height: 90%; object-fit: contain; }
+
+    /* ── PRODUCT INFO ── */
+    .product-info { display: flex; flex-direction: column; gap: var(--space-4); }
+
+    .info-brand-row {
+      display: flex; align-items: center; gap: var(--space-3);
+    }
+    .info-brand-logo {
+      height: 32px; max-width: 80px; object-fit: contain;
+      opacity: .85;
+    }
+    .info-brand-name {
+      font-size: var(--text-xs); font-weight: 800;
+      color: var(--accent); text-transform: uppercase; letter-spacing: .6px;
+    }
+
+    .info-model {
+      font-size: var(--text-sm); color: var(--color-text-muted);
+      font-family: monospace; letter-spacing: .3px;
+      margin-top: calc(var(--space-1) * -1);
+    }
+
+    .info-name {
+      font-size: var(--text-xl); font-weight: 700;
+      color: var(--primary); line-height: 1.35;
+      margin: 0;
+    }
+
+    .info-price-wrap {
+      padding: var(--space-4);
+      background: var(--color-surface);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--color-border);
+    }
+    .info-price-label {
+      font-size: var(--text-xs); color: var(--color-text-muted);
+      text-transform: uppercase; letter-spacing: .6px; font-weight: 700;
+    }
+    .info-price {
+      font-size: 1.6rem; font-weight: 800;
+      color: var(--primary); margin-top: var(--space-1);
+    }
+    .info-price.contact {
+      font-size: var(--text-lg); color: var(--accent);
+    }
+
+    .info-desc {
+      font-size: var(--text-sm); color: var(--color-text-secondary);
+      line-height: 1.7; border-left: 3px solid var(--accent);
+      padding-left: var(--space-4);
+    }
+
+    /* Tags */
+    .info-tags { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+    .info-tag {
+      font-size: var(--text-xs); font-weight: 600;
+      padding: 3px var(--space-3);
+      background: #eef2fb; color: var(--primary);
+      border-radius: 99px;
+    }
+
+    /* Action buttons */
+    .info-actions { display: flex; gap: var(--space-3); flex-wrap: wrap; }
+    .btn-contact {
+      flex: 1; min-width: 140px;
+      display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2);
+      padding: var(--space-3) var(--space-6);
+      background: var(--primary); color: #fff;
+      border: none; border-radius: var(--radius-md);
+      font-size: var(--text-sm); font-weight: 700;
+      text-decoration: none; cursor: pointer;
+      transition: background .15s;
+    }
+    .btn-contact:hover { background: var(--accent); }
+    .btn-line {
+      display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2);
+      padding: var(--space-3) var(--space-5);
+      background: #06c755; color: #fff;
+      border: none; border-radius: var(--radius-md);
+      font-size: var(--text-sm); font-weight: 700;
+      text-decoration: none; cursor: pointer;
+      transition: background .15s;
+    }
+    .btn-line:hover { background: #05b34c; }
+
+    /* PDF link */
+    .info-pdf {
+      display: inline-flex; align-items: center; gap: var(--space-2);
+      padding: var(--space-3) var(--space-4);
+      border: 1.5px solid #dc2626;
+      border-radius: var(--radius-md);
+      color: #dc2626; text-decoration: none;
+      font-size: var(--text-sm); font-weight: 600;
+      transition: background .15s;
+      width: fit-content;
+    }
+    .info-pdf:hover { background: #fff0f0; }
+
+    /* ── SPEC TABLE ── */
+    .spec-section {
+      background: var(--color-surface-raised);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      margin-top: var(--space-6);
+    }
+    .spec-head {
+      padding: var(--space-4) var(--space-6);
+      background: var(--primary);
+      color: #fff;
+      font-size: var(--text-sm); font-weight: 700;
+      letter-spacing: .3px;
+      display: flex; align-items: center; gap: var(--space-2);
+    }
+    .spec-table {
+      width: 100%; border-collapse: collapse;
+      font-size: var(--text-sm);
+    }
+    .spec-table tr:nth-child(even) td { background: var(--color-surface); }
+    .spec-table td {
+      padding: var(--space-3) var(--space-6);
+      border-bottom: 1px solid var(--color-border);
+      vertical-align: top;
+    }
+    .spec-table td:first-child {
+      font-weight: 600; color: var(--primary);
+      width: 38%; white-space: nowrap;
+    }
+    .spec-table td:last-child { color: var(--color-text-secondary); }
+    .spec-table tr:last-child td { border-bottom: none; }
+    .spec-empty {
+      padding: var(--space-8) var(--space-6);
+      text-align: center; color: var(--color-text-muted);
+      font-size: var(--text-sm);
+    }
+
+    /* Loading / Error */
+    .detail-loading {
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      min-height: 60vh; gap: var(--space-4);
+      color: var(--color-text-muted);
+    }
+    .detail-loading i { font-size: 2.5rem; opacity: .3; animation: spin 1.2s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .detail-error {
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      min-height: 50vh; gap: var(--space-3);
+      text-align: center; color: var(--color-text-muted);
+    }
+    .detail-error i { font-size: 2.5rem; opacity: .25; }
+    .detail-error strong { color: #dc2626; font-size: var(--text-base); }
+  </style>
+</head>
+<body class="product-page">
+
+<!-- NAVBAR -->
+<nav class="navbar solid" id="navbar">
+  <div class="nav-container">
+    <a href="index.html" class="nav-logo">
+      <img src="bgs-logo1.png" alt="BE GROVE SOLUTIONS CO., LTD" class="nav-logo-img" />
+    </a>
+    <ul class="nav-menu" role="menubar">
+      <li role="none"><a href="index.html" class="nav-link" role="menuitem">หน้าหลัก</a></li>
+      <li role="none"><a href="about.html" class="nav-link" role="menuitem">เกี่ยวกับเรา</a></li>
+      <li role="none"><a href="services.html" class="nav-link" role="menuitem">บริการ</a></li>
+      <li role="none"><a href="products.html" class="nav-link" role="menuitem">ผลิตภัณฑ์</a></li>
+      <li role="none"><a href="reference.html" class="nav-link" role="menuitem">Site Reference</a></li>
+      <li role="none"><a href="contact.html" class="nav-link" role="menuitem">ติดต่อเรา</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="lang-switch">
+        <button class="lang-btn active" data-lang="th">TH</button>
+        <button class="lang-btn" data-lang="en">EN</button>
+      </div>
+      <a href="contact.html" class="nav-contact-btn">ติดต่อเรา</a>
+    </div>
+    <button class="hamburger" aria-label="เปิดเมนู" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-menu" role="navigation" aria-label="เมนูมือถือ">
+  <a href="index.html" class="nav-link">หน้าหลัก</a>
+  <a href="about.html" class="nav-link">เกี่ยวกับเรา</a>
+  <a href="services.html" class="nav-link">บริการ</a>
+  <a href="products.html" class="nav-link">ผลิตภัณฑ์</a>
+  <a href="reference.html" class="nav-link">Site Reference</a>
+  <a href="contact.html" class="nav-link">ติดต่อเรา</a>
+  <div class="lang-switch">
+    <button class="lang-btn active" data-lang="th">TH</button>
+    <button class="lang-btn" data-lang="en">EN</button>
+  </div>
+  <a href="contact.html" class="nav-contact-btn">ติดต่อเรา</a>
+</div>
+
+<!-- CONTENT -->
+<div class="container" id="pageContent">
+  <div class="detail-loading" id="loadingState" role="status" aria-label="กำลังโหลดข้อมูลสินค้า">
+    <i class="fas fa-circle-notch" aria-hidden="true"></i>
+    <span>กำลังโหลดข้อมูลสินค้า…</span>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="logo-wrap">
+          <img src="bgs-logo1.png" alt="BE GROVE SOLUTIONS CO., LTD" class="footer-logo-img" />
+        </div>
+        <p>ผู้ให้บริการด้าน IT System Integration ครบวงจร</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+          <a href="#" aria-label="LINE"><i class="fab fa-line" aria-hidden="true"></i></a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>บริการ</h4>
+          <ul>
+            <li><a href="services.html">Network Infrastructure</a></li>
+            <li><a href="services.html">Cybersecurity</a></li>
+            <li><a href="services.html">Cloud Solutions</a></li>
+            <li><a href="services.html">Managed Services</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>เกี่ยวกับเรา</h4>
+          <ul>
+            <li><a href="about.html">ประวัติบริษัท</a></li>
+            <li><a href="reference.html">Site Reference</a></li>
+            <li><a href="contact.html">ติดต่อเรา</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>ติดต่อ</h4>
+          <ul>
+            <li class="contact-li"><i class="fas fa-map-marker-alt" aria-hidden="true"></i><span>111/38 หมู่ 4 ต.บึงยี่โถ อ.ธัญบุรี จ.ปทุมธานี 12130</span></li>
+            <li class="contact-li"><i class="fas fa-phone" aria-hidden="true"></i><span>+66 9 1495 9997</span></li>
+            <li class="contact-li"><i class="fab fa-line" aria-hidden="true"></i><span>@begrove</span></li>
+            <li class="contact-li"><i class="fas fa-envelope" aria-hidden="true"></i><span>info@begrovesolutions.com</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2024 BE GROVE SOLUTIONS CO., LTD. สงวนลิขสิทธิ์</p>
+    </div>
+  </div>
+</footer>
+
+<a href="https://line.me/ti/p/@begrove" target="_blank" class="sticky-line-tab" title="Chat with us on LINE">
+  <div class="slt-inner">
+    <i class="fab fa-line slt-icon" aria-hidden="true"></i>
+    <span class="slt-label">Line: @begrove</span>
+  </div>
+</a>
+
+<script src="js/main.js"></script>
+<script src="js/products-data.js"></script>
+<script>
+/* ── BRAND LOGOS (ซิงค์กับ products.html) ── */
+const BRANDS = {
+  cisco:    { name:'Cisco', logo:'images/product-partner/ciscopng-300x158.png' },
+  ruijie:   { name:'Ruijie Networks', logo:'images/product-partner/ruijie-logo.png' },
+  reyee:    { name:'Reyee Network', logo:'images/product-partner/reyee-logo.png' },
+  fortinet: { name:'Fortinet', logo:'images/product-partner/Fortinet-removebg-preview-300x133.png' },
+  hpe:      { name:'HPE / Aruba', logo:'images/product-partner/hpe-removebg-preview-300x300.png' },
+  aruba:    { name:'Aruba Networks', logo:'images/product-partner/aruba-logo.png' },
+  microsoft:{ name:'Microsoft', logo:'images/product-partner/microsoft-logo-hd-26-300x85.png' },
+  tplink:   { name:'TP-Link', logo:'images/product-partner/tplink-logo.png' },
+  ubiquiti: { name:'Ubiquiti', logo:'images/product-partner/ubiquiti-logo.png' },
+  mikrotik: { name:'Mikrotik', logo:'images/product-partner/mikrotik-logo.png' },
+  engenius: { name:'EnGenius', logo:'images/product-partner/engenius-logo.png' },
+  draytek:  { name:'DrayTek', logo:'images/product-partner/draytek-logo.png' },
+  huawei:   { name:'Huawei eKit', logo:'images/product-partner/huawei-logo.png' },
+  zyxel:    { name:'Zyxel', logo:'images/product-partner/zyxel-logo.png' },
+  cybrey:   { name:'Cybrey', logo:'images/product-partner/cybrey-logo.png' },
+};
+
+/* ── RENDER ── */
+function renderDetail(p) {
+  const brand = BRANDS[p.brand] || { name: p.brand, logo: '' };
+  const priceHtml = (!p.price || p.price === '0')
+    ? '<p class="info-price contact"><i class="fas fa-tag"></i> ติดต่อสอบถามราคา</p>'
+    : `<p class="info-price">฿${Number(p.price).toLocaleString()}</p>`;
+
+  const brandLogoHtml = brand.logo
+    ? `<img src="${brand.logo}" alt="${brand.name}" class="info-brand-logo" onerror="this.style.display='none'" />`
+    : '';
+
+  const tagsHtml = p.tags.length
+    ? `<div class="info-tags">${p.tags.map(t => `<span class="info-tag">${t}</span>`).join('')}</div>`
+    : '';
+
+  const pdfHtml = p.pdf
+    ? `<a href="${p.pdf}" target="_blank" rel="noopener" class="info-pdf">
+         <i class="fas fa-file-pdf" aria-hidden="true"></i> ดาวน์โหลด Datasheet / PDF
+       </a>`
+    : '';
+
+  /* Gallery */
+  const imgs = p.images.filter(Boolean);
+  const mainImgSrc = imgs[0] || brand.logo || '';
+  const galleryMainHtml = mainImgSrc
+    ? `<img src="${mainImgSrc}" alt="${p.name}" id="galleryMain" onerror="this.style.display='none'" />`
+    : `<i class="fas fa-box-open gallery-placeholder" aria-hidden="true"></i>`;
+
+  const thumbsHtml = imgs.length > 1
+    ? imgs.map((src, i) => `
+        <button class="gallery-thumb ${i===0?'active':''}" data-src="${src}" aria-label="รูปที่ ${i+1}" onclick="setGalleryImg(this)">
+          <img src="${src}" alt="รูปสินค้า ${i+1}" onerror="this.parentElement.style.display='none'" loading="lazy" />
+        </button>`).join('')
+    : '';
+
+  /* Spec table */
+  const specEntries = Object.entries(p.specs || {});
+  const specRowsHtml = specEntries.length
+    ? specEntries.map(([k, v]) => `<tr><td>${k}</td><td>${v}</td></tr>`).join('')
+    : `<tr><td colspan="2"><div class="spec-empty">ยังไม่มีข้อมูล Spec</div></td></tr>`;
+
+  document.title = `${p.name} | BE GROVE SOLUTIONS CO., LTD`;
+
+  document.getElementById('pageContent').innerHTML = `
+    <nav class="prod-breadcrumb" aria-label="เส้นทาง">
+      <a href="index.html">หน้าหลัก</a>
+      <i class="fas fa-chevron-right" aria-hidden="true"></i>
+      <a href="products.html">ผลิตภัณฑ์</a>
+      <i class="fas fa-chevron-right" aria-hidden="true"></i>
+      <span aria-current="page">${p.name}</span>
+    </nav>
+
+    <div class="product-outer">
+      <!-- Gallery -->
+      <div class="gallery-wrap">
+        <div class="gallery-main" id="galleryMainWrap">
+          ${galleryMainHtml}
+        </div>
+        ${thumbsHtml ? `<div class="gallery-thumbs" role="list" aria-label="รูปสินค้า">${thumbsHtml}</div>` : ''}
+      </div>
+
+      <!-- Info -->
+      <div class="product-info">
+        <div class="info-brand-row">
+          ${brandLogoHtml}
+          <span class="info-brand-name">${brand.name}</span>
+        </div>
+        ${p.model ? `<p class="info-model">Model: ${p.model}</p>` : ''}
+        <h1 class="info-name">${p.name}</h1>
+
+        <div class="info-price-wrap">
+          <p class="info-price-label">ราคา</p>
+          ${priceHtml}
+        </div>
+
+        ${p.desc ? `<p class="info-desc">${p.desc}</p>` : ''}
+        ${tagsHtml}
+        ${pdfHtml}
+
+        <div class="info-actions">
+          <a href="contact.html?product=${encodeURIComponent(p.name)}" class="btn-contact">
+            <i class="fas fa-envelope" aria-hidden="true"></i> ติดต่อสอบถาม
+          </a>
+          <a href="https://line.me/ti/p/@begrove" target="_blank" rel="noopener" class="btn-line">
+            <i class="fab fa-line" aria-hidden="true"></i> LINE @begrove
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Spec Table -->
+    <section class="spec-section" aria-label="ข้อมูล Spec สินค้า">
+      <div class="spec-head">
+        <i class="fas fa-list-ul" aria-hidden="true"></i>
+        QUICK SPEC — ${p.name}
+      </div>
+      <table class="spec-table" aria-label="ตาราง Spec">
+        <tbody>${specRowsHtml}</tbody>
+      </table>
+    </section>
+  `;
+}
+
+function showDetailError(msg) {
+  document.getElementById('pageContent').innerHTML = `
+    <div class="detail-error" role="alert">
+      <i class="fas fa-exclamation-circle" aria-hidden="true"></i>
+      <strong>ไม่พบสินค้า</strong>
+      <p>${msg}</p>
+      <a href="products.html" style="color:var(--primary);font-weight:600">← กลับหน้าสินค้าทั้งหมด</a>
+    </div>`;
+}
+
+function setGalleryImg(btn) {
+  const src = btn.dataset.src;
+  const mainImg = document.getElementById('galleryMain');
+  if (mainImg) { mainImg.style.opacity = '0'; setTimeout(() => { mainImg.src = src; mainImg.style.opacity = '1'; }, 150); }
+  document.querySelectorAll('.gallery-thumb').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+/* ── INIT ── */
+(async () => {
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get('id');
+  if (!id) { showDetailError('ไม่พบรหัสสินค้า กรุณาเข้าผ่านหน้ารายการสินค้า'); return; }
+
+  try {
+    const products = await loadProducts();
+    const product  = products.find(p => p.id === id);
+    if (!product) { showDetailError(`ไม่พบสินค้ารหัส "${id}"`); return; }
+    renderDetail(product);
+  } catch (err) {
+    showDetailError('โหลดข้อมูลไม่สำเร็จ: ' + err.message);
+  }
+})();
+</script>
+</body>
+</html>

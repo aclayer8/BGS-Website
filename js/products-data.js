@@ -8,7 +8,7 @@
 // (รูปแบบ .../pub?output=csv หรือ ...&sheet=Products)
 const CSV_URL   = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQBNJ_Y-rOU6R4dqcuipcEGNH5H_1nY0OGAquQ_jt6X7mTJaa235d51-KFCXmwposBI_cP6jHnutfEh/pub?output=csv';
 const CACHE_KEY = 'bgs_products_v1';
-const CACHE_TTL = 10 * 60 * 1000; // 10 นาที
+const CACHE_TTL = 0; // 0 = ไม่ cache (ปิดตอน dev) → เปลี่ยนเป็น 10 * 60 * 1000 ตอน production
 
 // ── 2. CSV PARSER ──────────────────────────────────────────
 function parseCSV(text) {

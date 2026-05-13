@@ -390,6 +390,11 @@
     }
     .prod-card:focus-within { outline: 2px solid var(--primary); }
 
+    .prod-card-link { display: block; text-decoration: none; }
+    .prod-card-link:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; border-radius: var(--radius-lg) var(--radius-lg) 0 0; }
+    .prod-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+    .prod-card { transition: transform .2s, box-shadow .2s; }
+
     .prod-card-img-wrap {
       background: var(--color-surface);
       display: flex;
@@ -1033,24 +1038,28 @@ function render() {
         : '';
       return `
       <article class="prod-card" role="listitem">
-        <div class="prod-card-img-wrap">
-          <img class="prod-card-img"
-               src="${imgSrc}"
-               alt="${p.name}"
-               loading="lazy"
-               onerror="this.src='${BRANDS[p.brand]?.logo || ''}'" />
-        </div>
+        <a href="product.html?id=${p.id}" class="prod-card-link" aria-label="ดูรายละเอียด ${p.name}">
+          <div class="prod-card-img-wrap">
+            <img class="prod-card-img"
+                 src="${imgSrc}"
+                 alt="${p.name}"
+                 loading="lazy"
+                 onerror="this.src='${BRANDS[p.brand]?.logo || ''}'" />
+          </div>
+        </a>
         <div class="prod-card-body">
           <p class="prod-card-brand">${BRANDS[p.brand]?.name || p.brand}</p>
           ${modelHtml}
-          <h3 class="prod-card-name">${p.name}</h3>
+          <h3 class="prod-card-name">
+            <a href="product.html?id=${p.id}" style="color:inherit;text-decoration:none;">${p.name}</a>
+          </h3>
           <p class="prod-card-desc">${p.desc}</p>
           <p class="prod-card-price">${priceHtml}</p>
           <div class="prod-card-footer">
             ${p.tags[0] ? `<span class="prod-card-tag">${p.tags[0]}</span>` : '<span></span>'}
             <div style="display:flex;gap:6px;align-items:center;">
               ${pdfHtml}
-              <a href="contact.html" class="prod-card-btn">สอบถาม</a>
+              <a href="product.html?id=${p.id}" class="prod-card-btn">ดูรายละเอียด</a>
             </div>
           </div>
         </div>
