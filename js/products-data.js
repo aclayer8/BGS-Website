@@ -4,15 +4,11 @@
 // ============================================================
 
 // ── 1. CONFIG ──────────────────────────────────────────────
-// แทนที่ YOUR_SHEET_ID ด้วย ID ของ Google Sheet
-// วิธีหา: เปิด Sheet → URL จะเป็น .../spreadsheets/d/XXXXXXX/edit
-// เอา XXXXXXX มาใส่ที่นี่
-const SHEET_ID   = '1Hz8hnbyIO4XbaV9hZMQ0xVricMuDdxqzq-HLTo8IPXs';
-const SHEET_NAME = 'Products';
-const CACHE_KEY  = 'bgs_products_v1';
-const CACHE_TTL  = 10 * 60 * 1000; // 10 นาที
-
-const CSV_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(SHEET_NAME)}`;
+// CSV_URL: copy จาก File → Share → Publish to web → CSV
+// (รูปแบบ .../pub?output=csv หรือ ...&sheet=Products)
+const CSV_URL   = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQBNJ_Y-rOU6R4dqcuipcEGNH5H_1nY0OGAquQ_jt6X7mTJaa235d51-KFCXmwposBI_cP6jHnutfEh/pub?output=csv';
+const CACHE_KEY = 'bgs_products_v1';
+const CACHE_TTL = 10 * 60 * 1000; // 10 นาที
 
 // ── 2. CSV PARSER ──────────────────────────────────────────
 function parseCSV(text) {
