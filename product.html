@@ -174,7 +174,7 @@
     }
     .info-pdf:hover { background: #fff0f0; }
 
-    /* ── SPEC TABLE ── */
+    /* ── SPEC SECTION ── */
     .spec-section {
       background: var(--color-surface-raised);
       border: 1px solid var(--color-border);
@@ -190,22 +190,16 @@
       letter-spacing: .3px;
       display: flex; align-items: center; gap: var(--space-2);
     }
-    .spec-table {
-      width: 100%; border-collapse: collapse;
+    .spec-freetext {
+      padding: var(--space-5) var(--space-6);
+      font-family: inherit;
       font-size: var(--text-sm);
+      line-height: 1.8;
+      color: var(--color-text-secondary);
+      white-space: pre-wrap;
+      word-break: break-word;
+      background: var(--color-surface-raised);
     }
-    .spec-table tr:nth-child(even) td { background: var(--color-surface); }
-    .spec-table td {
-      padding: var(--space-3) var(--space-6);
-      border-bottom: 1px solid var(--color-border);
-      vertical-align: top;
-    }
-    .spec-table td:first-child {
-      font-weight: 600; color: var(--primary);
-      width: 38%; white-space: nowrap;
-    }
-    .spec-table td:last-child { color: var(--color-text-secondary); }
-    .spec-table tr:last-child td { border-bottom: none; }
     .spec-empty {
       padding: var(--space-8) var(--space-6);
       text-align: center; color: var(--color-text-muted);
@@ -358,6 +352,25 @@ const BRANDS = {
   cybrey:   { name:'Cybrey', logo:'images/product-partner/cybrey-logo.png' },
 };
 
+/* ── SPEC RENDERER ─────────────────────────────────────────
+   Free-form text: วางข้อความจาก datasheet ลง Sheet ได้เลย
+   แสดงผลเป็น pre-wrap text block ── ไม่ต้อง format อะไรเพิ่ม
+────────────────────────────────────────────────────────── */
+function escHtml(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+function buildSpecHtml(raw) {
+  if (!raw || !String(raw).trim()) {
+    return `<div class="spec-empty">ยังไม่มีข้อมูล Spec — เพิ่มได้ใน Google Sheet คอลัมน์ specs</div>`;
+  }
+  return `<div class="spec-freetext">${escHtml(String(raw).trim())}</div>`;
+}
+
 /* ── RENDER ── */
 function renderDetail(p) {
   const brand = BRANDS[p.brand] || { name: p.brand, logo: '' };
@@ -393,11 +406,8 @@ function renderDetail(p) {
         </button>`).join('')
     : '';
 
-  /* Spec table */
-  const specEntries = Object.entries(p.specs || {});
-  const specRowsHtml = specEntries.length
-    ? specEntries.map(([k, v]) => `<tr><td>${k}</td><td>${v}</td></tr>`).join('')
-    : `<tr><td colspan="2"><div class="spec-empty">ยังไม่มีข้อมูล Spec</div></td></tr>`;
+  /* Spec — free-form text จาก Google Sheet คอลัมน์ specs */
+  const specHtml = buildSpecHtml(p.specs);
 
   document.title = `${p.name} | BE GROVE SOLUTIONS CO., LTD`;
 
@@ -452,11 +462,9 @@ function renderDetail(p) {
     <section class="spec-section" aria-label="ข้อมูล Spec สินค้า">
       <div class="spec-head">
         <i class="fas fa-list-ul" aria-hidden="true"></i>
-        QUICK SPEC — ${p.name}
+        Product Specifications — ${p.name}
       </div>
-      <table class="spec-table" aria-label="ตาราง Spec">
-        <tbody>${specRowsHtml}</tbody>
-      </table>
+      ${specHtml}
     </section>
   `;
 }
@@ -483,17 +491,4 @@ function setGalleryImg(btn) {
 (async () => {
   const params = new URLSearchParams(window.location.search);
   const id = params.get('id');
-  if (!id) { showDetailError('ไม่พบรหัสสินค้า กรุณาเข้าผ่านหน้ารายการสินค้า'); return; }
-
-  try {
-    const products = await loadProducts();
-    const product  = products.find(p => p.id === id);
-    if (!product) { showDetailError(`ไม่พบสินค้ารหัส "${id}"`); return; }
-    renderDetail(product);
-  } catch (err) {
-    showDetailError('โหลดข้อมูลไม่สำเร็จ: ' + err.message);
-  }
-})();
-</script>
-</body>
-</html>
+  if (!id) { showDetailError('ไม่พบรหัสสินค้า กรุณาเข
