@@ -1225,12 +1225,16 @@ function showLoading() {
 }
 
 function showError(err) {
+  const isScriptMissing = err instanceof ReferenceError && /loadProducts/.test(err.message);
+  const hint = isScriptMissing
+    ? 'ไฟล์ js/products-data.js โหลดไม่ขึ้น — ลอง Ctrl+Shift+R (hard refresh) หรือตรวจว่าไฟล์อยู่ถูกที่'
+    : 'ตรวจสอบว่า Google Sheet ถูก Publish แล้ว (File → Share → Publish to web → CSV)';
   document.getElementById('prodCountNum').textContent = '!';
   document.getElementById('prodGrid').innerHTML = `
     <div class="prod-error" role="alert">
       <i class="fas fa-exclamation-circle" aria-hidden="true"></i>
       <strong>โหลดสินค้าไม่สำเร็จ</strong>
-      <p>กรุณาตรวจสอบ SHEET_ID ใน js/products-data.js และ Publish Sheet</p>
+      <p>${hint}</p>
       <code>${err.message}</code>
       <button onclick="initProducts()" style="margin-top:12px;padding:6px 16px;background:var(--primary);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:13px;">
         ลองอีกครั้ง
@@ -1244,27 +1248,7 @@ showLoading();
 
 async function initProducts() {
   showLoading();
-  try {
-    PRODUCTS = await loadProducts();
-    render();
-  } catch (err) {
-    console.error('[BGS] loadProducts failed:', err);
-    showError(err);
-  }
-}
-initProducts();
-
-/* On desktop, sidebar is always visible */
-function handleResize() {
-  if (window.innerWidth > 900) {
-    document.getElementById('prodSidebar').setAttribute('aria-hidden','false');
-  } else {
-    document.getElementById('prodSidebar').setAttribute('aria-hidden','true');
-    document.getElementById('mobileFilterBtn').setAttribute('aria-expanded','false');
-  }
-}
-window.addEventListener('resize', handleResize);
-handleResize();
-</script>
-</body>
-</html>
+  // Guard: ถ้า products-data.js โหลดไม่ขึ้น แจ้ง error ทันที
+  if (typeof loadProducts !== 'function') {
+    showError(new ReferenceError('loadProducts is not defined — products-data.js ไม่ได้โหลด'));
+    
