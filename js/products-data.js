@@ -7,7 +7,7 @@
 // ── 1. CONFIG ────────────────────────────────────────────────
 //  เปลี่ยน CSV_URL เป็นลิงค์ Sheet ของคุณ (publish เป็น CSV แล้ว)
 //  File → Share → Publish to web → Comma-separated values (.csv)
-const CSV_URL   = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQBNJ_Y-rOU6R4dqcuipcEGNH5H_1nY0OGAquQ_jt6X7mTJaa235d51-KFCXmwposBI_cP6jHnutfEh/pub?output=csv';
+const CSV_URL   = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQp6_JUEIDV9sQpLLsW79Jm4yCvmgbn7FNgoieHddmphUScCbQJfyQqvBKt8BzDvga54elZSw4BQKJA/pub?output=csv';
 const CACHE_KEY = 'bgs_products_v3';
 const CACHE_TTL = 5 * 60 * 1000; // 5 นาที (production); 0 = ไม่ cache (dev)
 
