@@ -11,7 +11,19 @@ const CSV_URL   = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQBNJ_Y-rOU6R
 const CACHE_KEY = 'bgs_products_v3';
 const CACHE_TTL = 5 * 60 * 1000; // 5 นาที (production); 0 = ไม่ cache (dev)
 
-// ── 2. CSV PARSER (รองรับ comma ใน "quoted strings") ─────────
+// ── 2. BRAND NAME MAP (auto-fill เมื่อ Sheet ไม่ได้ใส่ brand_full) ──
+const BRAND_NAMES = {
+  'cisco':    'Cisco Systems',       'hpe':      'Hewlett Packard Enterprise',
+  'fortinet': 'Fortinet',            'aruba':    'Aruba Networks',
+  'ruijie':   'Ruijie Networks',     'reyee':    'Reyee',
+  'microsoft':'Microsoft',           'juniper':  'Juniper Networks',
+  'dell':     'Dell Technologies',   'ubiquiti': 'Ubiquiti',
+  'hikvision':'Hikvision',           'dahua':    'Dahua Technology',
+  'mikrotik': 'MikroTik',            'tp-link':  'TP-Link',
+  'zyxel':    'Zyxel',               'apc':      'APC by Schneider Electric',
+};
+
+// ── 3. CSV PARSER (รองรับ comma ใน "quoted strings") ─────────
 function parseCSV(text) {
   const lines = [];
   let line = [], field = '', inQ = false;
@@ -79,7 +91,7 @@ function mapRow(r) {
   const name      = r.name      || r.name_th    || '';
   const sku       = r.sku       || r.model      || r.id || '';
   const brand     = r.brand     || '';
-  const brandFull = r.brand_full || r.brandfull || brand || '';
+  const brandFull = r.brand_full || r.brandfull || BRAND_NAMES[brand.toLowerCase()] || brand || '';
   const cat       = r.category  || r.cat        || 'ทั่วไป';
   const short     = r.short     || r.short_desc || r.details_short || '';
   const details   = r.details   || r.desc_th    || r.desc || '';
