@@ -491,4 +491,17 @@ function setGalleryImg(btn) {
 (async () => {
   const params = new URLSearchParams(window.location.search);
   const id = params.get('id');
-  if (!id) { showDetailError('ไม่พบรหัสสินค้า กรุณาเข
+  if (!id) { showDetailError('ไม่พบรหัสสินค้า กรุณาเข้าผ่านหน้ารายการสินค้า'); return; }
+
+  try {
+    const products = await loadProducts();
+    const product  = products.find(p => p.id === id);
+    if (!product) { showDetailError(`ไม่พบสินค้ารหัส "${id}"`); return; }
+    renderDetail(product);
+  } catch (err) {
+    showDetailError('โหลดข้อมูลไม่สำเร็จ: ' + err.message);
+  }
+})();
+</script>
+</body>
+</html>

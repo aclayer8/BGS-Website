@@ -92,4 +92,25 @@ async function fetchFromSheet() {
 }
 
 // ── 6. PUBLIC API ──────────────────────────────────────────
-async fu
+async function loadProducts() {
+  try {
+    const raw = localStorage.getItem(CACHE_KEY);
+    if (raw) {
+      const { ts, data } = JSON.parse(raw);
+      if (Date.now() - ts < CACHE_TTL) return data;
+    }
+  } catch (e) { /* cache miss */ }
+
+  const data = await fetchFromSheet();
+
+  try {
+    localStorage.setItem(CACHE_KEY, JSON.stringify({ ts: Date.now(), data }));
+  } catch (e) { /* storage full */ }
+
+  return data;
+}
+
+function clearProductsCache() {
+  localStorage.removeItem(CACHE_KEY);
+  console.log('[BGS] Products cache cleared.');
+}
