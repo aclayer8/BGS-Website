@@ -5,11 +5,11 @@
 // ============================================================
 
 // ── 1. CONFIG ────────────────────────────────────────────────
-//  เปลี่ยน CSV_URL เป็นลิงค์ Sheet ของคุณ (publish เป็น CSV แล้ว)
-//  File → Share → Publish to web → Comma-separated values (.csv)
-const CSV_URL   = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQp6_JUEIDV9sQpLLsW79Jm4yCvmgbn7FNgoieHddmphUScCbQJfyQqvBKt8BzDvga54elZSw4BQKJA/pub?output=csv';
+//  ค่าทั้งหมดอ่านจาก js/config.js — แก้ไขแค่นั้นเมื่อ deploy ให้ client ใหม่
+const _cfg      = (typeof SITE_CONFIG !== 'undefined') ? SITE_CONFIG : {};
+const CSV_URL   = _cfg.csvUrl   || 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQp6_JUEIDV9sQpLLsW79Jm4yCvmgbn7FNgoieHddmphUScCbQJfyQqvBKt8BzDvga54elZSw4BQKJA/pub?output=csv';
 const CACHE_KEY = 'bgs_products_v3';
-const CACHE_TTL = 5 * 60 * 1000; // 5 นาที (production); 0 = ไม่ cache (dev)
+const CACHE_TTL = (_cfg.cacheTtl !== undefined) ? _cfg.cacheTtl : 5 * 60 * 1000;
 
 // ── 2. BRAND NAME MAP (auto-fill เมื่อ Sheet ไม่ได้ใส่ brand_full) ──
 const BRAND_NAMES = {
