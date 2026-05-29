@@ -7,8 +7,10 @@
 // ── 1. CONFIG ────────────────────────────────────────────────
 //  ค่าทั้งหมดอ่านจาก js/config.js — แก้ไขแค่นั้นเมื่อ deploy ให้ client ใหม่
 const _cfg      = (typeof SITE_CONFIG !== 'undefined') ? SITE_CONFIG : {};
-const CSV_URL   = _cfg.csvUrl   || 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQp6_JUEIDV9sQpLLsW79Jm4yCvmgbn7FNgoieHddmphUScCbQJfyQqvBKt8BzDvga54elZSw4BQKJA/pub?output=csv';
-const CACHE_KEY = 'bgs_products_v3';
+const CSV_URL   = _cfg.csvUrl   || 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQgB6nQ2umu9cymB5L4pK5jEPrGQrmdEyRU6hO7l4OKwNmJLMU5JKSPWBeCeQKHAQ/pub?output=csv';
+// CACHE_KEY ผูกกับ URL → ย้าย Sheet ใหม่ปุ๊บ cache เก่าถูกทิ้งอัตโนมัติ
+const _urlHash  = CSV_URL.split('/').slice(-2, -1)[0]?.slice(-12) || 'default';
+const CACHE_KEY = `bgs_products_v4_${_urlHash}`;
 const CACHE_TTL = (_cfg.cacheTtl !== undefined) ? _cfg.cacheTtl : 5 * 60 * 1000;
 
 // ── 2. BRAND NAME MAP (auto-fill เมื่อ Sheet ไม่ได้ใส่ brand_full) ──
@@ -127,7 +129,10 @@ function mapRow(r) {
 
 // ── 5. FETCH FROM SHEET ─────────────────────────────────────
 async function fetchFromSheet() {
-  const res = await fetch(CSV_URL);
+  // cache-buster ?_t= กัน Google CDN + browser HTTP cache เอาของเก่ามาให้
+  const sep = CSV_URL.includes('?') ? '&' : '?';
+  const url = `${CSV_URL}${sep}_t=${Date.now()}`;
+  const res = await fetch(url, { cache: 'no-store' });
   if (!res.ok) throw new Error(`Sheet fetch failed (${res.status}) — ตรวจสอบว่า Sheet ถูก Publish แล้ว`);
   const text = await res.text();
   if (!text.trim()) throw new Error('Sheet ส่งข้อมูลว่างเปล่า — ตรวจสอบว่า Sheet มีข้อมูลและ Publish แล้ว');
