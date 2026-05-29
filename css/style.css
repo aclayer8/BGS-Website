@@ -914,3 +914,39 @@ p { color: var(--text-medium); line-height: 1.75; }
 .mt-4 { margin-top: 16px; }
 .mb-4 { margin-bottom: 16px; }
 .hidden { display: none !important; }
+
+/* ============================================
+   CONTACT FORM — honeypot + status box
+   ============================================ */
+.hp-field {
+  position: absolute !important;
+  left: -9999px !important;
+  width: 1px; height: 1px;
+  opacity: 0; pointer-events: none;
+  overflow: hidden;
+}
+.form-status {
+  display: none;
+  margin-top: 16px;
+  padding: 14px 18px;
+  border-radius: 10px;
+  font-size: 0.92rem;
+  font-weight: 500;
+  line-height: 1.55;
+  font-family: var(--font-thai, system-ui);
+}
+.form-status.success {
+  background: #e8f5e9;
+  color: #1b5e20;
+  border: 1px solid #a5d6a7;
+}
+.form-status.error {
+  background: #ffebee;
+  color: #b71c1c;
+  border: 1px solid #ef9a9a;
+}
+.form-submit:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none !important;
+}

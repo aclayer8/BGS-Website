@@ -192,10 +192,19 @@
             <textarea id="message" name="message" rows="5" placeholder="กรุณาอธิบายความต้องการของคุณ..." required></textarea>
           </div>
 
+          <!-- Honeypot: hidden field — มนุษย์ไม่กรอก, bot จะกรอก → server reject -->
+          <div class="hp-field" aria-hidden="true">
+            <label>Leave this empty</label>
+            <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" />
+          </div>
+
           <button type="submit" class="btn btn-primary form-submit">
             <i class="fas fa-paper-plane"></i>
             <span data-th="ส่งข้อความ" data-en="Send Message">ส่งข้อความ</span>
           </button>
+
+          <!-- Status box: success / error -->
+          <div id="formStatus" class="form-status" role="status" aria-live="polite"></div>
         </form>
       </div>
     </div>
@@ -321,8 +330,205 @@
 
 <script src="js/main.js"></script>
 
+<!-- ── Contact Form Handler → Google Apps Script ── -->
+<script>
+(function () {
+  var ENDPOINT = 'https://script.google.com/macros/s/AKfycbwcv9WwBxDuLmU7kr2TZ4Xy5421FKs-BhxUyogIFS34Lf_XGp-mDxChCZ0TyPkxI4fJWQ/exec';
+
+  var form = document.getElementById('contactForm');
+  if (!form) return;
+
+  var btn    = form.querySelector('.form-submit');
+  var status = document.getElementById('formStatus');
+
+  function showStatus(type, text) {
+    status.className = 'form-status ' + type;
+    status.textContent = text;
+    status.style.display = 'block';
+  }
+  function hideStatus() { status.style.display = 'none'; }
+
+  function getInterestLabel(val) {
+    if (!val) return '';
+    var opt = form.querySelector('#interest option[value="' + val + '"]');
+    return opt ? (opt.dataset.th || opt.textContent.trim()) : val;
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    hideStatus();
+
+    var fd = new FormData(form);
+    var firstName = (fd.get('firstName') || '').trim();
+    var lastName  = (fd.get('lastName')  || '').trim();
+    var email     = (fd.get('email')     || '').trim();
+    var message   = (fd.get('message')   || '').trim();
+
+    if (!firstName || !lastName || !email || !message) {
+      showStatus('error', 'กรุณากรอกข้อมูลให้ครบ (ฟิลด์ที่มี *)');
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      showStatus('error', 'รูปแบบอีเมลไม่ถูกต้อง');
+      return;
+    }
+
+    var payload = {
+      name:        firstName + ' ' + lastName,
+      email:       email,
+      phone:       (fd.get('phone')   || '').trim(),
+      company:     (fd.get('company') || '').trim(),
+      subject:     getInterestLabel(fd.get('interest') || ''),
+      message:     message,
+      source_page: window.location.pathname,
+      _gotcha:     (fd.get('_gotcha') || '')
+    };
+
+    var origHTML = btn.innerHTML;
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> <span>กำลังส่ง...</span>';
+
+    // ใช้ text/plain (browser default เมื่อ body เป็น string + ไม่ตั้ง Content-Type)
+    // เพื่อหลีกเลี่ยง CORS preflight ที่ Apps Script ไม่ support
+    fetch(ENDPOINT, {
+      method: 'POST',
+      body: JSON.stringify(payload),
+      redirect: 'follow'
+    })
+    .then(function (r) { return r.json(); })
+    .then(function (res) {
+      if (res && res.ok) {
+        showStatus('success', '✓ ส่งข้อความเรียบร้อย ทีมงานจะติดต่อกลับภายใน 24 ชั่วโมง (วันทำการ)');
+        form.reset();
+        status.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } else {
+        showStatus('error', 'เกิดข้อผิดพลาด: ' + ((res && res.error) || 'ลองอีกครั้ง'));
+      }
+    })
+    .catch(function () {
+      showStatus('error', 'ไม่สามารถส่งได้ ลองใหม่อีกครั้ง หรือติดต่อทาง LINE: @begrove');
+    })
+    .then(function () {
+      btn.disabled = false;
+      btn.innerHTML = origHTML;
+    });
+  });
+})();
+</script>
+
 <!-- STICKY LINE TAB -->
 <a href="https://line.me/ti/p/@begrove" target="_blank" class="sticky-line-tab" title="Chat with us on LINE">
+  <div class="slt-inner">
+    <i class="fab fa-line slt-icon"></i>
+    <span class="slt-label">Line: @begrove</span>
+  </div>
+</a>
+
+</body>
+</html>
+>
+        <a href="#" data-th="เงื่อนไขการใช้บริการ" data-en="Terms of Service">เงื่อนไขการใช้บริการ</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+
+<!-- ── Contact Form Handler → Google Apps Script ── -->
+<script>
+(function () {
+  var ENDPOINT = 'https://script.google.com/macros/s/AKfycbwcv9WwBxDuLmU7kr2TZ4Xy5421FKs-BhxUyogIFS34Lf_XGp-mDxChCZ0TyPkxI4fJWQ/exec';
+
+  var form = document.getElementById('contactForm');
+  if (!form) return;
+
+  var btn    = form.querySelector('.form-submit');
+  var status = document.getElementById('formStatus');
+
+  function showStatus(type, text) {
+    status.className = 'form-status ' + type;
+    status.textContent = text;
+    status.style.display = 'block';
+  }
+  function hideStatus() { status.style.display = 'none'; }
+
+  function getInterestLabel(val) {
+    if (!val) return '';
+    var opt = form.querySelector('#interest option[value="' + val + '"]');
+    return opt ? (opt.dataset.th || opt.textContent.trim()) : val;
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    hideStatus();
+
+    var fd = new FormData(form);
+    var firstName = (fd.get('firstName') || '').trim();
+    var lastName  = (fd.get('lastName')  || '').trim();
+    var email     = (fd.get('email')     || '').trim();
+    var message   = (fd.get('message')   || '').trim();
+
+    if (!firstName || !lastName || !email || !message) {
+      showStatus('error', 'กรุณากรอกข้อมูลให้ครบ (ฟิลด์ที่มี *)');
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      showStatus('error', 'รูปแบบอีเมลไม่ถูกต้อง');
+      return;
+    }
+
+    var payload = {
+      name:        firstName + ' ' + lastName,
+      email:       email,
+      phone:       (fd.get('phone')   || '').trim(),
+      company:     (fd.get('company') || '').trim(),
+      subject:     getInterestLabel(fd.get('interest') || ''),
+      message:     message,
+      source_page: window.location.pathname,
+      _gotcha:     (fd.get('_gotcha') || '')
+    };
+
+    var origHTML = btn.innerHTML;
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> <span>กำลังส่ง...</span>';
+
+    fetch(ENDPOINT, {
+      method: 'POST',
+      body: JSON.stringify(payload),
+      redirect: 'follow'
+    })
+    .then(function (r) { return r.json(); })
+    .then(function (res) {
+      if (res && res.ok) {
+        showStatus('success', '✓ ส่งข้อความเรียบร้อย ทีมงานจะติดต่อกลับภายใน 24 ชั่วโมง (วันทำการ)');
+        form.reset();
+        status.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } else {
+        showStatus('error', 'เกิดข้อผิดพลาด: ' + ((res && res.error) || 'ลองอีกครั้ง'));
+      }
+    })
+    .catch(function () {
+      showStatus('error', 'ไม่สามารถส่งได้ ลองใหม่อีกครั้ง หรือติดต่อทาง LINE: @begrove');
+    })
+    .then(function () {
+      btn.disabled = false;
+      btn.innerHTML = origHTML;
+    });
+  });
+})();
+</script>
+
+<!-- STICKY LINE TAB -->
+<a href="https://line.me/ti/p/@begrove" target="_blank" class="sticky-line-tab" title="Chat with us on LINE">
+  <div class="slt-inner">
+    <i class="fab fa-line slt-icon"></i>
+    <span class="slt-label">Line: @begrove</span>
+  </div>
+</a>
+
+</body>
+</html>
   <div class="slt-inner">
     <i class="fab fa-line slt-icon"></i>
     <span class="slt-label">Line: @begrove</span>
