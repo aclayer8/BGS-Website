@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git -C \"E:\\\\ACL8\\\\Claudy\\\\bgswebsite\" diff --stat)",
+      "Bash(Get-ChildItem -Path \"E:\\\\ACL8\\\\Claudy\\\\bgswebsite\" -Recurse -File -Name)",
+      "Bash(Sort-Object)",
+      "Bash(git checkout *)",
+      "mcp__Claude_in_Chrome__javascript_tool",
+      "WebFetch(domain:sysnetcenter.com)",
+      "mcp__4210fde6-8669-432d-b90e-d6439633f5b1__create_file"
+    ]
+  }
+}

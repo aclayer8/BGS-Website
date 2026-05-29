@@ -1,0 +1,38 @@
+id,sku,name,model,brand,brand_full,category,price,image_1,image_2,image_3,short,details,specs,tags,badge,rating,reviews,pdf,visible
+rg-rap2260g,RG-RAP2260G,Reyee RG-RAP2260G Wi-Fi 6 Ceiling AP AX1800 Dual Band,RG-RAP2260G,reyee,Ruijie Networks,wireless,2890,https://drive.google.com/file/d/ใส่-ID-รูปที่นี่/view,,,"Wi-Fi 6 AX1800, Gigabit Port, PoE+, Cloud Managed","• Wi-Fi 6 (802.11ax) Dual-Band ความเร็วสูงสุด 1.775Gbps
+• ติดตั้งแบบ Ceiling Mount เหมาะกับสำนักงาน
+• รองรับ PoE+ (802.3at) ไม่ต้องเดินสายไฟแยก
+• บริหารจัดการผ่าน Ruijie Cloud หรือ Controller
+• รับประกันศูนย์ประเทศไทย 3 ปี","มาตรฐาน Wi-Fi: WiFi 6 (802.11ax)
+ความเร็วสูงสุด: AX1800 (1.775Gbps)
+ย่านความถี่: Dual-Band 2.4/5GHz
+พอร์ต LAN: 1x Gigabit Ethernet
+Power: PoE 802.3at (30W)
+ผู้ใช้งานแนะนำ: 30 Devices
+พื้นที่ครอบคลุม: 80 ตร.ม.
+Warranty: 3 ปี","WiFi6,Ceiling,PoE,Gigabit",New,4.8,12,,TRUE
+rg-ap840-l,RG-AP840-L,Ruijie RG-AP840-L Wi-Fi 6 Enterprise AP AX5370,RG-AP840-L,ruijie,Ruijie Networks,wireless,0,https://drive.google.com/file/d/ใส่-ID-รูปที่นี่/view,,,"WiFi 6 Enterprise AP, 4x4 MIMO, 5.37Gbps, PoE","• Wi-Fi 6 Enterprise Access Point ระดับองค์กร
+• ความเร็วสูงสุด 5.37Gbps (4804+574 Mbps)
+• รองรับ 4x4 MU-MIMO + OFDMA
+• บริหารจัดการผ่าน Ruijie Cloud หรือ Controller
+• เหมาะสำหรับสำนักงานขนาดใหญ่ โรงแรม โรงพยาบาล","มาตรฐาน Wi-Fi: WiFi 6 (802.11ax)
+ความเร็วสูงสุด: 5.37 Gbps
+ย่านความถี่: Dual-Band 2.4/5GHz
+MIMO: 4x4 MU-MIMO
+พอร์ต LAN: 1x 2.5G + 1x Gigabit
+Power: PoE 802.3at (30W)
+Warranty: 3 ปี","WiFi6,Enterprise,4x4MIMO,PoE",,0,0,,TRUE
+rg-s1910-24gt4sfp,RG-S1910-24GT4SFP,Ruijie RG-S1910-24GT4SFP Managed Switch 24 Port Gigabit,RG-S1910-24GT4SFP,ruijie,Ruijie Networks,switch,0,https://drive.google.com/file/d/ใส่-ID-รูปที่นี่/view,,,Managed Switch 24 Port Gigabit + 4 SFP Uplink,"• 24 Port Gigabit + 4 SFP Uplink
+• Layer 2 Managed Switch
+• รองรับ VLAN, QoS, RSTP, IGMP Snooping
+• บริหารจัดการผ่าน Web GUI / CLI / Ruijie Cloud
+• รับประกันศูนย์ประเทศไทย 3 ปี","พอร์ต: 24x Gigabit + 4x SFP
+Switching Capacity: 56 Gbps
+Layer: L2 Managed
+VLAN: 802.1Q VLAN
+QoS: 4 Queues per Port
+Power: 220V AC
+Warranty: 3 ปี","Switch,Gigabit,Managed,SFP",,0,0,,TRUE
+ตัวอย่าง-สินค้า-ของคุณ,SKU-ของคุณ,ชื่อสินค้าของคุณ,รุ่นสินค้า,cisco,,firewall,0,,,,คำอธิบายสั้น 1-2 บรรทัด,รายละเอียดสินค้า (ใช้ Enter ขึ้นบรรทัดใหม่),"spec1: ค่า
+spec2: ค่า
+spec3: ค่า","tag1,tag2,tag3",,,,,TRUE

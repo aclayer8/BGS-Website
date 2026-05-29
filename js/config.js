@@ -9,8 +9,8 @@ const SITE_CONFIG = {
   // ── Google Sheets (จำเป็นต้องแก้) ──────────────────────────
   // วิธีได้ URL: Google Sheet → File → Share → Publish to web
   //              → เลือก tab Products → Comma-separated values → Publish
-  csvUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQp6_JUEIDV9sQpLLsW79Jm4yCvmgbn7FNgoieHddmphUScCbQJfyQqvBKt8BzDvga54elZSw4BQKJA/pub?output=csv',
-
+  // csvUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQp6_JUEIDV9sQpLLsW79Jm4yCvmgbn7FNgoieHddmphUScCbQJfyQqvBKt8BzDvga54elZSw4BQKJA/pub?output=csv',
+  csvUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQgB6nQ2umu9cymB5L4pK5jEPrGQrmdEyRU6hO7l4OKwNmJLMU5JKSPWBeCeQKHAQ/pub?output=csv',
   // ── ข้อมูลบริษัท ────────────────────────────────────────────
   companyName:    'BE GROVE SOLUTIONS CO., LTD',
   companyShort:   'BGS',

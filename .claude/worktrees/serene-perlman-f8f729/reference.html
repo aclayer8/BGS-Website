@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Site Reference | BE GROVE SOLUTIONS CO., LTD</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    .customers-section {
+      padding: 70px 0 80px;
+      background: #fff;
+    }
+    .customers-header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+    .customers-header h2 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+    .customers-header h2 span {
+      color: var(--accent);
+    }
+    .customers-header p {
+      color: #6b7a99;
+      font-size: 1rem;
+    }
+    .customers-header .ref-cat-line {
+      width: 60px;
+      height: 3px;
+      background: var(--accent);
+      margin: 14px auto 0;
+      border-radius: 2px;
+    }
+    .logo-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 20px;
+    }
+    @media (max-width: 1100px) { .logo-grid { grid-template-columns: repeat(4, 1fr); } }
+    @media (max-width: 768px)  { .logo-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 480px)  { .logo-grid { grid-template-columns: repeat(2, 1fr); } }
+
+    .logo-box {
+      background: transparent;
+      border: none;
+      aspect-ratio: 3/2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+      overflow: hidden;
+    }
+    .logo-box:hover {
+      transform: translateY(-3px);
+      opacity: 0.85;
+    }
+    .logo-box img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+    /* Empty / no-image state */
+    .logo-box.empty {
+      background: #f4f7fc;
+      border-style: dashed;
+    }
+    .logo-box.empty img { display: none; }
+    .logo-box.empty::after {
+      content: '\f03e';
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      font-size: 1.5rem;
+      color: #c8d3e8;
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar solid" id="navbar">
+  <div class="nav-container">
+    <a href="index.html" class="nav-logo">
+      <img src="bgs-logo1.png" alt="BE GROVE SOLUTIONS CO., LTD" class="nav-logo-img" />
+    </a>
+    <ul class="nav-menu">
+      <li><a href="index.html" class="nav-link" data-th="หน้าหลัก" data-en="Home">หน้าหลัก</a></li>
+      <li><a href="about.html" class="nav-link" data-th="เกี่ยวกับเรา" data-en="About Us">เกี่ยวกับเรา</a></li>
+      <li><a href="services.html" class="nav-link" data-th="บริการ" data-en="Services">บริการ</a></li>
+      <li><a href="products.html" class="nav-link" data-th="ผลิตภัณฑ์" data-en="Products">ผลิตภัณฑ์</a></li>
+      <li><a href="reference.html" class="nav-link active" data-th="Site Reference" data-en="Site Reference">Site Reference</a></li>
+      <li><a href="contact.html" class="nav-link" data-th="ติดต่อเรา" data-en="Contact">ติดต่อเรา</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="lang-switch">
+        <button class="lang-btn active" data-lang="th">TH</button>
+        <button class="lang-btn" data-lang="en">EN</button>
+      </div>
+      <a href="contact.html" class="nav-contact-btn" data-th="ติดต่อเรา" data-en="Contact Us">ติดต่อเรา</a>
+    </div>
+    <button class="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-menu">
+  <a href="index.html" class="nav-link" data-th="หน้าหลัก" data-en="Home">หน้าหลัก</a>
+  <a href="about.html" class="nav-link" data-th="เกี่ยวกับเรา" data-en="About Us">เกี่ยวกับเรา</a>
+  <a href="services.html" class="nav-link" data-th="บริการ" data-en="Services">บริการ</a>
+  <a href="products.html" class="nav-link" data-th="ผลิตภัณฑ์" data-en="Products">ผลิตภัณฑ์</a>
+  <a href="reference.html" class="nav-link" data-th="Site Reference" data-en="Site Reference">Site Reference</a>
+  <a href="contact.html" class="nav-link" data-th="ติดต่อเรา" data-en="Contact">ติดต่อเรา</a>
+  <div class="lang-switch"><button class="lang-btn active" data-lang="th">TH</button><button class="lang-btn" data-lang="en">EN</button></div>
+  <a href="contact.html" class="nav-contact-btn" data-th="ติดต่อเรา" data-en="Contact Us">ติดต่อเรา</a>
+</div>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="index.html" data-th="หน้าหลัก" data-en="Home">หน้าหลัก</a>
+      <i class="fas fa-chevron-right"></i>
+      <span data-th="Site Reference" data-en="Site Reference">Site Reference</span>
+    </div>
+    <h1 data-th="ลูกค้าของเรา" data-en="Our Value Customers">ลูกค้าของเรา</h1>
+    <p data-th="องค์กรชั้นนำที่ไว้วางใจให้เราดูแลระบบ IT" data-en="Leading organizations that trust us to manage their IT systems.">องค์กรชั้นนำที่ไว้วางใจให้เราดูแลระบบ IT</p>
+  </div>
+</section>
+
+<!-- CUSTOMER LOGO GRID -->
+<section class="customers-section">
+  <div class="container">
+    <div class="customers-header">
+      <h2>Our Value <span>Customers</span></h2>
+      <p data-th="ลูกค้าองค์กรที่เราให้บริการ IT Solution ครบวงจร" data-en="Organizations we serve with complete IT Solutions">ลูกค้าองค์กรที่เราให้บริการ IT Solution ครบวงจร</p>
+      <div class="ref-cat-line"></div>
+    </div>
+
+    <div class="logo-grid">
+      <div class="logo-box"><img src="images/customers/1.reignwoordpark.png" alt="Reignwoordpark" /></div>
+      <div class="logo-box"><img src="images/customers/2.mofa.png" alt="Mofa" /></div>
+      <div class="logo-box"><img src="images/customers/3.bsm.png" alt="Bsm" /></div>
+      <div class="logo-box"><img src="images/customers/4.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/5.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/6.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/7.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/8.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/9.jpg" alt="Jpg" /></div>
+      <div class="logo-box"><img src="images/customers/10.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/11.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/12.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/13.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/14.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/15.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/16.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/17.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/18.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/19.jpg" alt="Jpg" /></div>
+      <div class="logo-box"><img src="images/customers/20.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/21.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/22.jpg" alt="Jpg" /></div>
+      <div class="logo-box"><img src="images/customers/23.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/24.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/25.jpg" alt="Jpg" /></div>
+      <div class="logo-box"><img src="images/customers/26.jpg" alt="Jpg" /></div>
+      <div class="logo-box"><img src="images/customers/27.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/28.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/29.jpg" alt="Jpg" /></div>
+      <div class="logo-box"><img src="images/customers/30.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/31.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/32.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/33.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/34.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/35.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/36.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/37.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/38.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/39.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/40.jpg" alt="Jpg" /></div>
+      <div class="logo-box"><img src="images/customers/41.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/42.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/43.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/44.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/45.jpg" alt="Jpg" /></div>
+      <div class="logo-box"><img src="images/customers/46.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/47.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/48.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/49.png" alt="Png" /></div>
+      <div class="logo-box"><img src="images/customers/50.png" alt="Png" /></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-inner">
+      <h2 data-th="สนใจใช้บริการกับเรา?" data-en="Interested in Working With Us?">สนใจใช้บริการกับเรา?</h2>
+      <p data-th="ติดต่อทีมผู้เชี่ยวชาญเพื่อปรึกษาโซลูชัน IT ที่เหมาะสมสำหรับองค์กรของคุณ" data-en="Contact our expert team to discuss the right IT solution for your organization.">ติดต่อทีมผู้เชี่ยวชาญเพื่อปรึกษาโซลูชัน IT ที่เหมาะสมสำหรับองค์กรของคุณ</p>
+      <div class="cta-buttons">
+        <a href="contact.html" class="btn btn-primary"><i class="fas fa-paper-plane"></i> <span data-th="ติดต่อเรา" data-en="Contact Us">ติดต่อเรา</span></a>
+        <a href="services.html" class="btn btn-outline"><i class="fas fa-th-large"></i> <span data-th="ดูบริการ" data-en="Our Services">ดูบริการ</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="logo-wrap">
+          <img src="bgs-logo1.png" alt="BE GROVE SOLUTIONS CO., LTD" class="footer-logo-img" />
+        </div></div>
+        <p data-th="ผู้ให้บริการด้าน IT System Integration ครบวงจร" data-en="A complete IT System Integration service provider.">ผู้ให้บริการด้าน IT System Integration ครบวงจร</p>
+        <div class="footer-social">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#"><i class="fab fa-line"></i></a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4 data-th="บริการ" data-en="Services">บริการ</h4>
+          <ul>
+            <li><a href="services.html">Network Infrastructure</a></li>
+            <li><a href="services.html">Cybersecurity</a></li>
+            <li><a href="services.html">Cloud Solutions</a></li>
+            <li><a href="services.html">Managed Services</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4 data-th="เกี่ยวกับเรา" data-en="Company">เกี่ยวกับเรา</h4>
+          <ul>
+            <li><a href="about.html" data-th="ประวัติบริษัท" data-en="Our Story">ประวัติบริษัท</a></li>
+            <li><a href="reference.html" data-th="Site Reference" data-en="Site Reference">Site Reference</a></li>
+            <li><a href="contact.html" data-th="ติดต่อเรา" data-en="Contact">ติดต่อเรา</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4 data-th="ติดต่อ" data-en="Contact">ติดต่อ</h4>
+          <ul>
+            <li class="contact-li"><i class="fas fa-map-marker-alt"></i><span data-th="111/38 หมู่ 4 ต.บึงยี่โถ อ.ธัญบุรี จ.ปทุมธานี 12130" data-en="111/38 Moo 4, Buengyitho, Thanyaburi, Pathumtani 12130">111/38 หมู่ 4 ต.บึงยี่โถ อ.ธัญบุรี จ.ปทุมธานี 12130</span></li>
+            <li class="contact-li"><i class="fas fa-phone"></i><span>+66 9 1495 9997</span></li>
+            <li class="contact-li"><i class="fab fa-line"></i><span>@begrove</span></li>
+            <li class="contact-li"><i class="fas fa-envelope"></i><span>info@begrovesolutions.com</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p data-th="© 2024 BE GROVE SOLUTIONS CO., LTD. สงวนลิขสิทธิ์" data-en="© 2024 BE GROVE SOLUTIONS CO., LTD. All Rights Reserved.">© 2024 BE GROVE SOLUTIONS CO., LTD. สงวนลิขสิทธิ์</p>
+    </div>
+  </div>
+</footer>
+<script src="js/main.js"></script>
+
+<!-- STICKY LINE TAB -->
+<a href="https://line.me/ti/p/@begrove" target="_blank" class="sticky-line-tab" title="Chat with us on LINE">
+  <div class="slt-inner">
+    <i class="fab fa-line slt-icon"></i>
+    <span class="slt-label">Line: @begrove</span>
+  </div>
+</a>
+
+<script>
+  // Auto mark empty boxes (no image loaded)
+  document.querySelectorAll('.logo-box img').forEach(img => {
+    img.addEventListener('error', () => img.parentElement.classList.add('empty'));
+  });
+</script>
+
+</body>
+</html>
+                                                                                                                        

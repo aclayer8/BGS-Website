@@ -1,0 +1,150 @@
+id,sku,name,model,brand,brand_full,category,price,image_1,short,details,specs,tags,badge,rating,reviews,pdf,visible
+rg-ap840-l,RG-AP840-L,Ruijie RG-AP840-L Wi-Fi 6 Dual-Radio 4x4 MIMO 5.37Gbps,RG-AP840-L,ruijie,Ruijie Networks,wireless,0,https://sysnetcenter.com/12402-home_default/rg-ap840-l-ruijie-wireless-access-point-dual-radio-wi-fi-6-4x4-mimo-5gbps.webp,"Wi-Fi 6 Dual-Radio 4x4 MIMO 5.37Gbps, Port 1/2.5/5Gbps + SFP 5Gbps","• Wi-Fi 6 (802.11ax) Dual-Radio 4x4 MIMO ความเร็วสูงสุด 5.37Gbps
+• พอร์ต LAN: 1/2.5/5Gbps และ SFP 5Gbps
+• รองรับ Standalone, Ruijie Cloud, Hardware Controller
+• เหมาะสำหรับองค์กรขนาดใหญ่ที่ต้องการ throughput สูง","มาตรฐาน Wi-Fi: WiFi 6 (802.11ax)
+ความเร็วสูงสุด: 5.37 Gbps
+MIMO: 4x4 MU-MIMO
+ย่านความถี่: Dual-Band 2.4/5GHz
+พอร์ต LAN: 1x 1/2.5/5Gbps
+พอร์ต SFP: 1x 5Gbps
+Power: PoE 802.3at
+จัดการ: Cloud / Controller / Standalone","WiFi6,Enterprise,4x4MIMO,HighDensity,5Gbps",,0,0,,TRUE
+rg-ap880-l,RG-AP880-L,Ruijie RG-AP880-L Wi-Fi 6E Tri-Radio 4x4 MIMO 7.78Gbps,RG-AP880-L,ruijie,Ruijie Networks,wireless,0,https://sysnetcenter.com/12372-home_default/ruijie-rg-ap880-l-wireless-access-point-tri-radio-6e-4x4-mimo.webp,"Wi-Fi 6E Tri-Radio 4x4 MIMO 7.78Gbps, Port 1/2.5/5Gbps + SFP 5Gbps","• Wi-Fi 6E (802.11ax) Tri-Radio 4x4 MIMO ความเร็วสูงสุด 7.78Gbps
+• รองรับย่านความถี่ 2.4/5/6GHz (6GHz = WiFi 6E)
+• พอร์ต LAN: 1/2.5/5Gbps และ SFP 5Gbps
+• รองรับ Standalone, Ruijie Cloud, Hardware Controller","มาตรฐาน Wi-Fi: WiFi 6E (802.11ax)
+ความเร็วสูงสุด: 7.78 Gbps
+MIMO: 4x4 MU-MIMO
+ย่านความถี่: Tri-Band 2.4/5/6GHz
+พอร์ต LAN: 1x 1/2.5/5Gbps
+พอร์ต SFP: 1x 5Gbps
+Power: PoE 802.3bt
+จัดการ: Cloud / Controller / Standalone","WiFi6E,TriBand,4x4MIMO,HighDensity,6GHz",,0,0,,TRUE
+rg-ap820-arv3,RG-AP820-AR(V3),Ruijie RG-AP820-AR(V3) Wi-Fi 6 Tri-Radio 3.84Gbps Indoor AP,RG-AP820-AR(V3),ruijie,Ruijie Networks,wireless,0,https://sysnetcenter.com/11928-home_default/rg-ap820-arv3-ruijie-wi-fi-6-tri-radio-4gbps-indoor-access-point-5-gbps-port.webp,"Wi-Fi 6 Tri-Radio 3.84Gbps, 5Gbps Combo SFP Port","• Wi-Fi 6 Tri-Radio ความเร็วสูงสุด 3.843Gbps
+• ย่านความถี่ 2.4GHz + 5GHz + 5GHz
+• พอร์ต: 5Gbps Combo SFP
+• รองรับ Cloud / Controller / Standalone","มาตรฐาน Wi-Fi: WiFi 6 (802.11ax)
+ความเร็วสูงสุด: 3.843 Gbps
+ย่านความถี่: Tri-Radio 2.4/5/5GHz
+พอร์ต: 5Gbps Combo SFP
+Power: PoE 802.3bt
+จัดการ: Cloud / Controller / Standalone","WiFi6,TriRadio,Enterprise,Indoor",,0,0,,TRUE
+rg-ap880-e,RG-AP880-E,Ruijie RG-AP880-E Wi-Fi 6E Tri-Radio 7.78Gbps Indoor AP,RG-AP880-E,ruijie,Ruijie Networks,wireless,0,https://sysnetcenter.com/11604-home_default/rg-ap880-e-ruijie-wifi-6e-tri-radio-7780-gbps-indoor-access-point.webp,"Wi-Fi 6E Tri-Radio 7.78Gbps, Port LAN 5Gbps + SFP 5Gbps","• Wi-Fi 6E Tri-Radio ความเร็วสูงสุด 7.78Gbps
+• รองรับ 2.4/5/6GHz
+• พอร์ต LAN 5Gbps และ SFP 5Gbps
+• รองรับ Standalone, Cloud Control","มาตรฐาน Wi-Fi: WiFi 6E (802.11ax)
+ความเร็วสูงสุด: 7.78 Gbps
+ย่านความถี่: Tri-Band 2.4/5/6GHz
+พอร์ต LAN: 1x 5Gbps
+พอร์ต SFP: 1x 5Gbps
+Power: PoE 802.3bt
+จัดการ: Cloud / Standalone","WiFi6E,TriBand,6GHz,Indoor",,0,0,,TRUE
+rg-ap680-ov3,RG-AP680-O(V3),Ruijie RG-AP680-O(V3) Wi-Fi 6 Dual-Radio Outdoor AP 2.97Gbps,RG-AP680-O(V3),ruijie,Ruijie Networks,wireless,0,https://sysnetcenter.com/11280-home_default/ruijie-rg-ap680-ov3-wi-fi-6-dual-radio-industrial-grade-outdoor-access-point-omni.webp,"Wi-Fi 6 Outdoor Dual-Radio 2.97Gbps, Omni-Antenna, SFP 2.5Gbps","• Wi-Fi 6 Outdoor ระดับ Industrial Grade
+• Dual-Radio 2.4/5GHz ความเร็วสูงสุด 2.97Gbps
+• เสา Omni-Directional built-in
+• กันน้ำ IP67 ใช้งานกลางแจ้งได้","มาตรฐาน Wi-Fi: WiFi 6 (802.11ax)
+ความเร็วสูงสุด: 2.97 Gbps
+ย่านความถี่: Dual-Band 2.4/5GHz
+พอร์ต LAN: 1x Gigabit
+พอร์ต SFP: 1x 2.5Gbps
+กันน้ำ: IP67
+Power: PoE 802.3at / DC
+จัดการ: Cloud / Controller / Standalone","WiFi6,Outdoor,IP67,Industrial,Omni",,0,0,,TRUE
+rg-ap680-ar,RG-AP680-AR,Ruijie RG-AP680-AR Wi-Fi 6 Quad-Radio Outdoor AP 11.62Gbps,RG-AP680-AR,ruijie,Ruijie Networks,wireless,0,https://sysnetcenter.com/11270-home_default/ruijie-rg-ap680-ar-wi-fi-6-quad-radio-industrial-grade-outdoor-access-point.webp,"Wi-Fi 6 Outdoor Quad-Radio 11.62Gbps, SFP+ 10Gbps","• Wi-Fi 6 Quad-Radio Outdoor สำหรับ High Density
+• ความเร็วสูงสุด 11.622Gbps
+• พอร์ต LAN 5Gbps + SFP+ 10Gbps
+• Industrial Grade IP67","มาตรฐาน Wi-Fi: WiFi 6 (802.11ax)
+ความเร็วสูงสุด: 11.622 Gbps
+ย่านความถี่: Quad-Radio
+พอร์ต LAN: 1x 5Gbps
+พอร์ต SFP+: 1x 10Gbps
+กันน้ำ: IP67
+Power: PoE 802.3bt / DC
+จัดการ: Cloud / Controller","WiFi6,Outdoor,QuadRadio,IP67,10Gbps",,0,0,,TRUE
+rg-ap180p-l,RG-AP180P-L,Ruijie RG-AP180P-L Wall Plate AP Wi-Fi 6 Dual-Radio 2.97Gbps,RG-AP180P-L,ruijie,Ruijie Networks,wireless,0,https://sysnetcenter.com/11156-home_default/ruijie-rg-ap180p-l-wall-plate-ap-wi-fi-6-dual-radio-2975m-poe-passthrough.webp,"Wall Plate AP Wi-Fi 6 2.97Gbps, 5 Gigabit Port, PoE Passthrough","• Wall Plate AP Wi-Fi 6 ติดตั้งในกล่อง Switch มาตรฐาน
+• Dual-Radio 2.97Gbps + 5 Gigabit Port
+• รองรับ PoE Passthrough (จ่ายไฟต่อให้อุปกรณ์อื่น)
+• เหมาะกับห้องพักโรงแรม ห้องประชุม","มาตรฐาน Wi-Fi: WiFi 6 (802.11ax)
+ความเร็วสูงสุด: 2.97 Gbps
+ย่านความถี่: Dual-Band 2.4/5GHz
+พอร์ต: 5x Gigabit (1 Uplink + 4 Downlink)
+PoE Passthrough: รองรับ
+Power: PoE 802.3at
+ติดตั้ง: Wall Plate","WiFi6,WallPlate,Hotel,PoEPassthrough,5Port",,0,0,,TRUE
+rg-ap880-ar,RG-AP880-AR,Ruijie RG-AP880-AR Wi-Fi 6 4-Radio Indoor AP 8.6Gbps,RG-AP880-AR,ruijie,Ruijie Networks,wireless,0,https://sysnetcenter.com/10888-home_default/ruijie-rg-ap880-ar-access-point-wi-fi-6-4-radio-indoor.webp,"Wi-Fi 6 4-Radio 8.6Gbps High-Density, Port LAN 5Gbps + SFP","• Wi-Fi 6 4-Radio สำหรับ High Density
+• ความเร็วสูงสุด 8.6Gbps
+• พอร์ต LAN 5Gbps + SFP
+• Cloud / Hardware Controller รองรับ","มาตรฐาน Wi-Fi: WiFi 6 (802.11ax)
+ความเร็วสูงสุด: 8.6 Gbps
+ย่านความถี่: 4-Radio
+พอร์ต LAN: 1x 5Gbps
+พอร์ต SFP: รองรับ
+Power: PoE 802.3bt
+จัดการ: Cloud / Controller","WiFi6,4Radio,HighDensity,Enterprise",,0,0,,TRUE
+rg-ap720-l,RG-AP720-L,Ruijie RG-AP720-L Wireless AP AC Wave 2 1.17Gbps,RG-AP720-L,ruijie,Ruijie Networks,wireless,3840,https://sysnetcenter.com/7647-home_default/ruijie-rg-ap720-l-wireless-access-point-ac-wave-2-cloud.webp,"WiFi 5 AC Wave 2, 2x2 MIMO 1.17Gbps, Gigabit Port, Cloud Managed","• WiFi 5 (802.11ac) Wave 2 Dual-Band
+• ความเร็วสูงสุด 1.167Gbps 2x2 MIMO
+• Gigabit LAN Port
+• Cloud / Controller / Standalone","มาตรฐาน Wi-Fi: WiFi 5 (802.11ac) Wave 2
+ความเร็วสูงสุด: 1.167 Gbps
+MIMO: 2x2 MU-MIMO
+ย่านความถี่: Dual-Band 2.4/5GHz
+พอร์ต LAN: 1x Gigabit
+Power: PoE 802.3af
+จัดการ: Cloud / Controller / Standalone","WiFi5,ACWave2,2x2MIMO,Gigabit",,0,0,,TRUE
+rg-ap810-l,RG-AP810-L,Ruijie RG-AP810-L Wi-Fi 6 AX1800 2x2 MIMO 1.77Gbps,RG-AP810-L,ruijie,Ruijie Networks,wireless,0,https://sysnetcenter.com/9111-home_default/ruijie-rg-ap810-l-wi-fi-6-ax1800-wireless-access-point-2x2-mimo-1775gbps.webp,"Wi-Fi 6 AX1800 2x2 MIMO 1.77Gbps, Gigabit Port, Cloud Managed","• Wi-Fi 6 (802.11ax) AX1800 Dual-Band
+• ความเร็วสูงสุด 1.775Gbps 2x2 MIMO
+• Gigabit LAN Port
+• Cloud / Controller / Standalone","มาตรฐาน Wi-Fi: WiFi 6 (802.11ax)
+ความเร็วสูงสุด: 1.775 Gbps (AX1800)
+MIMO: 2x2 MU-MIMO
+ย่านความถี่: Dual-Band 2.4/5GHz
+พอร์ต LAN: 1x Gigabit
+Power: PoE 802.3af
+จัดการ: Cloud / Controller / Standalone","WiFi6,AX1800,2x2MIMO,SMB",,0,0,,TRUE
+rg-ap820-lv3,RG-AP820-L(V3),Ruijie RG-AP820-L(V3) Wi-Fi 6 AX3000 2x2 MIMO 2.97Gbps,RG-AP820-L(V3),ruijie,Ruijie Networks,wireless,0,https://sysnetcenter.com/8910-home_default/ruijie-rg-ap820-lv3-wireless-access-point-ax-wifi6.webp,"Wi-Fi 6 AX3000 2x2 MIMO 2.97Gbps, Gigabit + SFP 2.5Gbps","• Wi-Fi 6 AX3000 รองรับ 160MHz Channel Width
+• ความเร็วสูงสุด 2.97Gbps 2x2 MIMO
+• Gigabit LAN + 2.5Gbps SFP
+• Cloud / Controller / Standalone","มาตรฐาน Wi-Fi: WiFi 6 (802.11ax)
+ความเร็วสูงสุด: 2.97 Gbps (AX3000)
+MIMO: 2x2 MU-MIMO
+Channel Width: 160MHz
+ย่านความถี่: Dual-Band 2.4/5GHz
+พอร์ต LAN: 1x Gigabit
+พอร์ต SFP: 1x 2.5Gbps
+Power: PoE 802.3at
+จัดการ: Cloud / Controller / Standalone","WiFi6,AX3000,160MHz,2x2MIMO",,0,0,,TRUE
+rg-ap110-l,RG-AP110-L,Ruijie RG-AP110-L Wall-Mount AP N300 2.4GHz 300Mbps,RG-AP110-L,ruijie,Ruijie Networks,wireless,0,https://sysnetcenter.com/7741-home_default/ruijie-rg-ap110-l-wall-mountable-wireless-access-point-cloud.webp,"Wall-Mount AP 2.4GHz 300Mbps, 2 LAN Port, Cloud Managed","• Wall-Mountable 2.4GHz 802.11n 300Mbps
+• 2 LAN Port
+• Cloud / Standalone / Hardware Control","มาตรฐาน Wi-Fi: 802.11n (2.4GHz)
+ความเร็วสูงสุด: 300 Mbps
+พอร์ต LAN: 2x 100Mbps
+Power: PoE 802.3af
+ติดตั้ง: Wall Mount
+จัดการ: Cloud / Standalone","N300,WallMount,Indoor,Budget",,0,0,,TRUE
+rg-ap130w2-v2,RG-AP130(W2) V2,Ruijie RG-AP130(W2) V2 Wall AP AC Wave 2 1.17Gbps 4 Port,RG-AP130(W2) V2,ruijie,Ruijie Networks,wireless,0,https://sysnetcenter.com/7743-home_default/ruijie-rg-ap130w2-v2-wall-access-point-ac-port-gigabit-cloud.webp,"Wall AP AC Wave 2 1.17Gbps, 4 Gigabit Port, Cloud Managed","• Wall Access Point WiFi 5 AC Wave 2
+• ความเร็วสูงสุด 1.167Gbps 2x2 MU-MIMO
+• 4 Gigabit LAN Port
+• Cloud / Controller","มาตรฐาน Wi-Fi: WiFi 5 (802.11ac) Wave 2
+ความเร็วสูงสุด: 1.167 Gbps
+MIMO: 2x2 MU-MIMO
+พอร์ต LAN: 4x Gigabit
+Power: PoE 802.3at
+ติดตั้ง: Wall Mount","WiFi5,WallMount,4Port,Hotel",,0,0,,TRUE
+rg-ap180,RG-AP180,Ruijie RG-AP180 Wall AP Wi-Fi 6 AX1800 5 Port Gigabit,RG-AP180,ruijie,Ruijie Networks,wireless,0,https://sysnetcenter.com/7745-home_default/ruijie-rg-ap180-wall-access-point-ax-wi-fi-6-port-gigabit-cloud.webp,"Wall AP Wi-Fi 6 AX1800 1.77Gbps, 5 Gigabit Port, Cloud Managed","• Wall Access Point Wi-Fi 6 (802.11ax)
+• ความเร็วสูงสุด 1.774Gbps
+• 5 Gigabit Port (1 Uplink + 4 Downlink)
+• Cloud / Controller","มาตรฐาน Wi-Fi: WiFi 6 (802.11ax)
+ความเร็วสูงสุด: 1.774 Gbps
+พอร์ต LAN: 5x Gigabit
+Power: PoE 802.3at
+ติดตั้ง: Wall Mount
+จัดการ: Cloud / Controller","WiFi6,WallMount,5Port,Hotel,AX1800",,0,0,,TRUE
+rg-ap210-l,RG-AP210-L,Ruijie RG-AP210-L Wireless AP N300 2x2 300Mbps,RG-AP210-L,ruijie,Ruijie Networks,wireless,0,https://sysnetcenter.com/7742-home_default/ruijie-rg-ap210-l-wireless-access-point-n-300mbps-cloud.webp,"Wireless AP N300 2x2 300Mbps, Cloud Managed, Ceiling Mount","• 802.11n Dual-Band 300Mbps 2x2
+• Ceiling Mount
+• Cloud / Standalone / Hardware Control","มาตรฐาน Wi-Fi: 802.11n
+ความเร็วสูงสุด: 300 Mbps
+MIMO: 2x2
+พอร์ต LAN: 1x 100Mbps
+Power: PoE 802.3af
+ติดตั้ง: Ceiling Mount","N300,Ceiling,Budget,Indoor",,0,0,,TRUE
