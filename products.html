@@ -224,17 +224,6 @@ const CAT_ICONS = {
   'ทั่วไป': 'fa-box',
 };
 const iconFor = (c) => CAT_ICONS[c] || 'fa-tag';
-const BRAND_LABELS_TH = {
-  'ruijie networks': 'รุ่ยเจีย เน็ตเวิร์ค',
-  'ruijie network': 'รุ่ยเจีย เน็ตเวิร์ค',
-  'reyee': 'รีย์ เน็ตเวิร์ค',
-  'reyee network': 'รีย์ เน็ตเวิร์ค',
-  'ubiquiti networks': 'ยูบิควิตี้ เน็ตเวิร์ค',
-  'cisco systems': 'ซิสโก้',
-  'fortinet': 'ฟอร์ติเน็ต',
-  'hewlett packard enterprise': 'เอชพีอี',
-  'aruba networks': 'อารูบ้า เน็ตเวิร์ค',
-};
 const BRAND_DISPLAY_NAMES = {
   'ruijie network': 'Ruijie Networks',
   'ruijie networks': 'Ruijie Networks',
@@ -300,9 +289,7 @@ function prettyCategory(cat) {
 }
 function brandTitle(name) {
   const key = normalizeText(name).toLowerCase();
-  const displayName = BRAND_DISPLAY_NAMES[key] || name;
-  const th = BRAND_LABELS_TH[key];
-  return th ? `${displayName} (${th})` : displayName;
+  return BRAND_DISPLAY_NAMES[key] || name;
 }
 function categoryLabel(brandName, cat) {
   const key = normalizeText(brandName).toLowerCase();
