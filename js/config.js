@@ -10,7 +10,8 @@ const SITE_CONFIG = {
   // วิธีได้ URL: Google Sheet → File → Share → Publish to web
   //              → เลือก tab Products → Comma-separated values → Publish
   // ปัจจุบัน: bgs-product-database.xlsx / Products (2026-05-30)
-  csvUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTd0vurS7hWw9vZ25kol3h7fI4LZi2OnFGUdDC96ommAfSP2pwBfBAoDtCEvrk-uQ/pub?output=csv',
+  csvUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT1iat5AZXrq7OFUdoPC3K6vgtLr1dtrlpWxT2GNCYY976LyMsw3Byi_03MOxpu_A/pub?output=csv',
+  // เก่า (2026-05-30): 2PACX-1vTd0vurS7hWw9vZ25kol3h7fI4LZi2OnFGUdDC96ommAfSP2pwBfBAoDtCEvrk-uQ
   // เก่า (2026-05-29): 2PACX-1vQgB6nQ2umu9cymB5L4pK5jEPrGQrmdEyRU6hO7l4OKwNmJLMU5JKSPWBeCeQKHAQ
   // เก่า (บัญชีเดิม): 2PACX-1vQp6_JUEIDV9sQpLLsW79Jm4yCvmgbn7FNgoieHddmphUScCbQJfyQqvBKt8BzDvga54elZSw4BQKJA
   // ── ข้อมูลบริษัท ────────────────────────────────────────────
