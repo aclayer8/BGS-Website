@@ -69,7 +69,7 @@
           <input type="text" id="searchInput" class="shop-sb-select" placeholder="ค้นหาสินค้า, รุ่น, แบรนด์..." style="background-image:none;" />
         </div>
 
-        <div class="shop-sb-card">
+        <div class="shop-sb-card shop-sb-hidden">
           <div class="shop-sb-title">แบรนด์</div>
           <select id="brandSelect" class="shop-sb-select">
             <option value="all">ทุกแบรนด์</option>
@@ -77,7 +77,7 @@
         </div>
 
         <div class="shop-sb-card">
-          <div class="shop-sb-title">หมวดหมู่</div>
+          <div class="shop-sb-title">แบรนด์ / หมวดหมู่</div>
           <ul class="shop-sb-menu" id="catMenu"></ul>
         </div>
 
@@ -195,6 +195,7 @@ let activeBrand = 'all';
 let activeSort = 'default';
 let searchQ = '';
 let currentPage = 1;
+let collapsedBrands = new Set();
 
 const $list   = document.getElementById('productList');
 const $pag    = document.getElementById('pagination');
@@ -223,9 +224,91 @@ const CAT_ICONS = {
   'ทั่วไป': 'fa-box',
 };
 const iconFor = (c) => CAT_ICONS[c] || 'fa-tag';
+const BRAND_LABELS_TH = {
+  'ruijie networks': 'รุ่ยเจีย เน็ตเวิร์ค',
+  'ruijie network': 'รุ่ยเจีย เน็ตเวิร์ค',
+  'reyee': 'รีย์ เน็ตเวิร์ค',
+  'reyee network': 'รีย์ เน็ตเวิร์ค',
+  'ubiquiti networks': 'ยูบิควิตี้ เน็ตเวิร์ค',
+  'cisco systems': 'ซิสโก้',
+  'fortinet': 'ฟอร์ติเน็ต',
+  'hewlett packard enterprise': 'เอชพีอี',
+  'aruba networks': 'อารูบ้า เน็ตเวิร์ค',
+};
+const BRAND_DISPLAY_NAMES = {
+  'ruijie network': 'Ruijie Networks',
+  'ruijie networks': 'Ruijie Networks',
+  'reyee': 'Reyee Network',
+  'reyee network': 'Reyee Network',
+};
+const BRAND_SHORT_NAMES = {
+  'ruijie networks': 'Ruijie',
+  'ruijie network': 'Ruijie',
+  'reyee': 'Reyee',
+  'reyee network': 'Reyee',
+  'ubiquiti networks': 'Ubiquiti',
+  'cisco systems': 'Cisco',
+  'fortinet': 'Fortinet',
+  'hewlett packard enterprise': 'HPE',
+  'aruba networks': 'Aruba',
+};
+const CATEGORY_LABELS = {
+  'access-point': 'Access Point',
+  'access point': 'Access Point',
+  'accessory': 'Accessories',
+  'accessories': 'Accessories',
+  'switch': 'Switches',
+  'switches': 'Switches',
+  'gateway': 'Gateway',
+  'gateway-router': 'Gateway Router',
+  'gateway router': 'Gateway Router',
+  'firewall': 'Next-Gen Firewall',
+  'next-gen firewall': 'Next-Gen Firewall',
+  'wireless-controller': 'Wireless Controller',
+  'wireless controller': 'Wireless Controller',
+  'controller': 'Wireless Controller',
+  'mesh-wifi': 'MESH WIFI',
+  'mesh wifi': 'MESH WIFI',
+  'home-wifi': 'Home WIFI',
+  'home wifi': 'Home WIFI',
+  'wireless-bridge': 'Wireless Bridge',
+  'wireless bridge': 'Wireless Bridge',
+  'network-access-control-nac': 'Network Access Control (NAC)',
+  'network access control nac': 'Network Access Control (NAC)',
+  'e-lighten-optical': 'e-Lighten Optical',
+  'e lighten optical': 'e-Lighten Optical',
+};
 
 function esc(s) {
   return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+function normalizeText(s) {
+  return String(s || '').trim().replace(/\s+/g, ' ');
+}
+function brandKeyFromProduct(p) {
+  return brandNameFromProduct(p).toLowerCase();
+}
+function brandNameFromProduct(p) {
+  const name = normalizeText(p.brand || p.brandFull || 'Other');
+  return BRAND_DISPLAY_NAMES[name.toLowerCase()] || name;
+}
+function prettyCategory(cat) {
+  const raw = normalizeText(cat || 'ทั่วไป');
+  const normalized = raw.toLowerCase().replace(/[_]+/g, '-');
+  const spaced = raw.replace(/[-_]+/g, ' ');
+  return CATEGORY_LABELS[normalized] || CATEGORY_LABELS[spaced.toLowerCase()] || spaced;
+}
+function brandTitle(name) {
+  const key = normalizeText(name).toLowerCase();
+  const displayName = BRAND_DISPLAY_NAMES[key] || name;
+  const th = BRAND_LABELS_TH[key];
+  return th ? `${displayName} (${th})` : displayName;
+}
+function categoryLabel(brandName, cat) {
+  const key = normalizeText(brandName).toLowerCase();
+  const shortName = BRAND_SHORT_NAMES[key] || normalizeText(brandName).split(/\s+/)[0] || '';
+  const pretty = prettyCategory(cat);
+  return pretty.toLowerCase().startsWith(shortName.toLowerCase()) ? pretty : `${shortName} ${pretty}`.trim();
 }
 function fmtBaht(n) {
   if (!n || Number(n) === 0) return 'ติดต่อสอบถาม';
@@ -247,7 +330,7 @@ function updateQuoteCount() {
 function getFiltered() {
   let list = [...ALL_PRODUCTS];
   if (activeCat !== 'all') list = list.filter(p => p.cat === activeCat);
-  if (activeBrand !== 'all') list = list.filter(p => p.brand === activeBrand);
+  if (activeBrand !== 'all') list = list.filter(p => brandNameFromProduct(p) === activeBrand || p.brand === activeBrand);
   if (searchQ) {
     const q = searchQ.toLowerCase();
     list = list.filter(p =>
@@ -400,33 +483,114 @@ function render() {
 }
 
 function buildFilters() {
-  // Categories
-  const cats = ['all', ...BGS.getCategories(ALL_PRODUCTS)];
-  $catMenu.innerHTML = cats.map(c => `
-    <li>
-      <button class="shop-sb-link ${c===activeCat?'active':''}" onclick="setCat('${esc(c)}')" data-cat="${esc(c)}">
-        <i class="fas ${c==='all'?'fa-th-large':iconFor(c)}"></i>
-        <span>${c==='all' ? 'ทั้งหมด' : esc(c)}</span>
-        <i class="fas fa-chevron-right shop-sb-plus"></i>
-      </button>
-    </li>`).join('');
+  const groups = new Map();
+  ALL_PRODUCTS.forEach(p => {
+    const key = brandKeyFromProduct(p);
+    const name = brandNameFromProduct(p);
+    if (!groups.has(key)) groups.set(key, { key, name, cats: new Set(), count: 0 });
+    const g = groups.get(key);
+    g.name = g.name || name;
+    g.cats.add(p.cat || 'ทั่วไป');
+    g.count++;
+  });
+  const sortedGroups = [...groups.values()].sort((a,b) => a.name.localeCompare(b.name, 'th'));
 
-  // Brands
-  const brands = ['all', ...BGS.getBrands(ALL_PRODUCTS)];
+  const allActive = activeBrand === 'all' && activeCat === 'all';
+  const allItem = `
+    <li class="shop-brand-group">
+      <button class="shop-sb-link shop-sb-all ${allActive ? 'active' : ''}" data-action="all">
+        <i class="fas fa-th-large"></i>
+        <span>ทั้งหมด</span>
+        <small>${ALL_PRODUCTS.length}</small>
+      </button>
+    </li>`;
+
+  $catMenu.innerHTML = allItem + sortedGroups.map(g => {
+    const isCollapsed = collapsedBrands.has(g.key);
+    const isBrandActive = activeBrand === g.name && activeCat === 'all';
+    const cats = [...g.cats].sort((a,b) => prettyCategory(a).localeCompare(prettyCategory(b), 'th'));
+    const catHtml = cats.map(cat => {
+      const count = ALL_PRODUCTS.filter(p => brandNameFromProduct(p) === g.name && p.cat === cat).length;
+      const isActive = activeBrand === g.name && activeCat === cat;
+      return `
+        <li>
+          <button class="shop-brand-cat ${isActive ? 'active' : ''}" data-action="brand-cat" data-brand="${esc(g.name)}" data-cat="${esc(cat)}">
+            <i class="fas fa-chevron-right"></i>
+            <span>${esc(categoryLabel(g.name, cat))}</span>
+            <small>${count}</small>
+          </button>
+        </li>`;
+    }).join('');
+    return `
+      <li class="shop-brand-group ${isCollapsed ? 'collapsed' : ''}">
+        <div class="shop-brand-head ${isBrandActive ? 'active' : ''}">
+          <button type="button" class="shop-brand-name" data-action="brand" data-brand="${esc(g.name)}">
+            <span>${esc(brandTitle(g.name))}</span>
+            <small>${g.count}</small>
+          </button>
+          <button type="button" class="shop-brand-toggle" data-action="toggle-brand" data-brand-key="${esc(g.key)}" aria-label="${isCollapsed ? 'เปิดหมวด' : 'ปิดหมวด'}">
+            <i class="fas ${isCollapsed ? 'fa-plus' : 'fa-minus'}"></i>
+          </button>
+        </div>
+        <ul class="shop-brand-cats">${catHtml}</ul>
+      </li>`;
+  }).join('');
+
+  const brands = ['all', ...sortedGroups.map(g => g.name)];
   $brand.innerHTML = brands.map(b =>
     `<option value="${esc(b)}" ${b===activeBrand?'selected':''}>${b==='all'?'ทุกแบรนด์':esc(b)}</option>`
   ).join('');
+
+  $catMenu.querySelectorAll('[data-action]').forEach(btn => {
+    btn.addEventListener('click', handleSidebarAction);
+  });
 }
 
 function setCat(c) {
   activeCat = c;
-  $head.textContent = c === 'all' ? 'ผลิตภัณฑ์ทั้งหมด' : c;
-  $catMenu.querySelectorAll('.shop-sb-link').forEach(btn => {
-    btn.classList.toggle('active', btn.dataset.cat === c);
-  });
+  if (c === 'all') activeBrand = 'all';
+  $head.textContent = c === 'all' ? 'ผลิตภัณฑ์ทั้งหมด' : prettyCategory(c);
+  buildFilters();
   render();
 }
 window.setCat = setCat;
+
+function setBrand(brand) {
+  activeBrand = brand;
+  activeCat = 'all';
+  $brand.value = brand;
+  $head.textContent = brand === 'all' ? 'ผลิตภัณฑ์ทั้งหมด' : brandTitle(brand);
+  buildFilters();
+  render();
+}
+window.setBrand = setBrand;
+
+function setBrandCat(brand, cat) {
+  activeBrand = brand;
+  activeCat = cat;
+  $brand.value = brand;
+  $head.textContent = `${brandTitle(brand)} / ${prettyCategory(cat)}`;
+  buildFilters();
+  render();
+}
+window.setBrandCat = setBrandCat;
+
+function handleSidebarAction(ev) {
+  const btn = ev.currentTarget;
+  const action = btn.dataset.action;
+  if (action === 'all') {
+    resetFilters();
+  } else if (action === 'brand') {
+    setBrand(btn.dataset.brand);
+  } else if (action === 'brand-cat') {
+    setBrandCat(btn.dataset.brand, btn.dataset.cat);
+  } else if (action === 'toggle-brand') {
+    const key = btn.dataset.brandKey;
+    if (collapsedBrands.has(key)) collapsedBrands.delete(key);
+    else collapsedBrands.add(key);
+    buildFilters();
+  }
+}
 
 function resetFilters() {
   activeCat = 'all'; activeBrand = 'all'; activeSort = 'default'; searchQ = '';
