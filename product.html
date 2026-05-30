@@ -442,4 +442,9 @@ function showError(msg) {
   }
 
   const p = BGS.findProduct(products, id);
-  if (!p) { showError(`ไม่พบสินค้ารหัส "${id}"`); return
+  if (!p) { showError(`ไม่พบสินค้ารหัส "${id}"`); return; }
+  renderDetail(p);
+})();
+</script>
+</body>
+</html>
