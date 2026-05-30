@@ -126,7 +126,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- Contact Form ---
   const contactForm = document.getElementById('contactForm');
-  contactForm?.addEventListener('submit', (e) => {
+  if (contactForm && !document.getElementById('formStatus') && !contactForm.dataset.customSubmitHandler) {
+    contactForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const btn = contactForm.querySelector('.form-submit');
     const origText = btn.innerHTML;
@@ -138,6 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
       contactForm.reset();
     }, 3000);
   });
+  }
 
   // --- Smooth stagger animation ---
   document.querySelectorAll('.services-grid .service-card, .products-grid .product-card').forEach((el, i) => {

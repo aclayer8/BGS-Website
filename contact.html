@@ -333,6 +333,9 @@
 
   var form = document.getElementById('contactForm');
   if (!form) return;
+  if (window.__bgsContactHandlerBound) return;
+  window.__bgsContactHandlerBound = true;
+  form.dataset.customSubmitHandler = 'google-script';
 
   var btn    = form.querySelector('.form-submit');
   var status = document.getElementById('formStatus');
@@ -350,8 +353,11 @@
     return opt ? (opt.dataset.th || opt.textContent.trim()) : val;
   }
 
+  var isSubmitting = false;
+
   form.addEventListener('submit', function (e) {
     e.preventDefault();
+    if (isSubmitting) return;
     hideStatus();
 
     var fd = new FormData(form);
@@ -381,6 +387,7 @@
     };
 
     var origHTML = btn.innerHTML;
+    isSubmitting = true;
     btn.disabled = true;
     btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> <span>กำลังส่ง...</span>';
 
@@ -405,6 +412,7 @@
       showStatus('error', 'ไม่สามารถส่งได้ ลองใหม่อีกครั้ง หรือติดต่อทาง LINE: @begrove');
     })
     .then(function () {
+      isSubmitting = false;
       btn.disabled = false;
       btn.innerHTML = origHTML;
     });
@@ -419,6 +427,9 @@
 
   var form = document.getElementById('contactForm');
   if (!form) return;
+  if (window.__bgsContactHandlerBound) return;
+  window.__bgsContactHandlerBound = true;
+  form.dataset.customSubmitHandler = 'google-script';
 
   var btn    = form.querySelector('.form-submit');
   var status = document.getElementById('formStatus');
