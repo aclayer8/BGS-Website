@@ -204,7 +204,7 @@
   border-left: 5px solid var(--accent);
 }
 .shop-cat-head h1 { font-size: 22px; font-weight: 700; margin-bottom: 4px; color: #fff; }
-.shop-cat-head p { font-size: 13px; opacity: .88; font-weight: 300; margin: 0; }
+.shop-cat-head p { font-size: 13px; color: #fff; opacity: .92; font-weight: 300; margin: 0; }
 
 .shop-toolbar {
   display: flex;
