@@ -95,7 +95,7 @@
       </aside>
 
       <!-- MAIN AREA -->
-      <section class="shop-main">
+      <section class="shop-main" id="productsResults">
         <div class="shop-cat-head">
           <h1 id="catHeadTitle">ผลิตภัณฑ์ทั้งหมด</h1>
           <p>อุปกรณ์ IT คุณภาพสูงจากแบรนด์ชั้นนำ — ตัวแทนจำหน่ายอย่างเป็นทางการ · รับประกันศูนย์</p>
@@ -195,6 +195,8 @@ let activeSort = 'default';
 let searchQ = '';
 let currentPage = 1;
 let collapsedBrands = new Set();
+let allBrandKeys = new Set();
+let filtersCollapsedInitialized = false;
 
 const $list   = document.getElementById('productList');
 const $pag    = document.getElementById('pagination');
@@ -754,6 +756,13 @@ function render() {
   currentPage = 1;
   renderGrid(getFiltered());
 }
+function scrollToResults() {
+  const target = document.getElementById('productsResults');
+  if (!target) return;
+  const offset = 88;
+  const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+  window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+}
 
 function buildFilters() {
   const groups = new Map();
@@ -775,6 +784,14 @@ function buildFilters() {
   const sortedGroups = [...groups.values()].sort((a,b) => {
     const orderDiff = menuGroupSortIndex(a.name) - menuGroupSortIndex(b.name);
     return orderDiff || menuGroupLabel(a.name).localeCompare(menuGroupLabel(b.name), 'th');
+  });
+  allBrandKeys = new Set(sortedGroups.map(g => g.key));
+  if (!filtersCollapsedInitialized) {
+    collapsedBrands = new Set(sortedGroups.map(g => g.key));
+    filtersCollapsedInitialized = true;
+  }
+  sortedGroups.forEach(g => {
+    if (activeBrand === g.name) collapsedBrands.delete(g.key);
   });
 
   const allActive = activeBrand === 'all' && activeCat === 'all';
@@ -837,6 +854,7 @@ function setCat(c) {
   $head.textContent = c === 'all' ? 'ผลิตภัณฑ์ทั้งหมด' : menuCategoryLabel(activeBrand, c);
   buildFilters();
   render();
+  scrollToResults();
 }
 window.setCat = setCat;
 
@@ -847,6 +865,7 @@ function setBrand(brand) {
   $head.textContent = brand === 'all' ? 'ผลิตภัณฑ์ทั้งหมด' : menuGroupLabel(brand);
   buildFilters();
   render();
+  scrollToResults();
 }
 window.setBrand = setBrand;
 
@@ -857,6 +876,7 @@ function setBrandCat(brand, cat) {
   $head.textContent = `${menuGroupLabel(brand)} / ${menuCategoryLabel(brand, cat)}`;
   buildFilters();
   render();
+  scrollToResults();
 }
 window.setBrandCat = setBrandCat;
 
@@ -883,6 +903,7 @@ function resetFilters() {
   buildFilters();
   $head.textContent = 'ผลิตภัณฑ์ทั้งหมด';
   render();
+  scrollToResults();
 }
 window.resetFilters = resetFilters;
 
