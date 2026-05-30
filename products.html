@@ -36,7 +36,6 @@
       <a href="contact.html" class="nav-quote-pill">
         <i class="far fa-file-lines"></i>
         <span>ขอใบเสนอราคา</span>
-        <span class="nav-quote-count" id="navQuoteCount">0</span>
       </a>
     </div>
     <button class="hamburger" aria-label="เปิดเมนู" aria-expanded="false"><span></span><span></span><span></span></button>
@@ -205,7 +204,6 @@ const $brand  = document.getElementById('brandSelect');
 const $sort   = document.getElementById('sortSelect');
 const $search = document.getElementById('searchInput');
 const $head   = document.getElementById('catHeadTitle');
-const $qCount = document.getElementById('navQuoteCount');
 
 const CAT_ICONS = {
   'Access Point': 'fa-wifi',
@@ -623,15 +621,6 @@ function fallbackImg() {
   return `<div class="spl-img-placeholder"><i class="fas fa-image"></i></div>`;
 }
 
-function readQuoteList() {
-  try { return JSON.parse(localStorage.getItem('bgs_quote_list') || '[]'); }
-  catch(e) { return []; }
-}
-function updateQuoteCount() {
-  const list = readQuoteList();
-  $qCount.textContent = list.length;
-}
-
 function getFiltered() {
   let list = [...ALL_PRODUCTS];
   if (activeCat !== 'all') list = list.filter(p => menuCatFromProduct(p) === activeCat || p.cat === activeCat);
@@ -691,36 +680,12 @@ function cardHtml(p) {
         <div class="${priceClass}">${fmtBaht(p.price)}</div>
         <div class="spl-price-note">ยังไม่รวมภาษี · ติดต่อขอราคาพิเศษ</div>
         <a href="${detailUrl}" class="spl-btn">ดูรายละเอียด <i class="fas fa-arrow-right"></i></a>
-        <button class="spl-btn-ghost" onclick="addToQuoteList('${esc(p.id)}', event)">
+        <a href="contact.html?product=${encodeURIComponent(p.id)}" class="spl-btn-ghost">
           <i class="far fa-file-lines"></i> ขอใบเสนอราคา
-        </button>
+        </a>
       </div>
     </article>`;
 }
-
-function addToQuoteList(id, ev) {
-  if (ev) { ev.preventDefault(); ev.stopPropagation(); }
-  const list = readQuoteList();
-  if (!list.includes(id)) list.push(id);
-  localStorage.setItem('bgs_quote_list', JSON.stringify(list));
-  updateQuoteCount();
-  // pulse feedback
-  if (ev && ev.currentTarget) {
-    const btn = ev.currentTarget;
-    const original = btn.innerHTML;
-    btn.innerHTML = '<i class="fas fa-check"></i> เพิ่มแล้ว';
-    btn.style.background = '#22c55e';
-    btn.style.borderColor = '#22c55e';
-    btn.style.color = '#fff';
-    setTimeout(() => {
-      btn.innerHTML = original;
-      btn.style.background = '';
-      btn.style.borderColor = '';
-      btn.style.color = '';
-    }, 1800);
-  }
-}
-window.addToQuoteList = addToQuoteList;
 
 function skeletonCards(n=4) {
   let h='';
@@ -941,7 +906,6 @@ function showError(err) {
 async function init() {
   $list.innerHTML = skeletonCards(4);
   $count.textContent = 'กำลังโหลด...';
-  updateQuoteCount();
 
   try {
     ALL_PRODUCTS = await BGS.loadProducts();

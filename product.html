@@ -35,7 +35,6 @@
       <a href="contact.html" class="nav-quote-pill">
         <i class="far fa-file-lines"></i>
         <span>ขอใบเสนอราคา</span>
-        <span class="nav-quote-count" id="navQuoteCount">0</span>
       </a>
     </div>
     <button class="hamburger" aria-label="เปิดเมนู"><span></span><span></span><span></span></button>
@@ -142,13 +141,6 @@ function esc(s) {
 function fmtBaht(n) {
   if (!n || Number(n) === 0) return 'ติดต่อสอบถาม';
   return '฿' + Number(n).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-}
-
-function readQuoteList() {
-  try { return JSON.parse(localStorage.getItem('bgs_quote_list') || '[]'); } catch(e) { return []; }
-}
-function updateQuoteCount() {
-  document.getElementById('navQuoteCount').textContent = readQuoteList().length;
 }
 
 function starHtml(rating) {
@@ -272,9 +264,9 @@ function renderDetail(p) {
         </div>
 
         <div class="sd-cta-row">
-          <button class="sd-btn-quote" id="quoteBtn" onclick="addThisToQuote('${esc(p.id)}')">
+          <a href="contact.html?product=${encodeURIComponent(p.id)}" class="sd-btn-quote" id="quoteBtn">
             <i class="far fa-file-lines"></i> ขอใบเสนอราคา
-          </button>
+          </a>
           <a href="https://line.me/ti/p/@begrove" target="_blank" class="sd-btn-line">
             <i class="fab fa-line"></i> สอบถามทาง LINE
           </a>
@@ -400,21 +392,6 @@ function qtyInc() { const i = document.getElementById('qtyInput'); i.value = Mat
 function qtyDec() { const i = document.getElementById('qtyInput'); i.value = Math.max(1, Number(i.value)-1); }
 window.qtyInc = qtyInc; window.qtyDec = qtyDec;
 
-function addThisToQuote(id) {
-  const list = readQuoteList();
-  if (!list.includes(id)) list.push(id);
-  localStorage.setItem('bgs_quote_list', JSON.stringify(list));
-  updateQuoteCount();
-  const btn = document.getElementById('quoteBtn');
-  btn.classList.add('added');
-  btn.innerHTML = '<i class="fas fa-check"></i> เพิ่มในรายการแล้ว';
-  setTimeout(() => {
-    btn.classList.remove('added');
-    btn.innerHTML = '<i class="far fa-file-lines"></i> ขอใบเสนอราคา';
-  }, 2200);
-}
-window.addThisToQuote = addThisToQuote;
-
 function showError(msg) {
   document.getElementById('pageContent').innerHTML = `
     <div class="shop-state">
@@ -426,7 +403,6 @@ function showError(msg) {
 }
 
 (async () => {
-  updateQuoteCount();
   const params = new URLSearchParams(window.location.search);
   const id = params.get('id');
   if (!id) { showError('ไม่พบรหัสสินค้า กรุณาเข้าผ่านหน้ารายการสินค้า'); return; }
