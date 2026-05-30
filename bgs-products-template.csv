@@ -1,5 +1,5 @@
-id,sku,name,model,brand,brand_full,category,price,image_1,image_2,image_3,short,details,specs,tags,badge,rating,reviews,pdf,visible
-rg-rap2260g,RG-RAP2260G,Reyee RG-RAP2260G Wi-Fi 6 Ceiling AP AX1800 Dual Band,RG-RAP2260G,reyee,Ruijie Networks,wireless,2890,https://drive.google.com/file/d/ใส่-ID-รูปที่นี่/view,,,"Wi-Fi 6 AX1800, Gigabit Port, PoE+, Cloud Managed","• Wi-Fi 6 (802.11ax) Dual-Band ความเร็วสูงสุด 1.775Gbps
+id,sku,name,model,brand,brand_full,category,menu_group,menu_category,price,image_1,image_2,image_3,short,details,specs,tags,badge,rating,reviews,pdf,visible
+rg-rap2260g,RG-RAP2260G,Reyee RG-RAP2260G Wi-Fi 6 Ceiling AP AX1800 Dual Band,RG-RAP2260G,reyee,Ruijie Networks,Access Point,Reyee Network,Access Point,2890,https://drive.google.com/file/d/ใส่-ID-รูปที่นี่/view,,,"Wi-Fi 6 AX1800, Gigabit Port, PoE+, Cloud Managed","• Wi-Fi 6 (802.11ax) Dual-Band ความเร็วสูงสุด 1.775Gbps
 • ติดตั้งแบบ Ceiling Mount เหมาะกับสำนักงาน
 • รองรับ PoE+ (802.3at) ไม่ต้องเดินสายไฟแยก
 • บริหารจัดการผ่าน Ruijie Cloud หรือ Controller

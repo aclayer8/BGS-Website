@@ -227,14 +227,17 @@ const iconFor = (c) => CAT_ICONS[c] || 'fa-tag';
 const BRAND_DISPLAY_NAMES = {
   'ruijie network': 'Ruijie Networks',
   'ruijie networks': 'Ruijie Networks',
+  'ruijie': 'Ruijie Networks',
   'reyee': 'Reyee Network',
   'reyee network': 'Reyee Network',
+  'draytek': 'DrayTek',
 };
 const BRAND_SHORT_NAMES = {
   'ruijie networks': 'Ruijie',
   'ruijie network': 'Ruijie',
   'reyee': 'Reyee',
   'reyee network': 'Reyee',
+  'draytek': 'DrayTek',
   'ubiquiti networks': 'Ubiquiti',
   'cisco systems': 'Cisco',
   'fortinet': 'Fortinet',
@@ -267,12 +270,146 @@ const CATEGORY_LABELS = {
   'e-lighten-optical': 'e-Lighten Optical',
   'e lighten optical': 'e-Lighten Optical',
 };
+const MENU_GROUP_ORDER = [
+  'Reyee Network',
+  'Ruijie Networks',
+  'DrayTek',
+  'Rack',
+  'ตู้ Rack / อุปกรณ์เสริมตู้ Rack',
+];
+const MENU_GROUP_LABELS = {
+  'reyee': 'Reyee Network (รีย์ เน็ตเวิร์ค)',
+  'reyee network': 'Reyee Network (รีย์ เน็ตเวิร์ค)',
+  'ruijie': 'Ruijie Networks (รุ่ยเจี๋ย เน็ตเวิร์ค)',
+  'ruijie network': 'Ruijie Networks (รุ่ยเจี๋ย เน็ตเวิร์ค)',
+  'ruijie networks': 'Ruijie Networks (รุ่ยเจี๋ย เน็ตเวิร์ค)',
+  'draytek': 'DrayTek (เดรเทค)',
+  'rack': 'ตู้ Rack / อุปกรณ์เสริมตู้ Rack',
+  'ตู้ rack / อุปกรณ์เสริมตู้ rack': 'ตู้ Rack / อุปกรณ์เสริมตู้ Rack',
+};
+const MENU_CATEGORY_ORDER = {
+  'reyee network': [
+    'Reyee Access Point',
+    'Reyee Gateway Router',
+    'Reyee Network Switch',
+    'Reyee MESH WIFI',
+    'Reyee Home WIFI',
+    'Network Access Control (NAC)',
+    'Reyee Wireless Bridge',
+    'Reyee e-Lighten Optical',
+  ],
+  'ruijie networks': [
+    'Ruijie Accessories',
+    'Ruijie Access Point',
+    'Ruijie Gateway',
+    'Ruijie Switches',
+    'Ruijie Next-Gen Firewall',
+    'Ruijie Wireless Controller',
+  ],
+  'draytek': [
+    'DrayTek Firewall Router',
+    'Draytek Network Switches',
+    'DrayTek Wireless AP',
+    'Draytek Web Content Filtering',
+  ],
+  'rack': [
+    'Cabinet Rack',
+    'Wall Rack',
+    'Server Rack',
+    'Open Rack',
+    'Outdoor Cabinet',
+    'Cable Management แผงจัดสาย',
+    'อุปกรณ์ประกอบตู้ Rack',
+    'Heavy Duty Fan พัดลม',
+    'Component Shelf ถาด',
+    'AC Power Distribution รางไฟ',
+  ],
+  'ตู้ rack / อุปกรณ์เสริมตู้ rack': [
+    'Cabinet Rack',
+    'Wall Rack',
+    'Server Rack',
+    'Open Rack',
+    'Outdoor Cabinet',
+    'Cable Management แผงจัดสาย',
+    'อุปกรณ์ประกอบตู้ Rack',
+    'Heavy Duty Fan พัดลม',
+    'Component Shelf ถาด',
+    'AC Power Distribution รางไฟ',
+  ],
+};
+const MENU_CATEGORY_LABELS = {
+  'reyee network': {
+    'access point': 'Reyee Access Point',
+    'gateway router': 'Reyee Gateway Router',
+    'gateway': 'Reyee Gateway Router',
+    'switch': 'Reyee Network Switch',
+    'switches': 'Reyee Network Switch',
+    'network switch': 'Reyee Network Switch',
+    'mesh wifi': 'Reyee MESH WIFI',
+    'mesh-wifi': 'Reyee MESH WIFI',
+    'home wifi': 'Reyee Home WIFI',
+    'home-wifi': 'Reyee Home WIFI',
+    'network access control nac': 'Network Access Control (NAC)',
+    'network-access-control-nac': 'Network Access Control (NAC)',
+    'wireless bridge': 'Reyee Wireless Bridge',
+    'wireless-bridge': 'Reyee Wireless Bridge',
+    'e lighten optical': 'Reyee e-Lighten Optical',
+    'e-lighten-optical': 'Reyee e-Lighten Optical',
+  },
+  'ruijie networks': {
+    'accessories': 'Ruijie Accessories',
+    'accessory': 'Ruijie Accessories',
+    'access point': 'Ruijie Access Point',
+    'gateway': 'Ruijie Gateway',
+    'switch': 'Ruijie Switches',
+    'switches': 'Ruijie Switches',
+    'next gen firewall': 'Ruijie Next-Gen Firewall',
+    'next-gen firewall': 'Ruijie Next-Gen Firewall',
+    'firewall': 'Ruijie Next-Gen Firewall',
+    'wireless controller': 'Ruijie Wireless Controller',
+    'wireless-controller': 'Ruijie Wireless Controller',
+    'controller': 'Ruijie Wireless Controller',
+  },
+  'draytek': {
+    'firewall router': 'DrayTek Firewall Router',
+    'router': 'DrayTek Firewall Router',
+    'network switches': 'Draytek Network Switches',
+    'switch': 'Draytek Network Switches',
+    'switches': 'Draytek Network Switches',
+    'wireless ap': 'DrayTek Wireless AP',
+    'access point': 'DrayTek Wireless AP',
+    'web content filtering': 'Draytek Web Content Filtering',
+  },
+};
 
 function esc(s) {
   return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 function normalizeText(s) {
   return String(s || '').trim().replace(/\s+/g, ' ');
+}
+function normalizeKey(s) {
+  return normalizeText(s).toLowerCase().replace(/[_]+/g, '-').replace(/\s*-\s*/g, '-');
+}
+function menuGroupFromProduct(p) {
+  const raw = normalizeText(p.menuGroup || p.menu_group || '') || brandNameFromProduct(p);
+  const key = normalizeText(raw).toLowerCase();
+  return BRAND_DISPLAY_NAMES[key] || raw;
+}
+function menuGroupKeyFromProduct(p) {
+  return menuGroupFromProduct(p).toLowerCase();
+}
+function menuGroupLabel(name) {
+  const key = normalizeText(name).toLowerCase();
+  return MENU_GROUP_LABELS[key] || brandTitle(name);
+}
+function menuGroupSortIndex(name) {
+  const key = normalizeText(name).toLowerCase();
+  const idx = MENU_GROUP_ORDER.findIndex(item => normalizeText(item).toLowerCase() === key);
+  return idx === -1 ? 999 : idx;
+}
+function menuCatFromProduct(p) {
+  return normalizeText(p.menuCat || p.menu_category || '') || normalizeText(p.cat || 'ทั่วไป');
 }
 function brandKeyFromProduct(p) {
   return brandNameFromProduct(p).toLowerCase();
@@ -290,6 +427,21 @@ function prettyCategory(cat) {
 function brandTitle(name) {
   const key = normalizeText(name).toLowerCase();
   return BRAND_DISPLAY_NAMES[key] || name;
+}
+function menuCategoryLabel(groupName, cat) {
+  const groupKey = normalizeText(groupName).toLowerCase();
+  const raw = normalizeText(cat);
+  const catKey = normalizeKey(raw);
+  const labels = MENU_CATEGORY_LABELS[groupKey] || {};
+  if (labels[catKey]) return labels[catKey];
+  if ((MENU_CATEGORY_ORDER[groupKey] || []).includes(raw)) return raw;
+  return categoryLabel(groupName, raw);
+}
+function menuCategorySortIndex(groupName, cat) {
+  const groupKey = normalizeText(groupName).toLowerCase();
+  const label = menuCategoryLabel(groupName, cat);
+  const idx = (MENU_CATEGORY_ORDER[groupKey] || []).findIndex(item => item.toLowerCase() === label.toLowerCase());
+  return idx === -1 ? 999 : idx;
 }
 function categoryLabel(brandName, cat) {
   const key = normalizeText(brandName).toLowerCase();
@@ -316,8 +468,8 @@ function updateQuoteCount() {
 
 function getFiltered() {
   let list = [...ALL_PRODUCTS];
-  if (activeCat !== 'all') list = list.filter(p => p.cat === activeCat);
-  if (activeBrand !== 'all') list = list.filter(p => brandNameFromProduct(p) === activeBrand || p.brand === activeBrand);
+  if (activeCat !== 'all') list = list.filter(p => menuCatFromProduct(p) === activeCat || p.cat === activeCat);
+  if (activeBrand !== 'all') list = list.filter(p => menuGroupFromProduct(p) === activeBrand || brandNameFromProduct(p) === activeBrand || p.brand === activeBrand);
   if (searchQ) {
     const q = searchQ.toLowerCase();
     list = list.filter(p =>
@@ -325,6 +477,8 @@ function getFiltered() {
       (p.sku||'').toLowerCase().includes(q) ||
       (p.model||'').toLowerCase().includes(q) ||
       (p.brand||'').toLowerCase().includes(q) ||
+      (menuGroupFromProduct(p)||'').toLowerCase().includes(q) ||
+      (menuCatFromProduct(p)||'').toLowerCase().includes(q) ||
       (p.cat||'').toLowerCase().includes(q) ||
       (p.short||'').toLowerCase().includes(q)
     );
@@ -462,7 +616,8 @@ function renderGrid(filtered) {
   }
   $list.innerHTML = slice.map(cardHtml).join('');
   $pag.innerHTML = buildPagination(currentPage, total);
-  $count.innerHTML = `แสดง <strong>${slice.length}</strong> จาก <strong>${filtered.length}</strong> รายการ${activeCat==='all'?'':' ในหมวด <strong>'+esc(activeCat)+'</strong>'}`;
+  const activeCatLabel = activeCat === 'all' ? '' : menuCategoryLabel(activeBrand, activeCat);
+  $count.innerHTML = `แสดง <strong>${slice.length}</strong> จาก <strong>${filtered.length}</strong> รายการ${activeCat==='all'?'':' ในหมวด <strong>'+esc(activeCatLabel)+'</strong>'}`;
 }
 function render() {
   currentPage = 1;
@@ -472,15 +627,18 @@ function render() {
 function buildFilters() {
   const groups = new Map();
   ALL_PRODUCTS.forEach(p => {
-    const key = brandKeyFromProduct(p);
-    const name = brandNameFromProduct(p);
+    const key = menuGroupKeyFromProduct(p);
+    const name = menuGroupFromProduct(p);
     if (!groups.has(key)) groups.set(key, { key, name, cats: new Set(), count: 0 });
     const g = groups.get(key);
     g.name = g.name || name;
-    g.cats.add(p.cat || 'ทั่วไป');
+    g.cats.add(menuCatFromProduct(p));
     g.count++;
   });
-  const sortedGroups = [...groups.values()].sort((a,b) => a.name.localeCompare(b.name, 'th'));
+  const sortedGroups = [...groups.values()].sort((a,b) => {
+    const orderDiff = menuGroupSortIndex(a.name) - menuGroupSortIndex(b.name);
+    return orderDiff || menuGroupLabel(a.name).localeCompare(menuGroupLabel(b.name), 'th');
+  });
 
   const allActive = activeBrand === 'all' && activeCat === 'all';
   const allItem = `
@@ -495,15 +653,18 @@ function buildFilters() {
   $catMenu.innerHTML = allItem + sortedGroups.map(g => {
     const isCollapsed = collapsedBrands.has(g.key);
     const isBrandActive = activeBrand === g.name && activeCat === 'all';
-    const cats = [...g.cats].sort((a,b) => prettyCategory(a).localeCompare(prettyCategory(b), 'th'));
+    const cats = [...g.cats].sort((a,b) => {
+      const orderDiff = menuCategorySortIndex(g.name, a) - menuCategorySortIndex(g.name, b);
+      return orderDiff || menuCategoryLabel(g.name, a).localeCompare(menuCategoryLabel(g.name, b), 'th');
+    });
     const catHtml = cats.map(cat => {
-      const count = ALL_PRODUCTS.filter(p => brandNameFromProduct(p) === g.name && p.cat === cat).length;
+      const count = ALL_PRODUCTS.filter(p => menuGroupFromProduct(p) === g.name && menuCatFromProduct(p) === cat).length;
       const isActive = activeBrand === g.name && activeCat === cat;
       return `
         <li>
           <button class="shop-brand-cat ${isActive ? 'active' : ''}" data-action="brand-cat" data-brand="${esc(g.name)}" data-cat="${esc(cat)}">
             <i class="fas fa-chevron-right"></i>
-            <span>${esc(categoryLabel(g.name, cat))}</span>
+            <span>${esc(menuCategoryLabel(g.name, cat))}</span>
             <small>${count}</small>
           </button>
         </li>`;
@@ -512,7 +673,7 @@ function buildFilters() {
       <li class="shop-brand-group ${isCollapsed ? 'collapsed' : ''}">
         <div class="shop-brand-head ${isBrandActive ? 'active' : ''}">
           <button type="button" class="shop-brand-name" data-action="brand" data-brand="${esc(g.name)}">
-            <span>${esc(brandTitle(g.name))}</span>
+            <span>${esc(menuGroupLabel(g.name))}</span>
             <small>${g.count}</small>
           </button>
           <button type="button" class="shop-brand-toggle" data-action="toggle-brand" data-brand-key="${esc(g.key)}" aria-label="${isCollapsed ? 'เปิดหมวด' : 'ปิดหมวด'}">
@@ -525,7 +686,7 @@ function buildFilters() {
 
   const brands = ['all', ...sortedGroups.map(g => g.name)];
   $brand.innerHTML = brands.map(b =>
-    `<option value="${esc(b)}" ${b===activeBrand?'selected':''}>${b==='all'?'ทุกแบรนด์':esc(b)}</option>`
+    `<option value="${esc(b)}" ${b===activeBrand?'selected':''}>${b==='all'?'ทุกแบรนด์':esc(menuGroupLabel(b))}</option>`
   ).join('');
 
   $catMenu.querySelectorAll('[data-action]').forEach(btn => {
@@ -536,7 +697,7 @@ function buildFilters() {
 function setCat(c) {
   activeCat = c;
   if (c === 'all') activeBrand = 'all';
-  $head.textContent = c === 'all' ? 'ผลิตภัณฑ์ทั้งหมด' : prettyCategory(c);
+  $head.textContent = c === 'all' ? 'ผลิตภัณฑ์ทั้งหมด' : menuCategoryLabel(activeBrand, c);
   buildFilters();
   render();
 }
@@ -546,7 +707,7 @@ function setBrand(brand) {
   activeBrand = brand;
   activeCat = 'all';
   $brand.value = brand;
-  $head.textContent = brand === 'all' ? 'ผลิตภัณฑ์ทั้งหมด' : brandTitle(brand);
+  $head.textContent = brand === 'all' ? 'ผลิตภัณฑ์ทั้งหมด' : menuGroupLabel(brand);
   buildFilters();
   render();
 }
@@ -556,7 +717,7 @@ function setBrandCat(brand, cat) {
   activeBrand = brand;
   activeCat = cat;
   $brand.value = brand;
-  $head.textContent = `${brandTitle(brand)} / ${prettyCategory(cat)}`;
+  $head.textContent = `${menuGroupLabel(brand)} / ${menuCategoryLabel(brand, cat)}`;
   buildFilters();
   render();
 }

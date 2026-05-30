@@ -27,24 +27,42 @@
 | 5 | `brand` | แบรนด์แบบสั้น (logo จะ map ตามนี้) | `Reyee` หรือ `Cisco` | ✅ |
 | 6 | `brand_full` | ชื่อแบรนด์เต็ม | `Ruijie Networks` | ⬜️ |
 | 7 | `category` | หมวดหมู่ | `Access Point` หรือ `Switch` | ✅ |
-| 8 | `price` | ราคา (ตัวเลขเท่านั้น ใส่ 0 = "ติดต่อสอบถาม") | `1690` | ✅ |
-| 9 | `image_1` | รูปหลัก (URL จาก Google Drive) | ดูด้านล่าง 👇 | ✅ |
-| 10 | `image_2` | รูปที่ 2 | — | ⬜️ |
-| 11 | `image_3` | รูปที่ 3 | — | ⬜️ |
-| 12 | `image_4` | รูปที่ 4 | — | ⬜️ |
-| 13 | `image_5` | รูปที่ 5 | — | ⬜️ |
-| 14 | `image_6` | รูปที่ 6 | — | ⬜️ |
-| 15 | `short` | คำอธิบายสั้น (โชว์ในการ์ดสินค้า) | `Wireless AP AC1300, Cloud Managed` | ✅ แนะนำ |
-| 16 | `details` | รายละเอียดเต็ม (ใช้ `Alt+Enter` ขึ้นบรรทัดใหม่) | ดูด้านล่าง 👇 | ⬜️ |
-| 17 | `specs` | ตาราง spec (รูปแบบ `key: value` บรรทัดละ 1 อัน) | ดูด้านล่าง 👇 | ✅ แนะนำ |
-| 18 | `tags` | แท็ก (คั่นด้วย comma) | `WiFi 5, Cloud, PoE` | ⬜️ |
-| 19 | `badge` | ป้ายมุมการ์ด (New, Hot, In Stock, Outdoor) | `New` | ⬜️ |
-| 20 | `rating` | คะแนน 0-5 | `4.5` | ⬜️ |
-| 21 | `reviews` | จำนวนรีวิว | `12` | ⬜️ |
-| 22 | `pdf` | URL ดาวน์โหลด PDF datasheet | — | ⬜️ |
-| 23 | `visible` | `TRUE` = แสดง, `FALSE` = ซ่อน | `TRUE` | ⬜️ (default = TRUE) |
+| 8 | `menu_group` | หัวข้อเมนูซ้าย (ถ้าไม่กรอกจะใช้ brand) | `Reyee Network` | ⬜️ แนะนำ |
+| 9 | `menu_category` | หมวดย่อยในเมนูซ้าย (ถ้าไม่กรอกจะใช้ category) | `Access Point` | ⬜️ แนะนำ |
+| 10 | `price` | ราคา (ตัวเลขเท่านั้น ใส่ 0 = "ติดต่อสอบถาม") | `1690` | ✅ |
+| 11 | `image_1` | รูปหลัก (URL จาก Google Drive) | ดูด้านล่าง 👇 | ✅ |
+| 12 | `image_2` | รูปที่ 2 | — | ⬜️ |
+| 13 | `image_3` | รูปที่ 3 | — | ⬜️ |
+| 14 | `image_4` | รูปที่ 4 | — | ⬜️ |
+| 15 | `image_5` | รูปที่ 5 | — | ⬜️ |
+| 16 | `image_6` | รูปที่ 6 | — | ⬜️ |
+| 17 | `short` | คำอธิบายสั้น (โชว์ในการ์ดสินค้า) | `Wireless AP AC1300, Cloud Managed` | ✅ แนะนำ |
+| 18 | `details` | รายละเอียดเต็ม (ใช้ `Alt+Enter` ขึ้นบรรทัดใหม่) | ดูด้านล่าง 👇 | ⬜️ |
+| 19 | `specs` | ตาราง spec (รูปแบบ `key: value` บรรทัดละ 1 อัน) | ดูด้านล่าง 👇 | ✅ แนะนำ |
+| 20 | `tags` | แท็ก (คั่นด้วย comma) | `WiFi 5, Cloud, PoE` | ⬜️ |
+| 21 | `badge` | ป้ายมุมการ์ด (New, Hot, In Stock, Outdoor) | `New` | ⬜️ |
+| 22 | `rating` | คะแนน 0-5 | `4.5` | ⬜️ |
+| 23 | `reviews` | จำนวนรีวิว | `12` | ⬜️ |
+| 24 | `pdf` | URL ดาวน์โหลด PDF datasheet | — | ⬜️ |
+| 25 | `visible` | `TRUE` = แสดง, `FALSE` = ซ่อน | `TRUE` | ⬜️ (default = TRUE) |
 
 > ⚠️ **ห้ามเปลี่ยนชื่อคอลัมน์** — โปรแกรมอ่านตามชื่อนี้
+
+---
+
+## 🧭 การจัดเมนูซ้ายจาก Google Sheet
+
+ให้ใช้ `category` เป็นชนิดสินค้ากลาง เช่น `Access Point`, `Switch`, `Firewall Router` แล้วใช้ `menu_group` เพื่อบอกว่าจะไปอยู่หัวข้อไหนในเมนูซ้าย
+
+| ต้องการให้ขึ้นเมนู | ใส่ `menu_group` | ใส่ `category` หรือ `menu_category` |
+|---|---|---|
+| Reyee Access Point | `Reyee Network` | `Access Point` |
+| Ruijie Access Point | `Ruijie Networks` | `Access Point` |
+| DrayTek Wireless AP | `DrayTek` | `Wireless AP` หรือ `Access Point` |
+| Cabinet Rack | `Rack` | `Cabinet Rack` |
+| Cable Management แผงจัดสาย | `Rack` | `Cable Management แผงจัดสาย` |
+
+ถ้าอยากบังคับชื่อเมนูแบบตรงตัว 100% ให้กรอก `menu_category` เป็นชื่อที่อยากให้แสดง เช่น `Reyee MESH WIFI` หรือ `AC Power Distribution รางไฟ`
 
 ---
 

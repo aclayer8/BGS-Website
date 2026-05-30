@@ -76,6 +76,7 @@ function driveUrl(url) {
 // ── 4. ROW → PRODUCT OBJECT ─────────────────────────────────
 //  ชื่อคอลัมน์ที่รองรับ (ไม่ case-sensitive, space → _):
 //   id, sku, name, model, brand, brand_full, category,
+//   menu_group, menu_category,
 //   price, image_1..image_6, short, details, specs, tags, badge, visible
 function mapRow(r) {
   // รวบรวมรูป image_1..image_6 (รวม image เก่าด้วย)
@@ -95,6 +96,8 @@ function mapRow(r) {
   const brand     = r.brand     || '';
   const brandFull = r.brand_full || r.brandfull || BRAND_NAMES[brand.toLowerCase()] || brand || '';
   const cat       = r.category  || r.cat        || 'ทั่วไป';
+  const menuGroup = r.menu_group || r.menu_brand || r.group || '';
+  const menuCat   = r.menu_category || r.menu_cat || '';
   const short     = r.short     || r.short_desc || r.details_short || '';
   const details   = r.details   || r.desc_th    || r.desc || '';
   const specs     = r.specs     || r.spec       || '';
@@ -113,6 +116,8 @@ function mapRow(r) {
     brand,
     brandFull,
     cat,
+    menuGroup,
+    menuCat,
     price,
     images,
     short: short || details.slice(0, 180),
