@@ -277,6 +277,9 @@ const MENU_GROUP_ORDER = [
   'Rack',
   'ตู้ Rack / อุปกรณ์เสริมตู้ Rack',
 ];
+const PINNED_MENU_GROUPS = {
+  'DrayTek': ['Firewall Router', 'Network Switches', 'Wireless AP', 'Web Content Filtering'],
+};
 const MENU_GROUP_LABELS = {
   'reyee': 'Reyee Network (รีย์ เน็ตเวิร์ค)',
   'reyee network': 'Reyee Network (รีย์ เน็ตเวิร์ค)',
@@ -634,6 +637,12 @@ function buildFilters() {
     g.name = g.name || name;
     g.cats.add(menuCatFromProduct(p));
     g.count++;
+  });
+  Object.entries(PINNED_MENU_GROUPS).forEach(([name, cats]) => {
+    const key = normalizeText(name).toLowerCase();
+    if (!groups.has(key)) groups.set(key, { key, name, cats: new Set(), count: 0 });
+    const g = groups.get(key);
+    cats.forEach(cat => g.cats.add(cat));
   });
   const sortedGroups = [...groups.values()].sort((a,b) => {
     const orderDiff = menuGroupSortIndex(a.name) - menuGroupSortIndex(b.name);
