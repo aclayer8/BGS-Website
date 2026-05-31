@@ -10,7 +10,7 @@ const SITE_CONFIG = {
   // วิธีได้ URL: Google Sheet → File → Share → Publish to web
   //              → เลือก tab Products → Comma-separated values → Publish
   // ปัจจุบัน: bgs-product-database.xlsx / Products (2026-05-30)
-  csvUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSiWg0mlD3ggIpJjWZfkEgcmyDceDhICM6p90vogy6eisn7OGKEZxWHCysXVoDYhg/pub?output=csv',
+  csvUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTP7uvHPi5oQKQ36qA4RxRtlSZY4EXzFK2eEXbdLbiqPcdkC0zdKglB0WuUHlORyQ/pub?output=csv',
   // Google Sheets for Projects / Portfolio.
   // Publish the Projects tab as CSV and paste the URL here.
   // Leave blank to use the built-in demo projects while preparing the sheet.
