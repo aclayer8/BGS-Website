@@ -5,6 +5,7 @@
 document.addEventListener('DOMContentLoaded', () => {
 
   // --- Language Switcher ---
+  const langSwitches = document.querySelectorAll('.lang-switch');
   const langBtns = document.querySelectorAll('.lang-btn');
   let currentLang = localStorage.getItem('bgs-lang') || 'th';
 
@@ -13,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.setItem('bgs-lang', lang);
     langBtns.forEach(btn => {
       btn.classList.toggle('active', btn.dataset.lang === lang);
+      btn.setAttribute('aria-pressed', btn.dataset.lang === lang ? 'true' : 'false');
     });
     // Toggle element visibility
     document.querySelectorAll('[data-th]').forEach(el => {
@@ -25,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.en-text').forEach(el => {
       el.style.display = lang === 'en' ? '' : 'none';
     });
-    document.querySelectorAll('[data-lang]').forEach(el => {
+    document.querySelectorAll('[data-lang]:not(.lang-btn)').forEach(el => {
       const elLang = el.dataset.lang;
       el.style.display = elLang === lang ? '' : 'none';
     });
@@ -33,7 +35,30 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   langBtns.forEach(btn => {
-    btn.addEventListener('click', () => setLang(btn.dataset.lang));
+    btn.setAttribute('type', 'button');
+    btn.addEventListener('click', (event) => {
+      event.stopPropagation();
+      const currentSwitch = btn.closest('.lang-switch');
+      if (btn.dataset.lang === currentLang) {
+        currentSwitch?.classList.toggle('open');
+        return;
+      }
+      setLang(btn.dataset.lang);
+      langSwitches.forEach(sw => sw.classList.remove('open'));
+    });
+  });
+
+  langSwitches.forEach(sw => {
+    sw.setAttribute('role', 'group');
+    sw.setAttribute('aria-label', 'Language selector');
+    sw.addEventListener('click', (event) => {
+      event.stopPropagation();
+      sw.classList.toggle('open');
+    });
+  });
+
+  document.addEventListener('click', () => {
+    langSwitches.forEach(sw => sw.classList.remove('open'));
   });
 
   // Init language on page load

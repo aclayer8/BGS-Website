@@ -100,7 +100,7 @@
       <li><a href="about.html" class="nav-link" data-th="เกี่ยวกับเรา" data-en="About Us">เกี่ยวกับเรา</a></li>
       <li><a href="services.html" class="nav-link" data-th="บริการ" data-en="Services">บริการ</a></li>
       <li><a href="products.html" class="nav-link" data-th="ผลิตภัณฑ์" data-en="Products">ผลิตภัณฑ์</a></li>
-      <li><a href="reference.html" class="nav-link active" data-th="Site Reference" data-en="Site Reference">Site Reference</a></li>
+      <li><a href="projects.html" class="nav-link" data-th="ผลงานของเรา" data-en="Our Projects">ผลงานของเรา</a></li>
       <li><a href="contact.html" class="nav-link" data-th="ติดต่อเรา" data-en="Contact">ติดต่อเรา</a></li>
     </ul>
     <div class="nav-right">
@@ -118,7 +118,7 @@
   <a href="about.html" class="nav-link" data-th="เกี่ยวกับเรา" data-en="About Us">เกี่ยวกับเรา</a>
   <a href="services.html" class="nav-link" data-th="บริการ" data-en="Services">บริการ</a>
   <a href="products.html" class="nav-link" data-th="ผลิตภัณฑ์" data-en="Products">ผลิตภัณฑ์</a>
-  <a href="reference.html" class="nav-link" data-th="Site Reference" data-en="Site Reference">Site Reference</a>
+  <a href="projects.html" class="nav-link" data-th="ผลงานของเรา" data-en="Our Projects">ผลงานของเรา</a>
   <a href="contact.html" class="nav-link" data-th="ติดต่อเรา" data-en="Contact">ติดต่อเรา</a>
   <div class="lang-switch"><button class="lang-btn active" data-lang="th">TH</button><button class="lang-btn" data-lang="en">EN</button></div>
   <a href="contact.html" class="nav-contact-btn" data-th="ติดต่อเรา" data-en="Contact Us">ติดต่อเรา</a>
@@ -246,7 +246,7 @@
           <h4 data-th="เกี่ยวกับเรา" data-en="Company">เกี่ยวกับเรา</h4>
           <ul>
             <li><a href="about.html" data-th="ประวัติบริษัท" data-en="Our Story">ประวัติบริษัท</a></li>
-            <li><a href="reference.html" data-th="Site Reference" data-en="Site Reference">Site Reference</a></li>
+            <li><a href="projects.html" data-th="ผลงานของเรา" data-en="Our Projects">ผลงานของเรา</a></li>
             <li><a href="contact.html" data-th="ติดต่อเรา" data-en="Contact">ติดต่อเรา</a></li>
           </ul>
         </div>
@@ -279,4 +279,8 @@
 <script>
   // Auto mark empty boxes (no image loaded)
   document.querySelectorAll('.logo-box img').forEach(img => {
-    img.addEventListener('error', () => img.parentElement.classList.add(
+    img.addEventListener('error', () => img.parentElement.classList.add('empty'));
+  });
+</script>
+</body>
+</html>

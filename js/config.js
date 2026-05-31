@@ -11,6 +11,10 @@ const SITE_CONFIG = {
   //              → เลือก tab Products → Comma-separated values → Publish
   // ปัจจุบัน: bgs-product-database.xlsx / Products (2026-05-30)
   csvUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSiWg0mlD3ggIpJjWZfkEgcmyDceDhICM6p90vogy6eisn7OGKEZxWHCysXVoDYhg/pub?output=csv',
+  // Google Sheets for Projects / Portfolio.
+  // Publish the Projects tab as CSV and paste the URL here.
+  // Leave blank to use the built-in demo projects while preparing the sheet.
+  projectsCsvUrl: '',
   // เก่า (2026-05-30): 2PACX-1vT1iat5AZXrq7OFUdoPC3K6vgtLr1dtrlpWxT2GNCYY976LyMsw3Byi_03MOxpu_A
   // เก่า (2026-05-30): 2PACX-1vTd0vurS7hWw9vZ25kol3h7fI4LZi2OnFGUdDC96ommAfSP2pwBfBAoDtCEvrk-uQ
   // เก่า (2026-05-29): 2PACX-1vQgB6nQ2umu9cymB5L4pK5jEPrGQrmdEyRU6hO7l4OKwNmJLMU5JKSPWBeCeQKHAQ

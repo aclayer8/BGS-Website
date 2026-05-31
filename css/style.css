@@ -140,15 +140,88 @@ p { color: var(--text-medium); line-height: 1.75; }
 .nav-link:hover, .nav-link.active { color: var(--primary); background: rgba(0, 48, 135, 0.06); }
 .nav-right { display: flex; align-items: center; gap: 12px; }
 .lang-switch {
-  display: flex; align-items: center; gap: 2px;
-  background: rgba(0, 30, 80, 0.06); border-radius: 20px; padding: 3px;
+  position: relative;
+  display: inline-flex;
+  align-items: flex-start;
+  min-width: 84px;
+  z-index: 40;
 }
 .lang-btn {
-  padding: 4px 12px; border-radius: 16px; font-size: 0.78rem; font-weight: 500;
-  color: rgba(0, 30, 80, 0.6); background: transparent;
-  transition: var(--transition); cursor: pointer; font-family: var(--font-thai);
+  display: none;
+  align-items: center;
+  gap: 7px;
+  width: 84px;
+  min-height: 34px;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 4px;
+  color: rgba(0, 30, 80, 0.78);
+  background: rgba(255, 255, 255, 0.92);
+  font-size: 0.86rem;
+  font-weight: 800;
+  line-height: 1;
+  transition: var(--transition);
+  cursor: pointer;
+  font-family: var(--font-thai);
+  box-shadow: 0 8px 18px rgba(0, 30, 80, 0.08);
 }
-.lang-btn.active { background: var(--accent); color: #fff; }
+.lang-btn::before {
+  content: "";
+  flex: 0 0 auto;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.75), 0 1px 4px rgba(0, 0, 0, 0.18);
+}
+.lang-btn[data-lang="th"]::before {
+  background: linear-gradient(
+    to bottom,
+    #d51b30 0 16%,
+    #fff 16% 28%,
+    #253a83 28% 72%,
+    #fff 72% 84%,
+    #d51b30 84% 100%
+  );
+}
+.lang-btn[data-lang="en"]::before {
+  content: "🇬🇧";
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #1f3b88;
+  font-size: 18px;
+  line-height: 1;
+}
+.lang-btn.active {
+  display: inline-flex;
+  order: 1;
+  background: transparent;
+  color: rgba(0, 30, 80, 0.78);
+  box-shadow: none;
+}
+.lang-btn.active::after {
+  content: "\f107";
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  margin-left: auto;
+  font-size: 11px;
+}
+.lang-switch.open .lang-btn.active::after,
+.lang-switch:hover .lang-btn.active::after {
+  content: "\f106";
+}
+.lang-switch.open .lang-btn:not(.active),
+.lang-switch:hover .lang-btn:not(.active) {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  display: inline-flex;
+  order: 2;
+}
+.lang-switch.open .lang-btn:hover,
+.lang-switch:hover .lang-btn:hover {
+  background: rgba(0, 30, 80, 0.08);
+}
 .nav-contact-btn {
   background: var(--accent); color: #fff; padding: 8px 20px;
   border-radius: 50px; font-size: 0.85rem; font-weight: 500;
