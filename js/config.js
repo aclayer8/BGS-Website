@@ -15,6 +15,12 @@ const SITE_CONFIG = {
   // Publish the Projects tab as CSV and paste the URL here.
   // Leave blank to use the built-in demo projects while preparing the sheet.
   projectsCsvUrl: '',
+  visitCounter: {
+    enabled: true,
+    namespace: 'begrove-solutions',
+    totalName: 'website-total',
+    dailyPrefix: 'website-day',
+  },
   // เก่า (2026-05-30): 2PACX-1vT1iat5AZXrq7OFUdoPC3K6vgtLr1dtrlpWxT2GNCYY976LyMsw3Byi_03MOxpu_A
   // เก่า (2026-05-30): 2PACX-1vTd0vurS7hWw9vZ25kol3h7fI4LZi2OnFGUdDC96ommAfSP2pwBfBAoDtCEvrk-uQ
   // เก่า (2026-05-29): 2PACX-1vQgB6nQ2umu9cymB5L4pK5jEPrGQrmdEyRU6hO7l4OKwNmJLMU5JKSPWBeCeQKHAQ

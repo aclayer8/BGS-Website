@@ -284,6 +284,55 @@
 .shop-sb-quote .sqb-row a:hover { background: rgba(255,255,255,.1); color: #fff; }
 .shop-sb-quote .sqb-row i { width: 14px; color: var(--accent); margin-right: 6px; }
 
+.shop-sb-views {
+  background: #fff;
+  border: 1px solid var(--shop-border-light);
+  border-radius: var(--shop-radius);
+  padding: 14px;
+  box-shadow: var(--shop-shadow);
+}
+.shop-sb-views .views-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--primary);
+  font-family: var(--font-thai);
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.shop-sb-views .views-title i {
+  color: var(--accent);
+}
+.views-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+.views-item {
+  min-width: 0;
+  border: 1px solid var(--shop-border-light);
+  border-radius: 6px;
+  background: #f8fafc;
+  padding: 10px 8px;
+  text-align: center;
+}
+.views-label {
+  display: block;
+  color: var(--shop-text-light);
+  font-size: 11px;
+  line-height: 1.2;
+  margin-bottom: 3px;
+}
+.views-item strong {
+  display: block;
+  color: var(--primary-dark);
+  font-size: 18px;
+  line-height: 1.1;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
 /* ============================================================
    MAIN AREA
    ============================================================ */

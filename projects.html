@@ -54,7 +54,7 @@
   <a href="contact.html" class="nav-contact-btn">ขอใบเสนอราคา</a>
 </div>
 
-<section class="projects-hero" id="projectsHero" style="background-image:url('images/building-pic.png')">
+<section class="projects-hero" id="projectsHero" style="background-image:url('images/bgs-ai-office.png')">
   <div class="projects-hero-title">
     <h1>OUR PROJECT</h1>
     <p>BE GROVE SOLUTIONS</p>
@@ -133,7 +133,6 @@
 <script src="js/projects-data.js"></script>
 <script>
 const $grid = document.getElementById('projectsGrid');
-const $hero = document.getElementById('projectsHero');
 
 function escProject(s) {
   return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -159,9 +158,6 @@ function projectCard(project) {
 
 (async function initProjects() {
   const projects = await loadProjects();
-  if (projects[0]?.cover) {
-    $hero.style.backgroundImage = `url('${projects[0].cover.replace(/'/g, "\\'")}')`;
-  }
   if (!projects.length) {
     $grid.innerHTML = `
       <div class="projects-state">

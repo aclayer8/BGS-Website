@@ -171,4 +171,49 @@ document.addEventListener('DOMContentLoaded', () => {
     el.style.transitionDelay = `${i * 0.08}s`;
   });
 
+  // --- Website Visit Counter ---
+  initVisitCounter();
+
 });
+
+function initVisitCounter() {
+  const cfg = (typeof SITE_CONFIG !== 'undefined' && SITE_CONFIG.visitCounter) ? SITE_CONFIG.visitCounter : {};
+  if (cfg.enabled === false) return;
+
+  const todayEl = document.getElementById('visitToday');
+  const totalEl = document.getElementById('visitTotal');
+
+  const namespace = encodeURIComponent(cfg.namespace || 'begrove-solutions');
+  const totalName = encodeURIComponent(cfg.totalName || 'website-total');
+  const dayKey = new Date().toISOString().slice(0, 10);
+  const dailyName = encodeURIComponent(`${cfg.dailyPrefix || 'website-day'}-${dayKey}`);
+  const baseUrl = 'https://api.counterapi.dev/v1';
+  const sessionKey = `bgs-visit-counter:${dayKey}`;
+
+  const format = (value) => Number(value || 0).toLocaleString('th-TH');
+  const setText = (el, value) => {
+    if (el) el.textContent = Number.isFinite(Number(value)) ? format(value) : '--';
+  };
+  const endpoint = (name, action) => `${baseUrl}/${namespace}/${name}${action ? `/${action}` : ''}`;
+  const readValue = (data) => data?.count ?? data?.value ?? data?.data?.count ?? data?.data?.value;
+  const request = async (name, action = '') => {
+    const res = await fetch(endpoint(name, action), { cache: 'no-store' });
+    if (!res.ok) throw new Error(`Counter request failed: ${res.status}`);
+    return readValue(await res.json());
+  };
+
+  const shouldCount = sessionStorage.getItem(sessionKey) !== '1';
+  const action = shouldCount ? 'up' : '';
+
+  Promise.all([
+    request(dailyName, action),
+    request(totalName, action)
+  ]).then(([today, total]) => {
+    if (shouldCount) sessionStorage.setItem(sessionKey, '1');
+    setText(todayEl, today);
+    setText(totalEl, total);
+  }).catch(() => {
+    setText(todayEl, null);
+    setText(totalEl, null);
+  });
+}
