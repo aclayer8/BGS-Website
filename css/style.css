@@ -114,8 +114,8 @@ p { color: var(--text-medium); line-height: 1.75; }
 }
 .navbar.solid { background: #e8eff9; }
 .nav-container {
-  max-width: 1200px; margin: 0 auto; padding: 0 24px;
-  display: flex; align-items: center; justify-content: space-between;
+  max-width: 1380px; margin: 0 auto; padding: 0 18px;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
   height: 140px;
 }
 /* ── Logo: blue logo บน page bg ขาว — สะอาด ไม่ต้องมี card ── */
@@ -124,26 +124,28 @@ p { color: var(--text-medium); line-height: 1.75; }
   transition: var(--transition);
 }
 .nav-logo-img {
-  height: 112px;
+  height: 96px;
   width: auto;
   object-fit: contain;
   display: block;
   transition: var(--transition);
 }
 .nav-logo:hover .nav-logo-img { transform: scale(1.03); }
-.nav-menu { display: flex; align-items: center; gap: 4px; }
+.nav-menu { flex: 1 1 auto; min-width: 0; display: flex; align-items: center; justify-content: center; gap: 2px; }
+.nav-menu li { flex: 0 0 auto; }
 .nav-link {
-  color: rgba(0, 30, 80, 0.75); font-size: 0.9rem; font-weight: 500;
-  padding: 8px 14px; border-radius: 6px; transition: var(--transition);
+  color: rgba(0, 30, 80, 0.75); font-size: 0.84rem; font-weight: 500;
+  padding: 8px 9px; border-radius: 6px; transition: var(--transition);
   font-family: var(--font-thai);
+  white-space: nowrap;
 }
 .nav-link:hover, .nav-link.active { color: var(--primary); background: rgba(0, 48, 135, 0.06); }
-.nav-right { display: flex; align-items: center; gap: 12px; }
+.nav-right { flex: 0 0 auto; display: flex; align-items: center; gap: 8px; }
 .lang-switch {
   position: relative;
   display: inline-flex;
   align-items: flex-start;
-  min-width: 84px;
+  min-width: 76px;
   z-index: 40;
 }
 .lang-btn {
@@ -223,8 +225,8 @@ p { color: var(--text-medium); line-height: 1.75; }
   background: rgba(0, 30, 80, 0.08);
 }
 .nav-contact-btn {
-  background: var(--accent); color: #fff; padding: 8px 20px;
-  border-radius: 50px; font-size: 0.85rem; font-weight: 500;
+  background: var(--accent); color: #fff; padding: 8px 14px;
+  border-radius: 50px; font-size: 0.8rem; font-weight: 500;
   transition: var(--transition); font-family: var(--font-thai);
 }
 .nav-contact-btn:hover { background: var(--accent-light); transform: translateY(-1px); }
