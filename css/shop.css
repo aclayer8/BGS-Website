@@ -994,7 +994,13 @@
   transition: background .15s, transform .15s;
 }
 .sd-btn-line:hover { background: #05a847; color: #fff; transform: translateY(-1px); }
-.sd-btn-line i { font-size: 18px; }
+.sd-btn-line .button-icon-img {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  display: block;
+  flex-shrink: 0;
+}
 
 /* HIGHLIGHT BOX */
 .sd-highlight {
@@ -1044,6 +1050,13 @@
   display: inline-flex; align-items: center; justify-content: center;
   font-size: 14px;
   color: #fff;
+}
+.sd-chip .social-icon-img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  display: block;
+  flex-shrink: 0;
 }
 .sd-chip.line i { background: #06c755; }
 .sd-chip.tel i { background: var(--primary); }
