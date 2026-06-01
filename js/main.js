@@ -189,10 +189,30 @@ function initVisitCounter() {
   const dailyName = encodeURIComponent(`${cfg.dailyPrefix || 'website-day'}-${dayKey}`);
   const baseUrl = 'https://api.counterapi.dev/v1';
   const sessionKey = `bgs-visit-counter:${dayKey}`;
+  const lastValueKey = 'bgs-visit-counter:last-values';
 
   const format = (value) => Number(value || 0).toLocaleString('th-TH');
   const setText = (el, value) => {
-    if (el) el.textContent = Number.isFinite(Number(value)) ? format(value) : '--';
+    if (!el) return;
+    if (value === null || value === undefined || value === '') {
+      el.textContent = '--';
+      return;
+    }
+    el.textContent = Number.isFinite(Number(value)) ? format(value) : '--';
+  };
+  const getLastValues = () => {
+    try {
+      return JSON.parse(localStorage.getItem(lastValueKey) || '{}');
+    } catch (e) {
+      return {};
+    }
+  };
+  const setLastValues = (values) => {
+    try {
+      localStorage.setItem(lastValueKey, JSON.stringify(values));
+    } catch (e) {
+      // Ignore storage errors.
+    }
   };
   const endpoint = (name, action) => `${baseUrl}/${namespace}/${name}${action ? `/${action}` : ''}`;
   const readValue = (data) => data?.count ?? data?.value ?? data?.data?.count ?? data?.data?.value;
@@ -204,16 +224,20 @@ function initVisitCounter() {
 
   const shouldCount = sessionStorage.getItem(sessionKey) !== '1';
   const action = shouldCount ? 'up' : '';
+  const lastValues = getLastValues();
+  setText(todayEl, lastValues.today);
+  setText(totalEl, lastValues.total);
 
-  Promise.all([
+  Promise.allSettled([
     request(dailyName, action),
     request(totalName, action)
-  ]).then(([today, total]) => {
-    if (shouldCount) sessionStorage.setItem(sessionKey, '1');
+  ]).then(([todayResult, totalResult]) => {
+    const today = todayResult.status === 'fulfilled' ? todayResult.value : lastValues.today;
+    const total = totalResult.status === 'fulfilled' ? totalResult.value : lastValues.total;
+    const hasFreshValue = todayResult.status === 'fulfilled' || totalResult.status === 'fulfilled';
+    if (shouldCount && hasFreshValue) sessionStorage.setItem(sessionKey, '1');
+    if (hasFreshValue) setLastValues({ today, total });
     setText(todayEl, today);
     setText(totalEl, total);
-  }).catch(() => {
-    setText(todayEl, null);
-    setText(totalEl, null);
   });
 }
