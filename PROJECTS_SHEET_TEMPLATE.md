@@ -73,7 +73,7 @@ projectsCsvUrl: '',
 | `title` | Yes | `Dib Bangkok` | ชื่อที่แสดงใต้รูปและบนหน้า detail |
 | `detail_title` | No | `โปรเจ็ค Dib Bangkok` | ข้อความบนแถบสีฟ้าในหน้า detail ถ้าปล่อยว่างจะใช้ `โปรเจ็ค` + `title` |
 | `cover` | Yes | Google Drive URL | รูปหน้าปกบนหน้า list |
-| `image_1` - `image_12` | No | Google Drive URL | รูปทั้งหมดในหน้า detail |
+| `image_1` - `image_20` | No | Google Drive URL | รูปทั้งหมดในหน้า detail |
 | `gallery` | No | `url1 | url2 | url3` | ใช้รวมหลายรูปในช่องเดียวได้ |
 | `sort_order` | No | `1` | ลำดับการแสดง ยิ่งน้อยยิ่งมาก่อน |
 | `visible` | No | `TRUE` | ใส่ `FALSE` เพื่อซ่อนโปรเจค |

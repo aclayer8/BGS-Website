@@ -6,7 +6,7 @@
 const PROJECTS_CFG = (typeof SITE_CONFIG !== 'undefined') ? SITE_CONFIG : {};
 const PROJECTS_CSV_URL = PROJECTS_CFG.projectsCsvUrl || '';
 const PROJECTS_CACHE_TTL = (PROJECTS_CFG.cacheTtl !== undefined) ? PROJECTS_CFG.cacheTtl : 5 * 60 * 1000;
-const PROJECTS_CACHE_KEY = `bgs_projects_v3_${PROJECTS_CSV_URL ? PROJECTS_CSV_URL.split('/').slice(-2, -1)[0]?.slice(-12) : 'demo'}`;
+const PROJECTS_CACHE_KEY = `bgs_projects_v4_${PROJECTS_CSV_URL ? PROJECTS_CSV_URL.split('/').slice(-2, -1)[0]?.slice(-12) : 'demo'}`;
 
 function parseProjectsCSV(text) {
   const lines = [];
@@ -89,7 +89,7 @@ function mapProjectRow(r, index) {
   const slug = r.slug || r.id || slugifyProject(title);
   const images = [];
 
-  for (let i = 1; i <= 12; i++) {
+  for (let i = 1; i <= 20; i++) {
     const src = projectDriveUrl(r[`image_${i}`] || r[`image${i}`] || '', 1400);
     if (src) images.push(src);
   }
