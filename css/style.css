@@ -282,7 +282,7 @@ p { color: var(--text-medium); line-height: 1.75; }
 }
 .hero-brand-lockup {
   grid-column: 1 / -1;
-  width: min(100%, 900px);
+  width: min(100%, 1080px);
   margin: 0 auto;
   text-align: center;
 }
@@ -326,6 +326,9 @@ p { color: var(--text-medium); line-height: 1.75; }
   font-weight: 700;
   letter-spacing: 0.075em;
   text-transform: uppercase;
+}
+.hero-slogan > span:not(.slogan-line) {
+  white-space: nowrap;
 }
 .hero-slogan .slogan-line {
   flex: 0 1 72px;
@@ -931,6 +934,7 @@ p { color: var(--text-medium); line-height: 1.75; }
     font-size: clamp(1.25rem, 6.4vw, 1.95rem);
     letter-spacing: 0;
   }
+  .hero-slogan > span:not(.slogan-line) { white-space: normal; }
   .hero-slogan .slogan-line { flex-basis: 34px; }
   .services-grid { grid-template-columns: 1fr; }
   .products-grid { grid-template-columns: 1fr; }
