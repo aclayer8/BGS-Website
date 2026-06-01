@@ -518,6 +518,7 @@ p { color: var(--text-medium); line-height: 1.75; }
    PRODUCTS HIGHLIGHT
    ============================================ */
 .products-section { background: var(--bg-white); }
+.products-section .section-header p { max-width: 760px; }
 .products-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
 .product-card {
   border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden;
