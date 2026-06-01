@@ -12,9 +12,11 @@ const SITE_CONFIG = {
   // ปัจจุบัน: bgs-product-database.xlsx / Products (2026-05-30)
   csvUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTP7uvHPi5oQKQ36qA4RxRtlSZY4EXzFK2eEXbdLbiqPcdkC0zdKglB0WuUHlORyQ/pub?output=csv',
   // Google Sheets for Projects / Portfolio.
-  // Publish the Projects tab as CSV and paste the URL here.
+  // Template file: bgs-our-projects.csv
+  // วิธีได้ URL: Google Sheet → File → Share → Publish to web
+  //              → เลือก tab bgs-our-projects → Comma-separated values → Publish
   // Leave blank to use the built-in demo projects while preparing the sheet.
-  projectsCsvUrl: '',
+  projectsCsvUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRSnnGz66PKsvhKxV69xHA2BoLTZfCa3r7TSoIXlJFF1MRhUfMcH4ZfyS3R7NpxmqZTcqmREsQnZZqh/pub?output=csv',
   visitCounter: {
     enabled: true,
     namespace: 'begrove-solutions',
