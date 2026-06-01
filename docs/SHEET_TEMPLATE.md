@@ -6,7 +6,7 @@
 
 ## 🎯 วิธีใช้แบบเร็ว
 
-1. เปิด Google Sheet ที่ link ใน `js/products-data.js` (บรรทัด `CSV_URL`)
+1. เปิด Google Sheet ที่ link ใน `js/config.js` (ค่า `csvUrl`)
 2. แก้/เพิ่ม/ลบสินค้าในแถวต่างๆ ของ Sheet
 3. **บันทึก** (Google Sheet จะบันทึกอัตโนมัติ)
 4. รอประมาณ **5 นาที** หรือกด **Ctrl+Shift+R** (hard refresh) ที่หน้าเว็บ
@@ -138,9 +138,9 @@ Warranty: รับประกัน 3 ปี
    - **Format**: **Comma-separated values (.csv)** ⚠️ สำคัญ!
 4. กด **Publish** → ยืนยัน
 5. คัดลอก **link** ที่ได้
-6. นำลิงค์นั้นไปวางใน `js/products-data.js` บรรทัดแรก:
+6. นำลิงค์นั้นไปวางใน `js/config.js`:
    ```javascript
-   const CSV_URL = 'วาง link ตรงนี้';
+   csvUrl: 'วาง link ตรงนี้',
    ```
 
 ### หลังจากนั้น:

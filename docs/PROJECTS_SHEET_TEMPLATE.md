@@ -4,7 +4,7 @@
 
 ## วิธีใช้งาน
 
-1. อัปโหลดไฟล์ `bgs-our-projects.csv` ขึ้น Google Drive ของลูกค้า
+1. อัปโหลดไฟล์ `data/templates/bgs-our-projects.csv` ขึ้น Google Drive ของลูกค้า
 2. คลิกขวาที่ไฟล์ > Open with > Google Sheets เพื่อแปลงเป็น Sheet ที่ลูกค้าแก้เองได้
 3. เปลี่ยนชื่อไฟล์/Sheet เป็น `bgs-our-projects` หรือชื่อที่ลูกค้าจำง่าย
 4. ใส่ข้อมูล 1 โปรเจคต่อ 1 แถว
