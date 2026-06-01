@@ -6,7 +6,7 @@
 const PROJECTS_CFG = (typeof SITE_CONFIG !== 'undefined') ? SITE_CONFIG : {};
 const PROJECTS_CSV_URL = PROJECTS_CFG.projectsCsvUrl || '';
 const PROJECTS_CACHE_TTL = (PROJECTS_CFG.cacheTtl !== undefined) ? PROJECTS_CFG.cacheTtl : 5 * 60 * 1000;
-const PROJECTS_CACHE_KEY = `bgs_projects_v1_${PROJECTS_CSV_URL ? PROJECTS_CSV_URL.split('/').slice(-2, -1)[0]?.slice(-12) : 'demo'}`;
+const PROJECTS_CACHE_KEY = `bgs_projects_v2_${PROJECTS_CSV_URL ? PROJECTS_CSV_URL.split('/').slice(-2, -1)[0]?.slice(-12) : 'demo'}`;
 
 function parseProjectsCSV(text) {
   const lines = [];
@@ -100,7 +100,7 @@ function mapProjectRow(r, index) {
   });
 
   const cover = projectDriveUrl(r.cover || r.cover_image || r.image || '', 1400) || images[0] || '';
-  if (cover && !images.includes(cover)) images.unshift(cover);
+  const galleryImages = images.filter((src, i) => src && src !== cover && images.indexOf(src) === i);
 
   const services = splitProjectList(r.services || r.scope || r.work_scope);
   const tags = splitProjectList(r.tags || r.categories);
@@ -120,7 +120,7 @@ function mapProjectRow(r, index) {
     description: r.description || r.details || '',
     solution: r.solution || r.result || '',
     cover,
-    images,
+    images: galleryImages,
     services,
     tags,
     featured,

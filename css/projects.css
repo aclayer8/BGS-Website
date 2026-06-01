@@ -142,7 +142,7 @@
 .project-detail-shell {
   max-width: 1180px;
   margin: 0 auto;
-  padding: 30px 20px 90px;
+  padding: 190px 20px 90px;
 }
 
 .project-detail-title {
@@ -267,5 +267,9 @@
 
   .projects-shell {
     padding-top: 36px;
+  }
+
+  .project-detail-shell {
+    padding-top: 150px;
   }
 }
