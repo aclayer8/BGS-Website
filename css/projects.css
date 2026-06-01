@@ -146,8 +146,10 @@
 }
 
 .project-detail-title {
+  position: relative;
+  overflow: hidden;
   width: 100%;
-  background: var(--project-title-bar-bg);
+  background: linear-gradient(135deg, #c5d8f5 0%, #e8eff9 60%, #f0f5fc 100%);
   color: var(--project-title-bar-text);
   text-align: center;
   font-family: var(--font-thai);
@@ -158,6 +160,17 @@
   padding: 8px 16px 10px;
   border: 1px solid rgba(0, 48, 135, 0.10);
   margin: 0 0 78px;
+}
+
+.project-detail-title::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0,48,135,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,48,135,0.04) 1px, transparent 1px);
+  background-size: 50px 50px;
+  pointer-events: none;
 }
 
 .project-gallery-grid {
