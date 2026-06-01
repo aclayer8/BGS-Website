@@ -6,7 +6,7 @@
 const PROJECTS_CFG = (typeof SITE_CONFIG !== 'undefined') ? SITE_CONFIG : {};
 const PROJECTS_CSV_URL = PROJECTS_CFG.projectsCsvUrl || '';
 const PROJECTS_CACHE_TTL = (PROJECTS_CFG.cacheTtl !== undefined) ? PROJECTS_CFG.cacheTtl : 5 * 60 * 1000;
-const PROJECTS_CACHE_KEY = `bgs_projects_v2_${PROJECTS_CSV_URL ? PROJECTS_CSV_URL.split('/').slice(-2, -1)[0]?.slice(-12) : 'demo'}`;
+const PROJECTS_CACHE_KEY = `bgs_projects_v3_${PROJECTS_CSV_URL ? PROJECTS_CSV_URL.split('/').slice(-2, -1)[0]?.slice(-12) : 'demo'}`;
 
 function parseProjectsCSV(text) {
   const lines = [];
@@ -117,6 +117,7 @@ function mapProjectRow(r, index) {
     year: r.year || r.project_year || '',
     category: r.category || r.type || 'IT Solution',
     summary: r.summary || r.short || r.description_short || '',
+    detailTitle: r.detail_title || r.title_bar || r.bar_title || r.project_detail_title || '',
     description: r.description || r.details || '',
     solution: r.solution || r.result || '',
     cover,

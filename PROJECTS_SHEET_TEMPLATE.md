@@ -29,12 +29,13 @@
 1. ลูกค้าเพิ่มแถวใหม่
 2. ใส่ `slug` เช่น `new-office-network`
 3. ใส่ `title` เช่น `New Office Network`
-4. อัปโหลดรูป cover และรูป gallery เข้า Drive
-5. Copy link ของรูปมาใส่ `cover`, `image_1`, `image_2`
-6. ใส่ `sort_order` เป็นเลขลำดับ เช่น `1`
-7. ใส่ `visible` เป็น `TRUE`
-8. เปิด `https://www.begrovesolutions.com/projects.html` เพื่อตรวจหน้า list
-9. กดรูปโปรเจคเพื่อตรวจหน้า detail
+4. ใส่ `detail_title` เช่น `โปรเจ็ค New Office Network` เพื่อแก้ข้อความบนแถบหน้า detail
+5. อัปโหลดรูป cover และรูป gallery เข้า Drive
+6. Copy link ของรูปมาใส่ `cover`, `image_1`, `image_2`
+7. ใส่ `sort_order` เป็นเลขลำดับ เช่น `1`
+8. ใส่ `visible` เป็น `TRUE`
+9. เปิด `https://www.begrovesolutions.com/projects.html` เพื่อตรวจหน้า list
+10. กดรูปโปรเจคเพื่อตรวจหน้า detail
 
 ## ข้อควรระวัง
 
@@ -70,6 +71,7 @@ projectsCsvUrl: '',
 | --- | --- | --- | --- |
 | `slug` | Yes | `dib-bangkok` | ใช้เป็นลิงก์ เช่น `project-detail.html?project=dib-bangkok` |
 | `title` | Yes | `Dib Bangkok` | ชื่อที่แสดงใต้รูปและบนหน้า detail |
+| `detail_title` | No | `โปรเจ็ค Dib Bangkok` | ข้อความบนแถบสีฟ้าในหน้า detail ถ้าปล่อยว่างจะใช้ `โปรเจ็ค` + `title` |
 | `cover` | Yes | Google Drive URL | รูปหน้าปกบนหน้า list |
 | `image_1` - `image_12` | No | Google Drive URL | รูปทั้งหมดในหน้า detail |
 | `gallery` | No | `url1 | url2 | url3` | ใช้รวมหลายรูปในช่องเดียวได้ |

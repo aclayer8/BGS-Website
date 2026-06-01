@@ -171,7 +171,7 @@ $lightbox.addEventListener('click', (event) => {
 function renderProject(project) {
   document.title = `${project.title} | BE GROVE SOLUTIONS CO., LTD`;
   lightboxImages = project.images && project.images.length ? project.images : [];
-  const title = `โปรเจ็ค ${project.title}`;
+  const title = project.detailTitle || `โปรเจ็ค ${project.title}`;
   const gallery = lightboxImages.map((src, i) => `
     <a class="project-gallery-item" href="${escProjectDetail(src)}" onclick="event.preventDefault(); showProjectLightboxImage(${i});">
       <img src="${escProjectDetail(src)}" alt="${escProjectDetail(project.title)} ${i + 1}" loading="lazy" />

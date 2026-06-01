@@ -3,8 +3,8 @@
    ============================================================ */
 
 :root {
-  --project-brown: #756a5b;
-  --project-brown-dark: #5f5549;
+  --project-title-bar-bg: #e8eef7;
+  --project-title-bar-text: var(--primary-dark);
 }
 
 .projects-page {
@@ -135,7 +135,7 @@
 }
 
 .projects-state i {
-  color: var(--project-brown);
+  color: var(--primary);
   font-size: 32px;
 }
 
@@ -147,12 +147,16 @@
 
 .project-detail-title {
   width: 100%;
-  background: var(--project-brown);
-  color: #fff;
+  background: var(--project-title-bar-bg);
+  color: var(--project-title-bar-text);
   text-align: center;
-  font-size: clamp(26px, 4vw, 36px);
+  font-family: var(--font-thai);
+  font-size: clamp(24px, 3.2vw, 34px);
+  font-weight: 600;
   line-height: 1.2;
+  letter-spacing: 0;
   padding: 8px 16px 10px;
+  border: 1px solid rgba(0, 48, 135, 0.10);
   margin: 0 0 78px;
 }
 
