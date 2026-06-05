@@ -187,7 +187,7 @@ function initVisitCounter() {
   const totalName = encodeURIComponent(cfg.totalName || 'website-total');
   const dayKey = new Date().toISOString().slice(0, 10);
   const dailyName = encodeURIComponent(`${cfg.dailyPrefix || 'website-day'}-${dayKey}`);
-  const baseUrl = 'https://api.counterapi.dev/v1';
+  const baseUrl = 'https://countapi.mileshilliard.com/api/v1';
   const sessionKey = `bgs-visit-counter:${dayKey}`;
   const lastValueKey = 'bgs-visit-counter:last-values';
 
@@ -214,16 +214,16 @@ function initVisitCounter() {
       // Ignore storage errors.
     }
   };
-  const endpoint = (name, action) => `${baseUrl}/${namespace}/${name}${action ? `/${action}` : ''}`;
-  const readValue = (data) => data?.count ?? data?.value ?? data?.data?.count ?? data?.data?.value;
-  const request = async (name, action = '') => {
+  const endpoint = (name, action) => `${baseUrl}/${action}/${namespace}-${name}`;
+  const readValue = (data) => data?.value ?? data?.count ?? data?.data?.value ?? data?.data?.count;
+  const request = async (name, action = 'get') => {
     const res = await fetch(endpoint(name, action), { cache: 'no-store' });
     if (!res.ok) throw new Error(`Counter request failed: ${res.status}`);
     return readValue(await res.json());
   };
 
   const shouldCount = sessionStorage.getItem(sessionKey) !== '1';
-  const action = shouldCount ? 'up' : '';
+  const action = shouldCount ? 'hit' : 'get';
   const lastValues = getLastValues();
   setText(todayEl, lastValues.today);
   setText(totalEl, lastValues.total);
