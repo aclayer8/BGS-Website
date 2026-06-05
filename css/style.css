@@ -329,6 +329,14 @@ p { color: var(--text-medium); line-height: 1.75; }
 .hero-slogan .slogan-line:last-child {
   background: linear-gradient(90deg, rgba(232, 112, 38, 0.68), transparent);
 }
+.hero-thai-slogan {
+  margin: 10px auto 0;
+  color: rgba(0, 31, 92, 0.72);
+  font-size: clamp(1rem, 1.7vw, 1.35rem);
+  font-weight: 600;
+  line-height: 1.6;
+  text-align: center;
+}
 .hero-text { }
 .hero-badge {
   display: inline-flex; align-items: center; gap: 8px;
@@ -1136,6 +1144,11 @@ p { color: var(--text-medium); line-height: 1.75; }
   }
   .hero-slogan > span:not(.slogan-line) { white-space: normal; }
   .hero-slogan .slogan-line { flex-basis: 34px; }
+  .hero-thai-slogan {
+    margin-top: 8px;
+    font-size: clamp(0.94rem, 4vw, 1.12rem);
+    line-height: 1.55;
+  }
   .services-grid { grid-template-columns: 1fr; }
   .products-grid { grid-template-columns: 1fr; }
   .products-full-grid { grid-template-columns: 1fr; }
