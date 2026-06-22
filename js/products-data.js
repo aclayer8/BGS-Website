@@ -142,23 +142,41 @@ async function fetchFromSheet() {
   const text = await res.text();
   if (!text.trim()) throw new Error('Sheet ส่งข้อมูลว่างเปล่า — ตรวจสอบว่า Sheet มีข้อมูลและ Publish แล้ว');
   const rows = parseCSV(text);
+  const headers = rows[0] ? rows[0].map(h => h.trim().toLowerCase()) : [];
+  if (!headers.includes('name') || !headers.includes('sku')) {
+    throw new Error('Sheet CSV format ไม่ถูกต้อง — ตรวจสอบว่า Publish tab Products ไม่ใช่หน้า error หรือ tab อื่น');
+  }
   const objs = csvToObjects(rows);
   const products = objs.map(mapRow).filter(p => p.visible && p.name);
+  if (products.length === 0) {
+    throw new Error('Sheet ไม่มีรายการสินค้าที่พร้อมแสดงผล');
+  }
   return products;
 }
 
 // ── 6. PUBLIC API ───────────────────────────────────────────
 async function loadProducts() {
   // ลองอ่าน cache ก่อน
+  let cachedData = null;
   try {
     const raw = localStorage.getItem(CACHE_KEY);
     if (raw) {
       const { ts, data } = JSON.parse(raw);
+      if (Array.isArray(data) && data.length > 0) cachedData = data;
       if (CACHE_TTL > 0 && Date.now() - ts < CACHE_TTL) return data;
     }
   } catch (e) { /* cache miss */ }
 
-  const data = await fetchFromSheet();
+  let data;
+  try {
+    data = await fetchFromSheet();
+  } catch (err) {
+    if (cachedData) {
+      console.warn('[BGS] Sheet load failed; using stale cached products:', err.message);
+      return cachedData;
+    }
+    throw err;
+  }
 
   try {
     localStorage.setItem(CACHE_KEY, JSON.stringify({ ts: Date.now(), data }));

@@ -952,13 +952,12 @@ async function init() {
   try {
     ALL_PRODUCTS = await BGS.loadProducts();
     if (ALL_PRODUCTS.length === 0) {
-      console.warn('[BGS] No products from Sheet; using mock data');
-      ALL_PRODUCTS = BGS.MOCK_PRODUCTS;
+      throw new Error('Sheet ไม่มีรายการสินค้าที่พร้อมแสดงผล');
     }
   } catch (err) {
-    console.warn('[BGS] Sheet load failed; using mock data:', err.message);
-    ALL_PRODUCTS = BGS.MOCK_PRODUCTS;
-    // Note: We still build UI from mock so user can see the design working
+    console.warn('[BGS] Sheet load failed:', err.message);
+    showError(err);
+    return;
   }
 
   buildFilters();

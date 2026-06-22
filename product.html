@@ -418,10 +418,11 @@ function showError(msg) {
   let products = [];
   try {
     products = await BGS.loadProducts();
-    if (!products.length) products = BGS.MOCK_PRODUCTS;
+    if (!products.length) throw new Error('Sheet ไม่มีรายการสินค้าที่พร้อมแสดงผล');
   } catch (err) {
-    console.warn('[BGS] Sheet load failed; trying mock:', err.message);
-    products = BGS.MOCK_PRODUCTS;
+    console.warn('[BGS] Sheet load failed:', err.message);
+    showError('โหลดข้อมูลสินค้าไม่สำเร็จ กรุณาลองใหม่อีกครั้งหรือติดต่อทีมงาน');
+    return;
   }
 
   const p = BGS.findProduct(products, id);

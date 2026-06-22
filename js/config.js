@@ -10,7 +10,7 @@ const SITE_CONFIG = {
   // วิธีได้ URL: Google Sheet → File → Share → Publish to web
   //              → เลือก tab Products → Comma-separated values → Publish
   // ปัจจุบัน: data/products/bgs-product-database.xlsx / Products (2026-05-30)
-  csvUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT4kfLSsAP1DiWUyK5ct-8KjqzY5NTdP7aIuOhOiDUh80-uH6npQ4Hhqxt1BrS-Ag/pub?output=csv',
+  csvUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTP7uvHPi5oQKQ36qA4RxRtlSZY4EXzFK2eEXbdLbiqPcdkC0zdKglB0WuUHlORyQ/pub?output=csv',
   // Google Sheets for Projects / Portfolio.
   // Template file: data/templates/bgs-our-projects.csv
   // วิธีได้ URL: Google Sheet → File → Share → Publish to web
